@@ -7,244 +7,210 @@
   <meta name="description" content="Ankit Kumar — DevOps & Cloud Infrastructure Engineer. Splunk, Azure, Terraform, CI/CD. Open to DevOps/SRE roles in Germany." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <a class="logo" href="#top" aria-label="Ankit Kumar home">AK</a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#quests">Quests</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <a href="https://blog.iankitkumar.in">Blog</a>
+  <header class="topnav">
+    <a class="brand-mark" href="#top">ankit@ops:~</a>
+    <nav aria-label="Primary">
+      <a href="#whoami">whoami</a>
+      <a href="#skills">skills</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+      <a href="https://blog.iankitkumar.in">blog</a>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="brand">
-      <div class="hero-copy">
-        <p class="brand" id="brand">Ankit Kumar</p>
-        <h1 class="headline">DevOps &amp; cloud infrastructure that stays up when it matters.</h1>
-        <p class="lede">
-          4+ years in enterprise ops — Splunk multi-site platforms, Azure, Terraform, and automation that cut operational toil by 35–70%. Seeking DevOps/SRE roles in Germany.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#quests">View cleared quests</a>
-          <a class="btn btn-ghost" href="#contact">Open a channel</a>
-        </div>
+    <section class="hero" id="top">
+      <p class="prompt-line"><span class="prompt">$</span> ./spawn ankit.sh</p>
+      <p class="eyebrow">LIVE · DevOps &amp; Cloud Infrastructure</p>
+      <h1 class="name">Ankit Kumar</h1>
+      <p class="role-line">
+        <span>Software Engineer</span>
+        <span>Platform Ops</span>
+        <span>SRE-minded</span>
+      </p>
+      <p class="lede">
+        4+ years building reliable enterprise platforms — Splunk multi-site, Azure, Terraform, and automation that cut operational toil by 35–70%.
+        Open to <strong>DevOps / SRE roles in Germany</strong> · EU Blue Card eligible · German A1.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Let&apos;s talk</a>
+        <a class="btn btn-ghost" href="./Ankit_Kumar_CV.pdf" download>Download CV / Lebenslauf</a>
+        <a class="btn btn-ghost" href="https://blog.iankitkumar.in">Resources / Blog</a>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <svg class="map" viewBox="0 0 640 520" role="img">
-          <defs>
-            <linearGradient id="terrain" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#d7e4dc" />
-              <stop offset="55%" stop-color="#b9cdc2" />
-              <stop offset="100%" stop-color="#8faba0" />
-            </linearGradient>
-            <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
-              <path d="M28 0H0V28" fill="none" stroke="rgba(18,24,22,0.08)" stroke-width="1" />
-            </pattern>
-          </defs>
-          <rect width="640" height="520" fill="url(#terrain)" />
-          <rect width="640" height="520" fill="url(#grid)" />
-          <path class="route" d="M72 410 C140 360, 180 300, 250 280 S370 250, 410 190 S500 110, 560 90" fill="none" stroke="#14201a" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 10" />
-          <g class="nodes">
-            <circle cx="72" cy="410" r="10" />
-            <circle cx="250" cy="280" r="10" />
-            <circle cx="410" cy="190" r="10" />
-            <circle cx="560" cy="90" r="14" class="goal" />
-          </g>
-          <g class="landmarks" fill="none" stroke="#14201a" stroke-width="2">
-            <path d="M230 250 l20-34 20 34z" />
-            <rect x="390" y="160" width="40" height="28" rx="2" />
-            <path d="M540 60 h40 v40 h-40z M550 70 h20 M560 70 v20" />
-          </g>
-        </svg>
+      <div class="term" aria-label="Interactive terminal">
+        <div class="term-bar">
+          <span>ankit@ops — zsh</span>
+          <span class="term-hint">try: help · whoami · skills · open contact</span>
+        </div>
+        <div class="term-body" id="term-out" tabindex="-1"></div>
+        <form class="term-form" id="term-form" autocomplete="off">
+          <label class="sr-only" for="term-input">Terminal command</label>
+          <span class="prompt" aria-hidden="true">$</span>
+          <input id="term-input" name="cmd" type="text" spellcheck="false" placeholder="help" />
+        </form>
       </div>
     </section>
 
-    <section class="about" id="about" aria-labelledby="about-title">
-      <div class="section-head">
-        <h2 id="about-title">About</h2>
-        <p>DevOps &amp; Cloud Infrastructure Engineer · Mumbai · open to Germany.</p>
-      </div>
-      <div class="about-panel">
+    <section class="block" id="whoami">
+      <h2><span class="cmd">&gt; whoami</span></h2>
+      <div class="prose">
         <p>
-          I design and run enterprise platforms where uptime, auditability, and automation matter —
+          I&apos;m a DevOps &amp; Cloud Infrastructure Engineer focused on platforms that must stay up —
           especially <strong>Splunk</strong> multi-site clusters, <strong>Azure</strong> foundations, and
-          <strong>CI/CD / IaC</strong> that remove repetitive BAU work. Certified in
-          <strong>AZ-104</strong>, <strong>Terraform Associate</strong>, and <strong>RHCSA</strong>;
-          AZ-400 in progress.
+          <strong>CI/CD / IaC</strong> that remove repetitive BAU work.
         </p>
         <p>
-          Currently targeting <strong>DevOps / SRE roles in Germany</strong> (EU Blue Card eligible).
-          Languages: English (C1), Hindi (native), German (A1 — actively leveling).
+          Currently at <strong>Wolters Kluwer</strong> (IT Infrastructure &amp; Operations). Previously global endpoint &amp; patch operations at Colgate GBS.
+          Certified <strong>AZ-104</strong>, <strong>Terraform Associate</strong>, and <strong>RHCSA</strong>; AZ-400 in progress.
         </p>
-      </div>
-    </section>
-
-    <section class="progress-section" aria-labelledby="progress-title">
-      <div class="section-head">
-        <h2 id="progress-title">Player status</h2>
-        <p>Wolters Kluwer · IT Infrastructure &amp; Operations (DevOps &amp; Cloud focus).</p>
-      </div>
-      <div class="progress-panel">
-        <div class="progress-meta">
-          <span>Level 14 — DevOps &amp; Cloud Infrastructure</span>
-          <span class="xp-label"><span id="xp-value">0</span> / 2400 XP</span>
-        </div>
-        <div class="xp-track" role="progressbar" aria-valuemin="0" aria-valuemax="2400" aria-valuenow="2100" aria-label="Experience progress">
-          <div class="xp-fill" id="xp-fill"></div>
-        </div>
-        <dl class="stat-grid">
-          <div><dt>Focus</dt><dd>Splunk platforms · Azure · IaC · CI/CD · Observability</dd></div>
-          <div><dt>Stack</dt><dd>Terraform · Azure · Python · PowerShell · Bash · GitHub Actions / Azure DevOps</dd></div>
-          <div><dt>Base</dt><dd>4+ years enterprise · Mumbai · Open to relocate (DE)</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <section class="quests" id="quests" aria-labelledby="quests-title">
-      <div class="section-head">
-        <h2 id="quests-title">Quests</h2>
-        <p>Case-style missions from production — outcomes first, tools second. Details are sanitized for public sharing.</p>
-      </div>
-      <ol class="quest-list">
-        <li class="quest" data-status="cleared">
-          <article>
-            <span class="quest-index">01</span>
-            <div class="quest-body">
-              <h3 class="quest-title">Splunk multi-site cluster migration</h3>
-              <p class="quest-meta">Wolters Kluwer · Apr 2024 – present</p>
-              <p class="quest-desc">
-                <strong>Problem:</strong> scale search performance, HA, and DR for a mission-critical Splunk estate.
-                <strong>Action:</strong> architected and led migration to a multi-site clustered deployment; drove Architecture Review Committee (ARC) certification.
-                <strong>Result:</strong> stronger search performance, high availability, and disaster-recovery readiness across sites.
-              </p>
-            </div>
-            <span class="quest-status">Cleared</span>
-          </article>
-        </li>
-        <li class="quest" data-status="cleared">
-          <article>
-            <span class="quest-index">02</span>
-            <div class="quest-body">
-              <h3 class="quest-title">DR, patching observability &amp; toil reduction</h3>
-              <p class="quest-meta">Wolters Kluwer · 2022 – present</p>
-              <p class="quest-desc">
-                <strong>Problem:</strong> operational load and patch risk on production Splunk / infra cycles.
-                <strong>Action:</strong> defined DR with RPO/RTO targets; built pre/during/post patch monitoring; automation runbooks; P1/P2 incident leadership toward 99.9%+ availability.
-                <strong>Result:</strong> ~35% BAU workload reduction (later role), earlier ~70% manual effort cut via runbooks; fewer patch-related surprises.
-              </p>
-            </div>
-            <span class="quest-status">Cleared</span>
-          </article>
-        </li>
-        <li class="quest" data-status="cleared">
-          <article>
-            <span class="quest-index">03</span>
-            <div class="quest-body">
-              <h3 class="quest-title">Azure foundations, SSO &amp; SOC2-ready visibility</h3>
-              <p class="quest-meta">Wolters Kluwer · Aug 2022 – Mar 2024</p>
-              <p class="quest-desc">
-                <strong>Problem:</strong> safe change testing and compliant access/secrets for Splunk ops.
-                <strong>Action:</strong> provisioned Azure dev/test with clustered Splunk; Entra ID SSO; Key Vault / CyberArk / Jira tooling; dashboards for financial + SOC2 monitoring; sensitive-field ingestion controls.
-                <strong>Result:</strong> audit-ready visibility and a safer path from test → production.
-              </p>
-            </div>
-            <span class="quest-status">Cleared</span>
-          </article>
-        </li>
-        <li class="quest" data-status="cleared">
-          <article>
-            <span class="quest-index">04</span>
-            <div class="quest-body">
-              <h3 class="quest-title">Global Windows patch &amp; endpoint fleet</h3>
-              <p class="quest-meta">Colgate Global Business Services · Aug 2021 – Jul 2022</p>
-              <p class="quest-desc">
-                <strong>Problem:</strong> consistent patching and software control across a huge global estate.
-                <strong>Action:</strong> operated 20,000+ Windows endpoints with SCCM/MECM, Workspace One, and Tanium; led patch ops across 79 factories / 70 countries; silent deploy automations; emergency zero-day response with Security.
-                <strong>Result:</strong> higher compliance velocity and faster risk closure on critical vulns.
-              </p>
-            </div>
-            <span class="quest-status">Cleared</span>
-          </article>
-        </li>
-        <li class="quest" data-status="active">
-          <article>
-            <span class="quest-index">05</span>
-            <div class="quest-body">
-              <h3 class="quest-title">Personal platform — iankitkumar.in</h3>
-              <p class="quest-meta">Independent · 2026</p>
-              <p class="quest-desc">
-                <strong>Action:</strong> domain + Cloudflare DNS/Email Routing, portfolio on Pages, Astro blog on <a href="https://blog.iankitkumar.in">blog.iankitkumar.in</a>, GitHub as source of truth.
-                <strong>Result:</strong> a production personal platform that doubles as a systems portfolio.
-              </p>
-            </div>
-            <span class="quest-status">In progress</span>
-          </article>
-        </li>
-      </ol>
-
-      <div class="side-quests">
-        <h3>Side quests</h3>
         <p>
-          Public experiments:
-          <a href="https://github.com/i-ankitkumar/IDS_using_MLP-GridSearchCV">IDS + MLP</a>,
-          <a href="https://github.com/i-ankitkumar/NIDS_using_MLandDL">NIDS ML/DL</a>,
-          <a href="https://github.com/i-ankitkumar/GPP_Hack4Good">Hack4Good</a>.
+          Based in Mumbai · targeting Germany · English (C1) · Hindi (native) · German (A1, leveling).
         </p>
       </div>
     </section>
 
-    <section class="skills" id="skills" aria-labelledby="skills-title">
-      <div class="section-head">
-        <h2 id="skills-title">Skill tree</h2>
-        <p>Ranked from production depth and certifications — not a buzzword dump.</p>
+    <section class="block" id="skills">
+      <h2><span class="cmd">&gt; ls -l ./skills</span></h2>
+      <div class="skill-grid">
+        <div>
+          <h3>Cloud &amp; platforms</h3>
+          <ul class="pills">
+            <li>Azure (IaaS/PaaS)</li>
+            <li>Splunk Enterprise</li>
+            <li>Entra ID / SSO</li>
+            <li>Key Vault · CyberArk</li>
+          </ul>
+        </div>
+        <div>
+          <h3>DevOps &amp; IaC</h3>
+          <ul class="pills">
+            <li>Terraform</li>
+            <li>Azure DevOps</li>
+            <li>GitHub Actions</li>
+            <li>YAML CI/CD</li>
+            <li>Docker · K8s</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Automation</h3>
+          <ul class="pills">
+            <li>Python</li>
+            <li>PowerShell</li>
+            <li>Bash</li>
+            <li>Runbooks</li>
+            <li>Patch automation</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Ops &amp; OS</h3>
+          <ul class="pills">
+            <li>RHEL / Linux</li>
+            <li>Incident Mgmt</li>
+            <li>Grafana</li>
+            <li>SCCM/MECM · Tanium</li>
+            <li>SOC2 practices</li>
+          </ul>
+        </div>
       </div>
-      <ul class="skill-tree">
-        <li style="--level: 94"><span>Splunk Enterprise (multi-site, SOC2, incident response)</span><i></i></li>
-        <li style="--level: 90"><span>Azure (IaaS/PaaS, Entra ID, Key Vault) — AZ-104</span><i></i></li>
-        <li style="--level: 88"><span>Automation (Python · PowerShell · Bash · runbooks)</span><i></i></li>
-        <li style="--level: 86"><span>IaC &amp; CI/CD (Terraform Associate · Azure DevOps · GitHub Actions)</span><i></i></li>
-        <li style="--level: 84"><span>Linux / RHEL — RHCSA</span><i></i></li>
-        <li style="--level: 80"><span>Endpoint &amp; patch ops (SCCM/MECM · Tanium · Workspace One)</span><i></i></li>
-        <li style="--level: 72"><span>Containers (Docker · Kubernetes — building depth)</span><i></i></li>
-      </ul>
-
-      <div class="certs" aria-labelledby="certs-title">
-        <h3 id="certs-title">Certificates</h3>
+      <div class="certs">
+        <h3><span class="cmd">&gt; cat ./certs.txt</span></h3>
         <ul>
           <li>HashiCorp Certified: Terraform Associate (003)</li>
           <li>AZ-104: Azure Administrator Associate</li>
           <li>Red Hat Certified System Administrator (RHCSA)</li>
           <li>AZ-900 · AI-900</li>
-          <li>AZ-400: Designing and Implementing Microsoft DevOps Solutions — <em>in progress</em></li>
+          <li>AZ-400 — <em>in progress</em></li>
         </ul>
       </div>
     </section>
 
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <div class="section-head">
-        <h2 id="contact-title">Open a channel</h2>
-        <p>Best for DevOps/SRE conversations — especially Germany-based roles.</p>
+    <section class="block" id="experience">
+      <h2><span class="cmd">&gt; cat ./experience.log</span></h2>
+
+      <article class="job open">
+        <button class="job-toggle" type="button" aria-expanded="true">
+          <span class="job-title">IT Infrastructure &amp; Operations Analyst (DevOps &amp; Cloud)</span>
+          <span class="job-meta">Wolters Kluwer · Apr 2024 – present · Pune</span>
+          <span class="chev" aria-hidden="true">▼</span>
+        </button>
+        <div class="job-body">
+          <ul>
+            <li>Architected and led Splunk migration to a multi-site clustered deployment; achieved WK Architecture Review Committee (ARC) certification — stronger search performance, HA, and DR readiness.</li>
+            <li>Designed DR plans with defined RPO/RTO for mission-critical Splunk across data centers.</li>
+            <li>Automation workflows reduced BAU operational workload by ~35%.</li>
+            <li>Built end-to-end monitoring for patching cycles (pre / during / post); fewer patch-related incidents via proactive detection.</li>
+            <li>Led P1/P2 response on production Splunk; drove RCA toward 99.9%+ availability.</li>
+            <li>Mentored 3+ engineers; CI/CD for automated infrastructure provisioning; monitoring-agent migration.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <button class="job-toggle" type="button" aria-expanded="false">
+          <span class="job-title">Associate IT Infrastructure &amp; Operations Analyst</span>
+          <span class="job-meta">Wolters Kluwer · Aug 2022 – Mar 2024 · Pune</span>
+          <span class="chev" aria-hidden="true">▼</span>
+        </button>
+        <div class="job-body">
+          <ul>
+            <li>Splunk dashboards for real-time financial reporting and SOC2 compliance visibility.</li>
+            <li>Data protection controls (sensitive-field ingestion suppression) and secure network patterns for enterprise / SOC2 standards.</li>
+            <li>Provisioned Azure-based dev/test with clustered Splunk for safe change validation.</li>
+            <li>SSO via Azure Entra ID; tooling with Jira, Key Vaults, CyberArk for access and secrets.</li>
+            <li>Automation runbooks cut manual operational effort by ~70%; Star Performer Award (Q1 2023).</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <button class="job-toggle" type="button" aria-expanded="false">
+          <span class="job-title">Executive Associate</span>
+          <span class="job-meta">Colgate Global Business Services · Aug 2021 – Jul 2022 · Mumbai</span>
+          <span class="chev" aria-hidden="true">▼</span>
+        </button>
+        <div class="job-body">
+          <ul>
+            <li>Managed 20,000+ global Windows endpoints (SCCM/MECM, Workspace One, Tanium).</li>
+            <li>Led Windows patch operations across 79 factories / 70 countries.</li>
+            <li>Silent deployment automations; emergency zero-day patch response with Security.</li>
+            <li>PowerShell automation for Autodesk decommissioning with licensing partners.</li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="side-quests" id="side-quests">
+        <h3><span class="cmd">&gt; ls ./side_quests</span></h3>
+        <ul>
+          <li><a href="https://github.com/i-ankitkumar/IDS_using_MLP-GridSearchCV">IDS using MLP + GridSearchCV</a></li>
+          <li><a href="https://github.com/i-ankitkumar/NIDS_using_MLandDL">NIDS with ML &amp; DL</a></li>
+          <li><a href="https://github.com/i-ankitkumar/GPP_Hack4Good">Hack4Good — GPP</a></li>
+          <li><a href="https://github.com/i-ankitkumar/iankitkumar.in">Personal platform — iankitkumar.in</a> + <a href="https://blog.iankitkumar.in">blog</a></li>
+        </ul>
       </div>
+    </section>
+
+    <section class="block" id="contact">
+      <h2><span class="cmd">&gt; open ./contact</span></h2>
+      <p class="prose">Best for DevOps / SRE conversations — especially Germany-based roles.</p>
       <div class="contact-links">
         <a href="mailto:mail@iankitkumar.in">mail@iankitkumar.in</a>
         <a href="https://linkedin.com/in/i-ankitkumar">LinkedIn</a>
         <a href="https://github.com/i-ankitkumar">GitHub</a>
         <a href="https://blog.iankitkumar.in">Blog</a>
+        <a href="./Ankit_Kumar_CV.pdf" download>CV (PDF)</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Ankit Kumar · DevOps &amp; Cloud Infrastructure · Built as a living save point</p>
+    <p>© <span id="year"></span> Ankit Kumar · exit 0</p>
   </footer>
 
   <script src="./script.js"></script>

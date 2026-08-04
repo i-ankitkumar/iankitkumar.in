@@ -18,7 +18,7 @@ This repo is not only a resume page — it is a **working production system** th
 
 1. **End-to-end ownership** — domain registration → DNS → TLS → static hosting → custom email → sibling blog subdomain → GitHub as source of truth.
 2. **Infrastructure judgment** — Cloudflare as edge + DNS authority; apex + `www` + `blog` split cleanly; **email MX/SPF/DKIM left untouched** while shipping websites.
-3. **Product / design taste** — a gamified UX without turning into badge spam; brand-first hero, restrained motion, accessible markup.
+3. **Product / design taste** — terminal-first UX tuned for German/EU hiring; brand-first hero, optional mini-shell, accessible markup.
 4. **Ops hygiene** — reproducible deploys with Wrangler, cache-aware headers, reduced-motion support, no secrets in the repo.
 
 **Interview soundbite:** *“I bought a domain, moved DNS to Cloudflare, protected email routing, split portfolio and blog onto separate Pages projects, and shipped a gamified static front end with a deliberate design system — then documented the whole path so it can be re-run or handed off.”*
@@ -79,16 +79,14 @@ Splitting portfolio and blog into **two Pages projects** keeps deploy blast radi
 
 ### Concept
 
-**“Systems expedition.”** Infrastructure work is presented as a map with routes, checkpoints, and quests — gamified language with editorial restraint.
+**Terminal-first ops portfolio** (inspired by scannable CLI sites like [itspgiri.com](https://www.itspgiri.com/)) — chosen for **German / EU DevOps–SRE hiring**: substance in &lt;30s, metrics visible, CV one click away. Light shell interactivity; **not** a playable Win95/pixel game.
 
 ### Hero composition (first viewport)
 
-Hard constraints applied on purpose:
-
-- Brand (`Ankit Kumar`) is the dominant signal — not an eyebrow.
-- One headline, one supporting sentence, one CTA group.
-- One dominant visual (SVG expedition map) — full-bleed panel, not a card collage.
-- No floating badges / promo chips over the hero media.
+- Brand (`Ankit Kumar`) is the dominant signal
+- One role promise + Germany / Blue Card intent
+- CTA group: Contact · CV/Lebenslauf PDF · Blog
+- Optional mini-terminal (`help`, `whoami`, `skills`, …) — sugar for demos, skippable for recruiters
 
 ### Visual tokens
 
@@ -96,32 +94,24 @@ Hard constraints applied on purpose:
 |---|---|
 | Mist green / cool paper background | Light atmospheric base (not default dark UI) |
 | Deep ink `#14201a` | Type + primary actions |
-| Teal `#0f766e` | Progress / cleared quests |
-| Signal orange `#c2410c` | Active quest + hover emphasis |
-| Soft grid mask | Depth without heavy illustration assets |
-
-### Interaction / motion
-
-Three intentional motions (disabled under `prefers-reduced-motion`):
-
-1. Hero copy + map **rise-in** on load  
-2. XP bar **fill + count-up** on scroll into view  
-3. Skill bars **animate width**; map route **dash** + light pointer parallax  
+| Teal `#0f766e` | Commands / accents |
+| Signal orange `#c2410c` | LIVE / in-progress emphasis |
+| Terminal panel | Dark mono console for optional interaction |
 
 ### Information architecture
 
-1. **Hero** — who + promise + CTAs  
-2. **Player status** — level / XP / focus / stack  
-3. **Quests** — selected projects as cleared / in-progress missions  
-4. **Skill tree** — ranked capability bars  
-5. **Contact** — email first, then socials + blog  
+1. **Hero** — brand + Germany CTA + mini-terminal  
+2. **`> whoami`** — profile prose  
+3. **`> ls ./skills`** + certs  
+4. **`> cat ./experience.log`** — expandable roles (WK, Colgate)  
+5. **`> side_quests`** — public GitHub experiments  
+6. **`> contact`** — mail / LinkedIn / GitHub / blog / CV  
 
 ### Accessibility
 
-- Skip link, semantic landmarks, labeled progressbar  
-- Sticky header with readable contrast  
-- Keyboard-focusable controls  
-- Motion reduced when the OS requests it  
+- Skip link, semantic landmarks, expandable buttons with `aria-expanded`
+- Sticky nav; keyboard-usable terminal form
+- Respects `prefers-reduced-motion`  
 
 ---
 
@@ -158,12 +148,13 @@ Registrar: Hostinger · DNS authority: **Cloudflare** · Zone status: active.
 
 ```text
 .
-├── index.html      # Structure + content
-├── styles.css      # Design tokens, layout, motion
-├── script.js       # XP / skill observers, year, parallax
-├── _headers        # Cloudflare Pages response headers
-├── README.md       # This document
-└── .gitignore      # .wrangler/, local vault notes
+├── index.html           # Terminal-first portfolio
+├── styles.css           # Design tokens + layout
+├── script.js            # Mini-terminal + experience toggles
+├── Ankit_Kumar_CV.pdf   # Downloadable CV / Lebenslauf
+├── _headers             # Cloudflare Pages response headers
+├── README.md            # This document
+└── .gitignore           # .wrangler/, local vault notes
 ```
 
 No bundler. Deploy the directory as-is.
@@ -280,11 +271,11 @@ Source: [Pages limits](https://developers.cloudflare.com/pages/platform/limits/)
 | Cloud / DNS | Apex CNAME flattening, subdomain split, proxied records |
 | Reliability mindset | Email kept working while websites were attached |
 | Separation of concerns | Portfolio vs blog as independent deployables |
-| Front-end craft | Design constraints, a11y, reduced motion |
+| Product judgment | Chose terminal-first UX for DE hiring over game/desktop gimmicks |
 | Delivery | Git history + Wrangler production deploys + live custom domain |
-| Documentation | This README as an operable runbook, not just marketing |
+| Documentation | This README as an operable runbook |
 
-Suggested demo path (2–3 minutes): open the live hero → scroll XP/skills → open a quest GitHub link → show `blog.iankitkumar.in` → walk this README’s architecture section.
+Suggested demo path (2–3 minutes): open https://iankitkumar.in → show Germany CTA + CV download → type `whoami` / `experience` in the mini-terminal → expand WK Splunk bullets → open blog → walk DNS/email section in this README.
 
 ---
 
@@ -292,10 +283,11 @@ Suggested demo path (2–3 minutes): open the live hero → scroll XP/skills →
 
 - [x] Domain + Cloudflare DNS + Email Routing  
 - [x] Pages project + custom domains  
-- [x] Gamified static portfolio UI  
+- [x] Resume-aligned content + Germany targeting  
+- [x] Terminal-first portfolio (DE-aligned) + CV PDF  
+- [x] Brutal Astro blog on `blog.iankitkumar.in`  
 - [ ] GitHub-connected auto-deploy on `main`  
-- [ ] Richer quest content / case-study pages  
-- [ ] Optional self-hosted fonts + contact form (Workers / Forms)  
+- [ ] Optional contact form (Workers / Forms)  
 - [ ] Performance pass (Lighthouse) + OG images  
 
 ---
