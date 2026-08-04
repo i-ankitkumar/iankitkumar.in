@@ -4,77 +4,172 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ankit Kumar — Portfolio</title>
-  <meta name="description" content="Ankit Kumar — gamified portfolio (test deploy)" />
-  <style>
-    :root {
-      --bg: #0b1220;
-      --fg: #e8eefc;
-      --muted: #9aa8c7;
-      --accent: #5eead4;
-      --line: rgba(94, 234, 212, 0.25);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-      color: var(--fg);
-      background:
-        radial-gradient(900px 500px at 10% -10%, rgba(94, 234, 212, 0.18), transparent 60%),
-        radial-gradient(700px 400px at 100% 0%, rgba(96, 165, 250, 0.14), transparent 55%),
-        var(--bg);
-      display: grid;
-      place-items: center;
-      padding: 2rem;
-    }
-    main {
-      width: min(640px, 100%);
-      border: 1px solid var(--line);
-      background: rgba(11, 18, 32, 0.72);
-      padding: 2rem;
-    }
-    h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      letter-spacing: -0.02em;
-    }
-    .badge {
-      display: inline-block;
-      margin-bottom: 1.25rem;
-      padding: 0.2rem 0.55rem;
-      border: 1px solid var(--line);
-      color: var(--accent);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    p { color: var(--muted); line-height: 1.6; }
-    a {
-      color: var(--accent);
-      text-underline-offset: 3px;
-    }
-    ul {
-      margin: 1.25rem 0 0;
-      padding-left: 1.1rem;
-      color: var(--muted);
-    }
-    li { margin: 0.35rem 0; }
-  </style>
+  <meta name="description" content="Ankit Kumar — cloud, automation, security, and MLOps. A gamified portfolio of systems work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main>
-    <div class="badge">test deploy</div>
-    <h1>Ankit Kumar — Portfolio</h1>
-    <p>
-      This is a smoke-test page for <strong>iankitkumar.in</strong>.
-      The gamified portfolio will land here next.
-    </p>
-    <ul>
-      <li>Site: <a href="https://iankitkumar.in">iankitkumar.in</a></li>
-      <li>Blog: <a href="https://blog.iankitkumar.in">blog.iankitkumar.in</a></li>
-      <li>GitHub: <a href="https://github.com/i-ankitkumar">i-ankitkumar</a></li>
-      <li>Mail: <a href="mailto:mail@iankitkumar.in">mail@iankitkumar.in</a></li>
-    </ul>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="logo" href="#top" aria-label="Ankit Kumar home">AK</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#quests">Quests</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="https://blog.iankitkumar.in">Blog</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="brand">
+      <div class="hero-copy">
+        <p class="brand" id="brand">Ankit Kumar</p>
+        <h1 class="headline">Build systems that stay up when it matters.</h1>
+        <p class="lede">
+          Cloud, automation, security, and MLOps — framed as an expedition through real infrastructure work.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#quests">Start the expedition</a>
+          <a class="btn btn-ghost" href="https://blog.iankitkumar.in">Read the blog</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg class="map" viewBox="0 0 640 520" role="img">
+          <defs>
+            <linearGradient id="terrain" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#d7e4dc" />
+              <stop offset="55%" stop-color="#b9cdc2" />
+              <stop offset="100%" stop-color="#8faba0" />
+            </linearGradient>
+            <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M28 0H0V28" fill="none" stroke="rgba(18,24,22,0.08)" stroke-width="1" />
+            </pattern>
+          </defs>
+          <rect width="640" height="520" fill="url(#terrain)" />
+          <rect width="640" height="520" fill="url(#grid)" />
+          <path class="route" d="M72 410 C140 360, 180 300, 250 280 S370 250, 410 190 S500 110, 560 90" fill="none" stroke="#14201a" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 10" />
+          <g class="nodes">
+            <circle cx="72" cy="410" r="10" />
+            <circle cx="250" cy="280" r="10" />
+            <circle cx="410" cy="190" r="10" />
+            <circle cx="560" cy="90" r="14" class="goal" />
+          </g>
+          <g class="landmarks" fill="none" stroke="#14201a" stroke-width="2">
+            <path d="M230 250 l20-34 20 34z" />
+            <rect x="390" y="160" width="40" height="28" rx="2" />
+            <path d="M540 60 h40 v40 h-40z M550 70 h20 M560 70 v20" />
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="progress-section" aria-labelledby="progress-title">
+      <div class="section-head">
+        <h2 id="progress-title">Player status</h2>
+        <p>India · Remote · Currently shipping reliable platforms.</p>
+      </div>
+      <div class="progress-panel">
+        <div class="progress-meta">
+          <span>Level 12 — Systems Engineer</span>
+          <span class="xp-label"><span id="xp-value">0</span> / 2400 XP</span>
+        </div>
+        <div class="xp-track" role="progressbar" aria-valuemin="0" aria-valuemax="2400" aria-valuenow="1860" aria-label="Experience progress">
+          <div class="xp-fill" id="xp-fill"></div>
+        </div>
+        <dl class="stat-grid">
+          <div><dt>Focus</dt><dd>Cloud · Automation · Security · MLOps</dd></div>
+          <div><dt>Stack</dt><dd>Python · Terraform · AWS · Azure · Linux</dd></div>
+          <div><dt>Base</dt><dd>IT Infrastructure &amp; Operations</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="quests" id="quests" aria-labelledby="quests-title">
+      <div class="section-head">
+        <h2 id="quests-title">Quests</h2>
+        <p>Selected missions from the field — intrusion detection, platforms, and tooling.</p>
+      </div>
+      <ol class="quest-list">
+        <li class="quest" data-status="cleared">
+          <a href="https://github.com/i-ankitkumar/IDS_using_MLP-GridSearchCV">
+            <span class="quest-index">01</span>
+            <span class="quest-body">
+              <span class="quest-title">Intrusion Detection with MLP</span>
+              <span class="quest-desc">GridSearchCV-tuned neural net for network intrusion classification.</span>
+            </span>
+            <span class="quest-status">Cleared</span>
+          </a>
+        </li>
+        <li class="quest" data-status="cleared">
+          <a href="https://github.com/i-ankitkumar/NIDS_using_MLandDL">
+            <span class="quest-index">02</span>
+            <span class="quest-body">
+              <span class="quest-title">NIDS with ML &amp; DL</span>
+              <span class="quest-desc">Network intrusion detection experiments across classical ML and deep learning.</span>
+            </span>
+            <span class="quest-status">Cleared</span>
+          </a>
+        </li>
+        <li class="quest" data-status="cleared">
+          <a href="https://github.com/i-ankitkumar/GPP_Hack4Good">
+            <span class="quest-index">03</span>
+            <span class="quest-body">
+              <span class="quest-title">Hack4Good — GPP</span>
+              <span class="quest-desc">Hackathon build focused on practical impact under time pressure.</span>
+            </span>
+            <span class="quest-status">Cleared</span>
+          </a>
+        </li>
+        <li class="quest" data-status="active">
+          <a href="https://iankitkumar.in">
+            <span class="quest-index">04</span>
+            <span class="quest-body">
+              <span class="quest-title">Personal platform — iankitkumar.in</span>
+              <span class="quest-desc">Gamified portfolio + learning blog on Cloudflare, synced from GitHub.</span>
+            </span>
+            <span class="quest-status">In progress</span>
+          </a>
+        </li>
+      </ol>
+    </section>
+
+    <section class="skills" id="skills" aria-labelledby="skills-title">
+      <div class="section-head">
+        <h2 id="skills-title">Skill tree</h2>
+        <p>Core branches I keep leveling in production environments.</p>
+      </div>
+      <ul class="skill-tree">
+        <li style="--level: 92"><span>Cloud (AWS · Azure)</span><i></i></li>
+        <li style="--level: 88"><span>Automation (Ansible · Bash · Python)</span><i></i></li>
+        <li style="--level: 84"><span>IaC (Terraform · YAML)</span><i></i></li>
+        <li style="--level: 80"><span>Security &amp; NIDS</span><i></i></li>
+        <li style="--level: 76"><span>Linux systems</span><i></i></li>
+        <li style="--level: 70"><span>MLOps &amp; data tooling</span><i></i></li>
+      </ul>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="section-head">
+        <h2 id="contact-title">Open a channel</h2>
+        <p>Prefer email for work. Socials for the trail notes.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:mail@iankitkumar.in">mail@iankitkumar.in</a>
+        <a href="https://github.com/i-ankitkumar">GitHub</a>
+        <a href="https://linkedin.com/in/i-ankitkumar">LinkedIn</a>
+        <a href="https://blog.iankitkumar.in">Blog</a>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Ankit Kumar · Built as a living save point</p>
+  </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>
