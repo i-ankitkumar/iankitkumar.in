@@ -223,6 +223,47 @@ Connect this GitHub repo to the Pages project for **push-to-deploy** (removes th
 
 ---
 
+## Cost & limits
+
+### What you pay
+
+| Item | Cost | Notes |
+|---|---|---|
+| Domain `iankitkumar.in` (Hostinger) | **Paid** (registration + yearly renewal) | Only recurring bill in this stack today |
+| Cloudflare DNS | **$0** | Free plan zone |
+| Cloudflare Pages (portfolio + blog) | **$0** | Free plan |
+| Static bandwidth / requests | **$0 / unlimited** | Pure static assets — no Pages Functions yet |
+| TLS certificates | **$0** | Issued by Cloudflare for custom domains |
+| Cloudflare Email Routing | **$0** | Forwarding (`mail@` + catch-all), not a full mailbox product |
+| GitHub public repos | **$0** | |
+| Wrangler deploys | **$0** | Uses the free Cloudflare account |
+
+**Bottom line:** ongoing cost is **domain renewal only**. Cloudflare Free covers hosting, DNS, CDN, TLS, and email forwarding for this workflow.
+
+### Cloudflare Pages Free limits (account-wide)
+
+Source: [Pages limits](https://developers.cloudflare.com/pages/platform/limits/) · [Pages pricing page](https://pages.cloudflare.com/)
+
+| Limit | Free plan | Impact on this project |
+|---|---|---|
+| Sites / Pages projects | **Unlimited** | Safe to add more static sites/subdomains |
+| Static requests + bandwidth | **Unlimited** | Fine for personal portfolio + blog traffic |
+| Builds / deploys per month | **500 / account** | Shared across all Pages projects; hard to hit personally |
+| Concurrent builds | **1** | One Git build at a time |
+| Build timeout | **20 minutes** | Plenty for this static site / Astro blog |
+| Custom domains per project | **100** | We use a handful |
+| Pages Functions | Counts toward Workers Free (**~100k req/day**) | Unused today — static only means no Functions quota burn |
+
+**Creating more blogs/sites:** yes — Free allows unlimited Pages projects. Traffic for static sites is unlimited. What is *not* unlimited is the monthly build count and Workers/Functions usage if you add server-side code later.
+
+### When you would start paying Cloudflare
+
+- Upgrade to Pro/Business for more concurrent builds or higher build quotas  
+- Use paid products (e.g. Workers Paid, R2 at scale, paid email mailbox elsewhere)  
+- Outgrow free quotas (unlikely for this personal static setup)
+
+---
+
 ## Security & privacy notes
 
 - No API keys, Cloudflare tokens, or mailbox credentials in this repository  
