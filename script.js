@@ -1,6 +1,27 @@
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+/* Theme toggle — UI Stack light/dark */
+const themeBtn = document.getElementById("theme-toggle");
+function currentTheme() {
+  const attr = document.documentElement.getAttribute("data-theme");
+  if (attr === "light" || attr === "dark") return attr;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+function setTheme(next) {
+  document.documentElement.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch (e) {}
+  if (themeBtn) themeBtn.textContent = next === "dark" ? "Light" : "Dark";
+}
+if (themeBtn) {
+  themeBtn.textContent = currentTheme() === "dark" ? "Light" : "Dark";
+  themeBtn.addEventListener("click", () => {
+    setTheme(currentTheme() === "dark" ? "light" : "dark");
+  });
+}
+
 /* Expandable experience */
 document.querySelectorAll(".job-toggle").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -25,7 +46,8 @@ const HELP = `available commands:
   blog       open blog
   cv         download CV / Lebenslauf
   clear      clear terminal
-  uptime     years in ops`;
+  uptime     years in ops
+  theme      toggle light/dark`;
 
 function appendLine(text, cls) {
   if (!termOut) return;
@@ -95,6 +117,10 @@ function runCommand(raw) {
     case "resume":
       window.location.href = "./Ankit_Kumar_CV.pdf";
       appendLine("downloading CV / Lebenslauf …", "term-line-out");
+      break;
+    case "theme":
+      setTheme(currentTheme() === "dark" ? "light" : "dark");
+      appendLine(`theme → ${currentTheme()}`, "term-line-out");
       break;
     case "clear":
       if (termOut) termOut.innerHTML = "";
