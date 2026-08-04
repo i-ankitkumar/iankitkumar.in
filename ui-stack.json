@@ -1,37 +1,27 @@
 {
-  "name": "iankitkumar-ops",
-  "spacing": { "unit": 8, "scale": [4, 8, 16, 24, 32, 48, 64] },
+  "name": "iankitkumar-ops-console",
+  "direction": "Control-room console — one full-bleed terminal hero for German DevOps hiring",
+  "signature": "Full-width ops console containing identity, intent, CTAs, and REPL",
   "color": {
-    "rule": "60-30-10",
-    "light": {
-      "bg": "#F4F7F5",
-      "bgElevated": "#FFFFFF",
-      "ink": "#14201A",
-      "muted": "#5A6B63",
-      "border": "#D5DED8",
-      "primary": "#0F766E",
-      "accent": "#C2410C",
-      "termBg": "#0F1713",
-      "termFg": "#D8EBE3"
-    },
-    "dark": {
-      "bg": "#0B1210",
-      "bgElevated": "#15201B",
-      "ink": "#E8F0EB",
-      "muted": "#9BB0A6",
-      "border": "#2A3A33",
-      "primary": "#2DD4BF",
-      "accent": "#FB923C",
-      "termBg": "#060A08",
-      "termFg": "#D8EBE3"
-    }
+    "concrete": "#eceef1",
+    "paper": "#f7f8fa",
+    "ink": "#12151a",
+    "mute": "#5c6573",
+    "steel": "#1f4e79",
+    "copper": "#c05600",
+    "console": "#0e1116"
   },
   "typography": {
-    "ratio": 1.25,
-    "display": "Syne",
-    "body": "Figtree",
+    "display": "Bricolage Grotesque",
+    "body": "IBM Plex Sans",
     "mono": "IBM Plex Mono"
   },
-  "interactions": ["default", "hover", "active", "focus", "disabled"],
-  "a11y": { "minContrast": 4.5, "touchTarget": 44 }
+  "rules": [
+    "No skill cards or elevated panel grids",
+    "Hero is one composition (console), not a two-column dashboard",
+    "Brand name is the largest signal inside the console",
+    "Spacing on 8px grid",
+    "5-state interactions on links/buttons",
+    "Avoid cream+terracotta, acid neon dark, broadsheet defaults"
+  ]
 }
