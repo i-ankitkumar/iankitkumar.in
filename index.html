@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ankit Kumar — Portfolio</title>
+  <meta name="description" content="Ankit Kumar — gamified portfolio (test deploy)" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --fg: #e8eefc;
+      --muted: #9aa8c7;
+      --accent: #5eead4;
+      --line: rgba(94, 234, 212, 0.25);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--fg);
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(94, 234, 212, 0.18), transparent 60%),
+        radial-gradient(700px 400px at 100% 0%, rgba(96, 165, 250, 0.14), transparent 55%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+    }
+    main {
+      width: min(640px, 100%);
+      border: 1px solid var(--line);
+      background: rgba(11, 18, 32, 0.72);
+      padding: 2rem;
+    }
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+    .badge {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    p { color: var(--muted); line-height: 1.6; }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+    }
+    ul {
+      margin: 1.25rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+    li { margin: 0.35rem 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="badge">test deploy</div>
+    <h1>Ankit Kumar — Portfolio</h1>
+    <p>
+      This is a smoke-test page for <strong>iankitkumar.in</strong>.
+      The gamified portfolio will land here next.
+    </p>
+    <ul>
+      <li>Site: <a href="https://iankitkumar.in">iankitkumar.in</a></li>
+      <li>Blog: <a href="https://blog.iankitkumar.in">blog.iankitkumar.in</a></li>
+      <li>GitHub: <a href="https://github.com/i-ankitkumar">i-ankitkumar</a></li>
+      <li>Mail: <a href="mailto:mail@iankitkumar.in">mail@iankitkumar.in</a></li>
+    </ul>
+  </main>
+</body>
+</html>
