@@ -1,0 +1,37 @@
+{
+  "name": "iankitkumar-ops",
+  "spacing": { "unit": 8, "scale": [4, 8, 16, 24, 32, 48, 64] },
+  "color": {
+    "rule": "60-30-10",
+    "light": {
+      "bg": "#F4F7F5",
+      "bgElevated": "#FFFFFF",
+      "ink": "#14201A",
+      "muted": "#5A6B63",
+      "border": "#D5DED8",
+      "primary": "#0F766E",
+      "accent": "#C2410C",
+      "termBg": "#0F1713",
+      "termFg": "#D8EBE3"
+    },
+    "dark": {
+      "bg": "#0B1210",
+      "bgElevated": "#15201B",
+      "ink": "#E8F0EB",
+      "muted": "#9BB0A6",
+      "border": "#2A3A33",
+      "primary": "#2DD4BF",
+      "accent": "#FB923C",
+      "termBg": "#060A08",
+      "termFg": "#D8EBE3"
+    }
+  },
+  "typography": {
+    "ratio": 1.25,
+    "display": "Syne",
+    "body": "Figtree",
+    "mono": "IBM Plex Mono"
+  },
+  "interactions": ["default", "hover", "active", "focus", "disabled"],
+  "a11y": { "minContrast": 4.5, "touchTarget": 44 }
+}
