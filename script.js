@@ -1,4 +1,4 @@
-const XP_TARGET = 1860;
+const XP_TARGET = 2100;
 const XP_MAX = 2400;
 
 const yearEl = document.getElementById("year");

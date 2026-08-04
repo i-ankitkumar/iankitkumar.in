@@ -262,11 +262,32 @@ a {
   color: var(--muted);
 }
 
+.about,
 .progress-section,
 .quests,
 .skills,
 .contact {
   padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem);
+}
+
+.about-panel {
+  max-width: 46rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+
+.about-panel p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.about-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.about-panel strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .progress-panel {
@@ -335,19 +356,13 @@ a {
   border-top: 1px solid var(--line);
 }
 
-.quest a {
+.quest article {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 1rem 1.25rem;
-  align-items: baseline;
+  align-items: start;
   padding: 1.35rem 0;
   border-bottom: 1px solid var(--line);
-  text-decoration: none;
-}
-
-.quest a:hover .quest-title,
-.quest a:focus-visible .quest-title {
-  color: var(--accent);
 }
 
 .quest-index {
@@ -355,22 +370,38 @@ a {
   font-weight: 800;
   font-size: 1.1rem;
   color: var(--muted);
+  padding-top: 0.15rem;
 }
 
 .quest-title {
-  display: block;
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.2rem;
   letter-spacing: -0.02em;
-  transition: color 160ms var(--ease);
+}
+
+.quest-meta {
+  margin: 0.35rem 0 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .quest-desc {
-  display: block;
-  margin-top: 0.25rem;
+  margin: 0;
   color: var(--muted);
-  max-width: 48ch;
+  max-width: 62ch;
+}
+
+.quest-desc strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.quest-desc a {
+  color: var(--accent);
+  text-underline-offset: 3px;
 }
 
 .quest-status {
@@ -378,10 +409,35 @@ a {
   font-weight: 700;
   color: var(--accent);
   white-space: nowrap;
+  padding-top: 0.2rem;
 }
 
 .quest[data-status="active"] .quest-status {
   color: var(--signal);
+}
+
+.side-quests {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  max-width: 46rem;
+}
+
+.side-quests h3 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.side-quests p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.side-quests a {
+  color: var(--ink);
+  font-weight: 600;
+  text-underline-offset: 3px;
 }
 
 .skill-tree {
@@ -418,6 +474,35 @@ a {
 
 .skill-tree.is-inview li i::after {
   width: calc(var(--level) * 1%);
+}
+
+.certs {
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  max-width: 46rem;
+}
+
+.certs h3 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.certs ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+}
+
+.certs li {
+  margin: 0.35rem 0;
+}
+
+.certs em {
+  color: var(--signal);
+  font-style: normal;
+  font-weight: 700;
 }
 
 .contact-links {
@@ -470,7 +555,7 @@ a {
     gap: 0;
   }
 
-  .quest a {
+  .quest article {
     grid-template-columns: auto 1fr;
   }
 
