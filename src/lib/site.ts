@@ -10,7 +10,7 @@ export const SITE = {
   role: 'Infrastructure Engineer → Software & AI Engineering',
   tagline: 'Splunk · Azure · AWS · Terraform · MCP',
   description:
-    'Ankit Kumar is an infrastructure engineer at Wolters Kluwer transitioning into software and AI engineering. Splunk multi-site clusters, Azure, AWS, Terraform, MCP, and AI-powered security tooling. Based in Pune, India; relocating to Heidelberg.',
+    'Ankit Kumar is an infrastructure engineer becoming a software & AI engineer. Splunk multi-site clusters, Azure, AWS, Terraform at Wolters Kluwer; multi-agent AI office (Paperclip + Honcho + GitNexus + Hermes) outside it. Based in Pune, India; relocating to Heidelberg.',
 
   // Public contact (routed via Cloudflare Email Routing → real inbox)
   email: 'mail@iankitkumar.in',
