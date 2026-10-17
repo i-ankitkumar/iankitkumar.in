@@ -80,11 +80,12 @@ a:focus-visible, button:focus-visible {
 }
 .muted { color: var(--muted); }
 .lead {
-  font-family: var(--font-serif);
-  font-size: var(--t-xl);
+  font-family: var(--font-sans);
+  font-size: var(--t-lg);
   line-height: var(--lh-loose);
   color: var(--fg-soft);
   max-width: 60ch;
+  letter-spacing: -0.005em;
 }
 
 /* ------------------------------------------------------------------
