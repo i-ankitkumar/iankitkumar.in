@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { data } = project;
+
+const statusLabel: Record<string, string> = {
+  live: 'Live',
+  shipped: 'Shipped',
+  'in-progress': 'In progress',
+  archived: 'Archived',
+  research: 'Research',
+};
+
+const blocks: { title: string; body?: string }[] = [
+  { title: 'Problem', body: data.problem },
+  { title: 'Architecture', body: data.architecture },
+  { title: 'Implementation', body: data.implementation },
+  { title: 'Results', body: data.results },
+];
+---
+
+<Base title={data.name} description={data.summary}>
+  <Nav slot="header" />
+
+  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
+    <div class="container">
+      <p style="margin: 0 0 var(--s-4);">
+        <a href="/work/" class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs);">← All work</a>
+      </p>
+      <span class="eyebrow">{data.type}</span>
+      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem); margin-top: var(--s-3);">{data.name}</h1>
+      <p class="lead" style="margin-top: var(--s-5);">{data.summary}</p>
+      <div class="actions" style="margin-top: var(--s-5);">
+        {data.links.map((l) => (
+          <a class="btn" href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}>
+            {l.label}{l.external && <span class="arr"> ↗</span>}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
+    <div class="container">
+      <div class="proj-detail">
+        <aside class="meta">
+          <dl style="margin:0;">
+            <dt>Status</dt>
+            <dd><span style="color: var(--accent); font-family: var(--font-mono);">{statusLabel[data.status] ?? data.status}</span></dd>
+            {data.period && (<><dt>Period</dt><dd>{data.period}</dd></>)}
+            {data.stack.length > 0 && (
+              <>
+                <dt>Stack</dt>
+                <dd>
+                  {data.stack.map((s) => (
+                                    <span style="display:inline-block; padding:0.2rem 0.55rem; border:1px solid var(--rule); border-radius:var(--r-pill); font-family:var(--font-mono); font-size:var(--t-xs); color:var(--muted); margin:0 0.3rem 0.3rem 0;">{s}</span>
+                                  ))}
+                </dd>
+              </>
+            )}
+          </dl>
+        </aside>
+        <div class="prose">
+          {blocks.filter((b) => b.body).map((b) => (
+            <h3>{b.title}</h3>
+            <p>{b.body}</p>
+          ))}
+          {Content && <Content />}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

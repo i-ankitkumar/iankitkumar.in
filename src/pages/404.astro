@@ -1,0 +1,28 @@
+---
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import { SITE } from '~/lib/site';
+---
+
+<Base title="404 — Not found" description="The page you were looking for doesn't exist on this site." noindex={true}>
+  <Nav slot="header" />
+
+  <section class="notfound">
+    <div>
+      <div class="code">404</div>
+      <p class="lead" style="margin-top: var(--s-4);">This page doesn't exist.</p>
+      <p class="muted" style="margin-top: var(--s-2);">It may have moved, or never have.</p>
+      <div class="actions" style="margin-top: var(--s-6); justify-content: center;">
+        <a class="btn primary" href="/">← Home</a>
+        <a class="btn" href="/work/">Work</a>
+        <a class="btn" href="/contact/">Contact</a>
+      </div>
+      <p class="muted" style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs);">
+        {SITE.siteUrl}{Astro.url.pathname}
+      </p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

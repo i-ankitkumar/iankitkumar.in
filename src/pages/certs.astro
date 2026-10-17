@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import CertItem from '~/components/CertItem.astro';
+import { SITE } from '~/lib/site';
+
+const certs = (await getCollection('certs')).sort((a, b) => {
+  const rank = { active: 0, 'in-progress': 1, expired: 2 } as Record<string, number>;
+  return (rank[a.data.status] ?? 9) - (rank[b.data.status] ?? 9) || a.data.order - b.data.order;
+});
+---
+
+<Base title="Certifications" description={`Cloud and infrastructure certifications held by ${SITE.name}: Terraform Associate, AZ-104, RHCSA, AZ-900, AI-900, AZ-400 in progress.`}>
+  <Nav slot="header" />
+
+  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
+    <div class="container stack">
+      <span class="eyebrow">§ Certifications</span>
+      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">Verified, in order of recency.</h1>
+      <p class="lead">
+        Active first. In-progress next. Expired last — kept on the page because they shaped what I built on top.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
+    <div class="container">
+      <div class="cert-list">
+        {certs.map((c) => <CertItem cert={c} />)}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

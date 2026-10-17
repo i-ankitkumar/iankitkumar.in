@@ -1,0 +1,49 @@
+---
+import { SITE } from '~/lib/site';
+
+const navItems: { href: string; label: string }[] = [
+  { href: '/', label: 'Index' },
+  { href: '/work', label: 'Work' },
+  { href: '/experience', label: 'Experience' },
+  { href: '/certs', label: 'Certifications' },
+  { href: '/experiments', label: 'Experiments' },
+  { href: '/contact', label: 'Contact' },
+  { href: SITE.blog, label: 'Blog ↗' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="container">
+    <a href="/" class="brand" aria-label={`${SITE.name} — home`}>
+      Ankit Kumar<span class="dot">.</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      {navItems.map((item) => {
+        const itemPath = item.href.replace(/\/$/, '') || '/';
+        const isExternal = item.href.startsWith('http');
+        const isCurrent = !isExternal && itemPath === currentPath;
+        return (
+          <a
+            href={item.href}
+            aria-current={isCurrent ? 'page' : undefined}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        aria-label="Toggle dark mode"
+        aria-pressed="false"
+      >
+        <span data-theme-label>Theme</span>
+      </button>
+    </nav>
+  </div>
+</header>

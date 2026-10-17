@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import ExperimentCard from '~/components/ExperimentCard.astro';
+import ConfirmMark from '~/components/ConfirmMark.astro';
+import { SITE } from '~/lib/site';
+
+const experiments = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Experiments" description={`Software and AI engineering experiments by ${SITE.name}: MCP servers, AI-assisted Splunk tooling, and security automation.`}>
+  <Nav slot="header" />
+
+  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
+    <div class="container stack">
+      <span class="eyebrow">§ Experiments</span>
+      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+        Software &amp; AI engineering,<br />outside the day job.
+      </h1>
+      <p class="lead">
+        The work that takes me from infrastructure engineering toward software and AI engineering. Most of this is experimental and the entries below carry a <ConfirmMark confirm label="verify" /> marker — verify before citing externally.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
+    <div class="container">
+      <div class="project-grid">
+        {experiments.map((exp) => <ExperimentCard exp={exp} />)}
+      </div>
+      <p class="muted" style="margin-top: var(--s-6); max-width: 60ch;">
+        Two experiments in this category right now. New ones land here as they're prototyped.
+      </p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

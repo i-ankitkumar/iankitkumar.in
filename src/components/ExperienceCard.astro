@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ConfirmMark from './ConfirmMark.astro';
+
+export interface Props {
+  role: CollectionEntry<'experience'>;
+}
+
+const { role } = Astro.props;
+const { data } = role;
+---
+
+<article class="timeline-item reveal" data-confirm={data.confirm || undefined}>
+  <div class="period">
+    {data.period}
+    {data.duration && <><br />{data.duration}</>}
+    <br />{data.location}
+  </div>
+  <div>
+    <h3 class="role">
+      {data.role}
+      <ConfirmMark confirm={data.confirm} />
+    </h3>
+    <p class="company">{data.company}{data.current && <span class="muted"> — current</span>}</p>
+    <p class="muted" style="margin:0; max-width:64ch; line-height:1.65;">{data.summary}</p>
+    {data.bullets.length > 0 && (
+      <ul>
+        {data.bullets.map((b) => <li set:html={b} />)}
+      </ul>
+    )}
+    {data.stack.length > 0 && (
+      <div class="tags" style="margin-top: var(--s-3);">
+        {data.stack.map((t) => <span class="tag">{t}</span>)}
+      </div>
+    )}
+  </div>
+</article>

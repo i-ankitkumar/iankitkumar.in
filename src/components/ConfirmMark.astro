@@ -1,0 +1,10 @@
+---
+export interface Props {
+  confirm?: boolean;
+  label?: string;
+}
+
+const { confirm, label = 'verify' } = Astro.props;
+---
+
+{confirm && <span class="confirm-mark" title={`This item is flagged for user verification — "${label}"`}>{label}</span>}

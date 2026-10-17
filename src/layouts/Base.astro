@@ -1,0 +1,176 @@
+---
+import { SITE } from '~/lib/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description = SITE.description,
+  ogType = 'website',
+  noindex = false,
+  bodyClass = '',
+} = Astro.props;
+
+const pageTitle = title ? `${title} — ${SITE.name}` : `${SITE.name} — ${SITE.role}`;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', SITE.siteUrl).toString();
+const ogImage = new URL(SITE.ogImageUrl, SITE.siteUrl).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  url: SITE.siteUrl,
+  image: new URL(SITE.photoUrl, SITE.siteUrl).toString(),
+  email: SITE.emailDirect,
+  telephone: SITE.phone,
+  jobTitle: SITE.role,
+  description: SITE.description,
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Wolters Kluwer',
+    url: 'https://www.wolterskluwer.com',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Pune',
+    addressRegion: 'Maharashtra',
+    addressCountry: 'IN',
+  },
+  knowsLanguage: ['en-GB', 'en-IN', 'hi-IN', 'de-DE'],
+  sameAs: SITE.sameAs,
+  alumniOf: [
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'KJ Somaiya College of Engineering',
+      address: 'Mumbai, India',
+    },
+    {
+      '@type': 'CollegeOrUniversity',
+      name: 'Mumbai University',
+      address: 'Mumbai, India',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F0F12" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={SITE.faviconUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Theme bootstrap — runs before paint to avoid FOUC -->
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot name="header">
+      <!-- Default header slot -->
+    </slot>
+    <main id="main">
+      <slot />
+    </main>
+    <slot name="footer">
+      <!-- Default footer slot -->
+    </slot>
+
+    <!-- Reveal-on-scroll + theme toggle -->
+    <script>
+      const root: HTMLElement = document.documentElement;
+      const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+      const apply = (t: 'light' | 'dark') => {
+        root.dataset.theme = t;
+        localStorage.setItem('theme', t);
+        if (toggle) toggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+      };
+      toggle?.addEventListener('click', () => {
+        const next: 'light' | 'dark' = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(next);
+      });
+      // Reflect initial state on toggle
+      apply(root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+      // Reveal-on-scroll
+      const io = new IntersectionObserver(
+        (entries: IntersectionObserverEntry[]) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    padding: 0.6rem 1rem;
+    background: var(--fg);
+    color: var(--bg);
+    border-radius: 0 0 var(--r-md) 0;
+    z-index: 99;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+</style>

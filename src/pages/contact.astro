@@ -1,0 +1,78 @@
+---
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import { SITE } from '~/lib/site';
+---
+
+<Base title="Contact" description={`Contact details for ${SITE.name}: email, LinkedIn, GitHub, résumé.`}>
+  <Nav slot="header" />
+
+  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
+    <div class="container stack">
+      <span class="eyebrow">§ Contact</span>
+      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+        The fastest route<br />is email.
+      </h1>
+      <p class="lead">
+        I'm happy to talk about a role, a thing you're working on, or a question about Splunk / Terraform / MCP.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
+    <div class="container">
+      <div class="stack-lg" style="max-width: var(--measure);">
+        <div>
+          <span class="eyebrow">Email</span>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            <span class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); display: block; margin-top: 0.4rem;">
+              Cloudflare Email Routing → {SITE.emailDirect}
+            </span>
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">LinkedIn</span>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <a href={SITE.linkedin} target="_blank" rel="noopener">{SITE.linkedin.replace('https://', '')}</a>
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">GitHub</span>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <a href={SITE.github} target="_blank" rel="noopener">{SITE.github.replace('https://', '')}</a>
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">Résumé</span>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <a href={SITE.resumeUrl} target="_blank" rel="noopener">Download PDF ↓</a>
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">Blog</span>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <a href={SITE.blog} target="_blank" rel="noopener">{SITE.blog.replace('https://', '')} ↗</a>
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">Phone (verify)</span>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <span class="muted">{SITE.phone}</span>
+            <span class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); display: block; margin-top: 0.4rem;">
+              Listed on the CV — not preferred for first contact.
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

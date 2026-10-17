@@ -1,0 +1,171 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import Section from '~/components/Section.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import ExperimentCard from '~/components/ExperimentCard.astro';
+import CertItem from '~/components/CertItem.astro';
+import ConfirmMark from '~/components/ConfirmMark.astro';
+import { SITE } from '~/lib/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.filter((p) => p.data.featured).slice(0, 3);
+
+const experiments = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
+
+const certs = (await getCollection('certs'))
+  .sort((a, b) => {
+    const rank = { active: 0, 'in-progress': 1, expired: 2 } as Record<string, number>;
+    return (rank[a.data.status] ?? 9) - (rank[b.data.status] ?? 9) || a.data.order - b.data.order;
+  });
+
+const skillGroups: { title: string; items: string[] }[] = [
+  {
+    title: 'Cloud & Infrastructure',
+    items: ['Azure (IaaS/PaaS)', 'AWS (introductory)', 'Splunk Enterprise · multi-site', 'Terraform', 'Docker', 'Kubernetes (foundations)'],
+  },
+  {
+    title: 'Observability & Monitoring',
+    items: ['Splunk (clustering, SOC2, dashboards)', 'Grafana', 'Runbooks', 'Patch-cycle monitoring', 'On-call / P1/P2 incident ownership'],
+  },
+  {
+    title: 'DevOps & CI/CD',
+    items: ['Azure DevOps Pipelines', 'GitHub Actions', 'YAML CI/CD', 'Git / GitOps', 'Agile · Scrum · ITIL'],
+  },
+  {
+    title: 'Operating Systems',
+    items: ['RHEL (RHCSA)', 'Windows Server', 'SCCM / MECM', 'Workspace One', 'Tanium'],
+  },
+  {
+    title: 'Scripting & Automation',
+    items: ['Python', 'PowerShell', 'Bash / UNIX Shell', 'Runbook development', 'Patch automation'],
+  },
+  {
+    title: 'AI & Tooling (verify)',
+    items: ['Model Context Protocol (MCP)', 'AI-assisted Splunk triage', 'Pandas · NumPy', 'scikit-learn · TensorFlow / Keras', 'LLM structured-output pipelines'],
+  },
+];
+---
+
+<Base
+  title={undefined}
+  description={SITE.description}
+>
+  <Nav slot="header" />
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container stack">
+      <div class="meta">
+        <span class="meta-item"><strong>Ankit Kumar</strong></span>
+        <span class="meta-item"><strong>Pune</strong> → Heidelberg</span>
+        <span class="meta-item"><strong>EU Blue Card</strong> eligible</span>
+      </div>
+      <h1 class="display">
+        Infrastructure engineer<br />
+        becoming a software<br />
+        <span style="color: var(--accent); font-style: italic;">&amp; AI engineer.</span>
+      </h1>
+      <p class="lead lede">
+        I run platforms that have to stay up. At Wolters Kluwer I led the Splunk multi-site cluster migration through ARC certification, owned P1/P2 incidents to 99.9%+, and cut BAU by ~35% with automation. The next chapter is software and AI engineering — MCP servers, AI-assisted Splunk tooling, and writing more than runbooks.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
+          Résumé <span class="arr">↓</span>
+        </a>
+        <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href={`mailto:${SITE.email}`}>Email</a>
+      </div>
+      <p class="muted" style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.06em;">
+        Currently at Wolters Kluwer · {SITE.languages}
+      </p>
+    </div>
+  </section>
+
+  <!-- ABOUT / POSITIONING -->
+  <Section num="01" title="About" id="about" intro="A short version of where I've been and where I'm heading.">
+    <div class="prose" style="max-width: var(--measure);">
+      <p>
+        I'm an infrastructure engineer with four years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune — Splunk multi-site clusters, Azure foundations, Terraform, CI/CD for infra, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
+      </p>
+      <p>
+        The work I want next lives closer to software engineering. I prototype MCP servers that tie language models into Splunk. I write small Python services that turn LLM structured output into enriched security alerts. The skills I bring are the boring ones that matter in production: defined RPO/RTO, audit-ready telemetry, change control that doesn't fight the team. The skills I'm adding are the ones that let me ship the prototypes I'm sketching.
+      </p>
+      <p>
+        I'm relocating to Heidelberg with my partner and open to software and AI engineering roles in Germany. EU Blue Card eligible.
+        <ConfirmMark confirm={SITE.confirm.relocateHeidelberg} label="verify" />
+      </p>
+    </div>
+  </Section>
+
+  <!-- FEATURED WORK -->
+  <Section num="02" title="Selected work" id="work" intro="Three pieces I'd talk through in an interview. The full list is on the work page.">
+    <div class="project-grid">
+      {featured.map((p) => <ProjectCard project={p} />)}
+    </div>
+    <p class="muted" style="margin-top: var(--s-6);">
+      <a href="/work/">All projects →</a>
+    </p>
+  </Section>
+
+  <!-- SKILLS -->
+  <Section num="03" title="Stack" id="stack" intro="Tools and categories I work with day-to-day. Newer categories are flagged for verification.">
+    <div class="skill-grid">
+      {skillGroups.map((group) => (
+        <div class="skill-group reveal">
+          <h3>{group.title}{group.title.includes('verify') && <ConfirmMark confirm={true} label="verify" />}</h3>
+          <ul>
+            {group.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- CERTS PREVIEW -->
+  <Section num="04" title="Certifications" id="certs" intro="Active first, in-progress next, expired last.">
+    <div class="cert-list">
+      {certs.map((c) => <CertItem cert={c} />)}
+    </div>
+  </Section>
+
+  <!-- EXPERIMENTS PREVIEW -->
+  <Section num="05" title="Experiments" id="experiments" intro="Software and AI engineering work outside my day job. Newer work — verify before citing.">
+    <div class="project-grid">
+      {experiments.map((exp) => <ExperimentCard exp={exp} />)}
+    </div>
+    <p class="muted" style="margin-top: var(--s-6);">
+      <a href="/experiments/">All experiments →</a>
+    </p>
+  </Section>
+
+  <!-- CONTACT CTA -->
+  <Section num="06" title="Get in touch" id="contact" intro="The fastest route is email. The slower routes are linked below.">
+    <div class="stack" style="margin-top: var(--s-3);">
+      <p class="lead" style="max-width: 50ch;">
+        I'm happy to talk about a role, a project, or a thing you're working on.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href={`mailto:${SITE.email}`}>
+          {SITE.email} <span class="arr">→</span>
+        </a>
+        <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href={SITE.resumeUrl} target="_blank" rel="noopener">Résumé (PDF)</a>
+      </div>
+      <p class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs);">
+        Direct (real inbox): {SITE.emailDirect}
+      </p>
+    </div>
+  </Section>
+
+  <Footer slot="footer" />
+</Base>
+
+<style is:global>
+  .prose p { margin: 0 0 var(--s-5); line-height: var(--lh-loose); }
+  .prose p:last-child { margin-bottom: 0; }
+</style>

@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import { SITE } from '~/lib/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Work" description={`Selected engineering projects by ${SITE.name}: Splunk multi-site migration, SOC2 dashboards, global endpoint ops, and ML security research.`}>
+  <Nav slot="header" />
+
+  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
+    <div class="container stack">
+      <span class="eyebrow">§ Work</span>
+      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+        Projects, in order<br />of how often I talk about them.
+      </h1>
+      <p class="lead">
+        Production work comes first (Wolters Kluwer, Colgate GBS). Research and personal work follow. Every entry has a problem, an architecture, an implementation, and a result — the same shape I'd use to brief a hiring manager.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
+    <div class="container">
+      <div class="project-grid">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>

@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ConfirmMark from './ConfirmMark.astro';
+
+export interface Props {
+  cert: CollectionEntry<'certs'>;
+}
+
+const { cert } = Astro.props;
+const { data } = cert;
+
+const statusLabel: Record<string, string> = {
+  active: 'Active',
+  expired: 'Expired',
+  'in-progress': 'In progress',
+};
+---
+
+<div class="cert-item reveal" data-confirm={data.confirm || undefined}>
+  <div>
+    <div class="name">
+      {data.name}
+      <ConfirmMark confirm={data.confirm} />
+    </div>
+    <div class="issuer">{data.issuer}{data.issued && ` · ${data.issued}`}</div>
+  </div>
+  <div class={`status ${data.status}`}>{statusLabel[data.status] ?? data.status}</div>
+</div>

@@ -1,0 +1,42 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ConfirmMark from './ConfirmMark.astro';
+
+export interface Props {
+  exp: CollectionEntry<'experiments'>;
+}
+
+const { exp } = Astro.props;
+const { data } = exp;
+
+const categoryLabel: Record<string, string> = {
+  'ai-agent': 'AI Agent',
+  mcp: 'MCP',
+  'security-tooling': 'Security Tooling',
+  'ml-security': 'ML Security',
+  other: 'Other',
+};
+
+const statusLabel: Record<string, string> = {
+  live: 'Live',
+  shipped: 'Shipped',
+  'in-progress': 'In progress',
+  experimental: 'Experimental',
+  archived: 'Archived',
+};
+---
+
+<article class="project-card reveal" data-confirm={data.confirm || undefined}>
+  <span class="type">{categoryLabel[data.category] ?? data.category}</span>
+  <span class="status">{statusLabel[data.status] ?? data.status}</span>
+  <h3>
+    {data.name}
+    <ConfirmMark confirm={data.confirm} />
+  </h3>
+  <p>{data.summary}</p>
+  {data.stack.length > 0 && (
+    <div class="tags">
+      {data.stack.map((t) => <span class="tag">{t}</span>)}
+    </div>
+  )}
+</article>

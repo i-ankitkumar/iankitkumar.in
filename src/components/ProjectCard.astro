@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ConfirmMark from './ConfirmMark.astro';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+  size?: 'sm' | 'md';
+}
+
+const { project, size = 'md' } = Astro.props;
+const { data, id } = project;
+
+const statusLabel: Record<string, string> = {
+  live: 'Live',
+  shipped: 'Shipped',
+  'in-progress': 'In progress',
+  archived: 'Archived',
+  research: 'Research',
+};
+---
+
+<a class={`project-card reveal ${size === 'sm' ? 'is-visible' : ''}`} href={`/work/${id}/`} data-confirm={data.confirm || undefined}>
+  <span class="type">{data.type}</span>
+  {data.status && <span class="status">{statusLabel[data.status] ?? data.status}</span>}
+  <h3>
+    {data.name}
+    <ConfirmMark confirm={data.confirm} label={data.confirm ? 'verify' : undefined} />
+  </h3>
+  <p>{data.summary}</p>
+  {data.tags.length > 0 && (
+    <div class="tags">
+      {data.tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+  )}
+</a>
+
+<style>
+  .project-card.sm { padding: var(--s-5); }
+  .project-card.sm h3 { font-size: var(--t-lg); }
+</style>
