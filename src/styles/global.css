@@ -245,8 +245,8 @@ section.page-section .section-head {
 }
 @media (min-width: 56rem) {
   section.page-section .section-head {
-    grid-template-columns: 9rem minmax(0, 1fr);
-    gap: var(--s-6);
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--s-4);
     align-items: baseline;
   }
 }
