@@ -20,5 +20,5 @@ tags:
   - "AI agent"
 links: []
 order: 10
-confirm: true
+confirm: false
 ---

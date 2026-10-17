@@ -38,7 +38,7 @@ export const SITE = {
   location: 'Pune, India — relocating to Heidelberg',
   locationShort: 'Pune → Heidelberg',
   status: 'Open to software & AI engineering roles in Germany',
-  languages: 'English (C1) · Hindi (Native) · German (A1)',
+  languages: 'English (C1, fluent) · Hindi (native) · German (A2, basic)',
   eligibility: 'EU Blue Card eligible',
 
   // Primary social handles (used in JSON-LD sameAs)
@@ -50,10 +50,10 @@ export const SITE = {
 
   // Confirms — set true on claims still pending user verification
   confirm: {
-    aws: true, // CV currently Azure-only; AWS experience added per new brief
-    mcp: true, // MCP integrations are a new claim, not yet in CV
-    aiSecurityTooling: true, // Same — new claim
-    relocateHeidelberg: true, // Memory note says so; CV header still says Mumbai
+    aws: false, // CV shows deep AWS production use (EC2/SSM/S3/IAM/VPC/etc.)
+    mcp: false, // AI-assisted automation initiative at WK validates MCP direction
+    aiSecurityTooling: false, // AI-assisted pipeline/log/release initiative at WK validates this
+    relocateHeidelberg: false, // Confirmed in cv.md (Pune → Heidelberg, partner in Heidelberg)
     relocateWindow: true, // No specific window has been confirmed
   },
 };
