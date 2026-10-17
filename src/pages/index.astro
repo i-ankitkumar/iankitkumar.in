@@ -10,7 +10,7 @@ import CertItem from '~/components/CertItem.astro';
 import { SITE } from '~/lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const featured = projects.filter((p) => p.data.featured).slice(0, 3);
+const featured = projects.filter((p) => p.data.featured).slice(0, 4);
 
 const experiments = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
 
@@ -47,7 +47,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   },
   {
     title: 'AI & Tooling',
-    items: ['Model Context Protocol (MCP)', 'AI-assisted Splunk tooling', 'LLM structured-output pipelines', 'Pandas · NumPy', 'scikit-learn · TensorFlow / Keras'],
+    items: ['Model Context Protocol (MCP)', 'AI-assisted Splunk tooling', 'LLM structured-output pipelines', 'Paperclip · Honcho · GitNexus · Hermes', 'Pandas · NumPy · scikit-learn · TensorFlow / Keras'],
   },
 ];
 ---
@@ -97,7 +97,10 @@ const skillGroups: { title: string; items: string[] }[] = [
         I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune — Splunk multi-site clusters, Azure landing zones, Terraform across 2,500+ subscriptions, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
       </p>
       <p>
-        At WK I drove an <strong>AI-assisted automation initiative</strong> for pipeline-failure detection, log analysis, and release tagging — and I'm building on top of that with software-engineering work: an MCP server that lets language models query Splunk the way an SRE would, and a small Python pipeline that turns LLM structured output into enriched security alerts. Five years of platform engineering is what I'm bringing. Software and AI engineering is where I'm going.
+        At WK I drove an <strong>AI-assisted automation initiative</strong> for pipeline-failure detection, log analysis, and release tagging — and I'm building on top of that with software-engineering work: an MCP server that lets language models query Splunk the way an SRE would, and a small Python pipeline that turns LLM structured output into enriched security alerts.
+      </p>
+      <p>
+        My daily work stack is multi-agent too: <strong>Paperclip</strong> for orchestration, <strong>Honcho</strong> for persistent cross-agent memory, <strong>GitNexus</strong> for codebase knowledge graphs, <strong>Hermes</strong> as the agent runtime — with specialised agents for dev, qa, infra, marketing, and design. Same MCP-and-shared-memory primitives as the WK work, just with more agents on a personal workstation. Five years of platform engineering is what I'm bringing. Software and AI engineering is where I'm going.
       </p>
       <p>
         Relocating to Heidelberg with my partner. Open to software and AI engineering roles in Germany. EU Blue Card eligible.
@@ -106,7 +109,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- FEATURED WORK -->
-  <Section title="Selected work" id="work" intro="Three pieces I'd talk through in an interview. The full list is on the work page.">
+  <Section title="Selected work" id="work" intro="Four pieces I'd talk through in an interview. The full list is on the work page.">
     <div class="project-grid">
       {featured.map((p) => <ProjectCard project={p} />)}
     </div>
