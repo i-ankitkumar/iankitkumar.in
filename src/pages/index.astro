@@ -86,7 +86,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </section>
 
   <!-- ABOUT / POSITIONING -->
-  <Section num="01" title="About" id="about" intro="A short version of where I've been and where I'm heading.">
+  <Section title="About" id="about" intro="A short version of where I've been and where I'm heading.">
     <div class="prose" style="max-width: var(--measure);">
       <p>
         I'm an infrastructure engineer with four years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune — Splunk multi-site clusters, Azure foundations, Terraform, CI/CD for infra, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
@@ -102,7 +102,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- FEATURED WORK -->
-  <Section num="02" title="Selected work" id="work" intro="Three pieces I'd talk through in an interview. The full list is on the work page.">
+  <Section title="Selected work" id="work" intro="Three pieces I'd talk through in an interview. The full list is on the work page.">
     <div class="project-grid">
       {featured.map((p) => <ProjectCard project={p} />)}
     </div>
@@ -112,7 +112,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- SKILLS -->
-  <Section num="03" title="Stack" id="stack" intro="Tools and categories I work with day-to-day. Newer categories are flagged for verification.">
+  <Section title="Stack" id="stack" intro="Tools and categories I work with day-to-day. Newer categories are flagged for verification.">
     <div class="skill-grid">
       {skillGroups.map((group) => (
         <div class="skill-group reveal">
@@ -126,14 +126,14 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- CERTS PREVIEW -->
-  <Section num="04" title="Certifications" id="certs" intro="Active first, in-progress next, expired last.">
+  <Section title="Certifications" id="certs" intro="Active first, in-progress next, expired last.">
     <div class="cert-list">
       {certs.map((c) => <CertItem cert={c} />)}
     </div>
   </Section>
 
   <!-- EXPERIMENTS PREVIEW -->
-  <Section num="05" title="Experiments" id="experiments" intro="Software and AI engineering work outside my day job. Newer work — verify before citing.">
+  <Section title="Experiments" id="experiments" intro="Software and AI engineering work outside my day job. Newer work — verify before citing.">
     <div class="project-grid">
       {experiments.map((exp) => <ExperimentCard exp={exp} />)}
     </div>
@@ -143,7 +143,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- CONTACT CTA -->
-  <Section num="06" title="Get in touch" id="contact" intro="The fastest route is email. The slower routes are linked below.">
+  <Section title="Get in touch" id="contact" intro="The fastest route is email. The slower routes are linked below.">
     <div class="stack" style="margin-top: var(--s-3);">
       <p class="lead" style="max-width: 50ch;">
         I'm happy to talk about a role, a project, or a thing you're working on.

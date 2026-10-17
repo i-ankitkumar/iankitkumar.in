@@ -238,23 +238,8 @@ section.page-section {
   border-top: 1px solid var(--rule);
 }
 section.page-section .section-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--s-3);
+  display: block;
   margin-bottom: var(--s-6);
-}
-@media (min-width: 56rem) {
-  section.page-section .section-head {
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: var(--s-4);
-    align-items: baseline;
-  }
-}
-.section-head .num {
-  font-family: var(--font-mono);
-  font-size: var(--t-xs);
-  letter-spacing: 0.18em;
-  color: var(--muted);
 }
 .section-head .title {
   font-family: var(--font-serif);
