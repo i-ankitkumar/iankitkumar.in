@@ -1,0 +1,65 @@
+# Ankit Kumar
+
+> Infrastructure engineer at Wolters Kluwer shipping software and AI tooling. Splunk multi-site clusters, Azure, AWS, Terraform at work; MCP, AI-assisted ops, and a multi-agent dev environment (Paperclip + Honcho + GitNexus + Hermes) outside it. Based in Pune, India, relocating to Heidelberg, Germany. EU Blue Card eligible. Open to software and AI engineering roles in Germany.
+
+## About
+
+- [About + career direction](https://iankitkumar.in/#about)
+- [Experience (3 roles)](https://iankitkumar.in/experience/)
+- [Stack and tools](https://iankitkumar.in/#stack)
+- [Certifications](https://iankitkumar.in/certs/)
+
+## Selected Projects (production)
+
+- [Splunk multi-site cluster migration](https://iankitkumar.in/work/splunk-multisite-migration/): WK ARC-certified multi-site topology; RTO/RPO and DR readiness improved.
+- [Multi-cloud Splunk upgrade automation](https://iankitkumar.in/work/splunk-upgrade-automation/): AWS SSM/EC2 + Azure Run Command with automatic rollback; 20,000+ endpoints at 99.9% success.
+- [Subscription migration across 25 Azure tenants](https://iankitkumar.in/work/subscription-migration/): 2.5–3 month program; 200–300 subscriptions migrated under standard governance policies.
+- [Tech-debt scanning across 2,500+ subscriptions](https://iankitkumar.in/work/tech-debt-scanning/): Python + PowerShell; 2,000+ flagged resources resolved on demand.
+- [Splunk dashboards for SOC2 + financial reporting](https://iankitkumar.in/work/soc2-dashboards/): Audit-ready telemetry and financial compliance reporting.
+- [Global Windows endpoint operations](https://iankitkumar.in/work/global-endpoints/): 20K+ endpoints, 79 factories, 70 countries (Colgate GBS).
+
+## Selected Projects (security / ML research)
+
+- [NIDS — network intrusion detection with deep learning](https://iankitkumar.in/work/nids-ml-dl/): Comparative study of deep models for network intrusion detection.
+- [IDS — grid search over classical ML for intrusion detection](https://iankitkumar.in/work/ids-mlp-gridsearch/): Hyperparameter search across classical ML baselines.
+
+## Selected Projects (personal)
+
+- [iankitkumar.in + blog.iankitkumar.in](https://iankitkumar.in/work/portfolio-and-blog/): The site you are on, plus its sibling blog. Astro, Cloudflare Pages.
+- [AI office stack — multi-agent dev environment](https://iankitkumar.in/work/ai-office-stack/): Self-hosted Paperclip + Honcho + GitNexus + Hermes, five specialised agents.
+- [GPP Hack4Good — civic data project](https://iankitkumar.in/work/gpp-hack4good/): Civic-data analysis as part of a hackathon team.
+
+## Experiments (software + AI engineering, outside the day job)
+
+- [MCP server: Splunk query planner](https://iankitkumar.in/experiments/): TypeScript Model Context Protocol server exposing SPL authoring and indexer cluster health to LLM clients.
+- [AI-assisted triage for Splunk security alerts](https://iankitkumar.in/experiments/): Python pipeline that turns LLM structured output into enriched Splunk notable events (severity, MITRE ATT&CK, next step).
+
+## Certifications
+
+- HashiCorp Certified — Terraform Associate (003) — Active. Program: [hashicorp.com](https://www.hashicorp.com/en/products/terraform/terraform-certified-associate)
+- Microsoft AZ-104 — Azure Administrator Associate — Active. Program: [learn.microsoft.com](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator)
+- Red Hat Certified System Administrator (RHCSA) — Active. Program: [redhat.com](https://www.redhat.com/en/services/certifications/red-hat-certified-system-administrator-rhcsa)
+- Microsoft AZ-400 — Designing and Implementing Microsoft DevOps Solutions — In progress. Program: [learn.microsoft.com](https://learn.microsoft.com/en-us/credentials/certifications/devops-engineer)
+- Microsoft AZ-900 — Azure Fundamentals — Held (expired; superseded by AZ-104). Program: [learn.microsoft.com](https://learn.microsoft.com/en-us/credentials/certifications/azure-fundamentals)
+- Microsoft AI-900 — Azure AI Fundamentals — Held (expired). Program: [learn.microsoft.com](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-fundamentals)
+
+## Experience
+
+- Wolters Kluwer (Apr 2024 – present, Pune) — IT Infrastructure & Operations Analyst — DevOps & Cloud. Splunk multi-site, Azure landing zones, Terraform across 2,500+ subscriptions, AI-assisted automation initiative.
+- Wolters Kluwer (Aug 2022 – Mar 2024, Pune) — Associate. Splunk, Azure, and cloud governance foundations.
+- Colgate Global Business Services (Aug 2021 – Jul 2022, Mumbai) — 20,000+ Windows endpoints across 79 factories in 70 countries.
+
+## Contact
+
+- Email: [mail@iankitkumar.in](mailto:mail@iankitkumar.in) (forwarded to a real inbox via Cloudflare Email Routing)
+- LinkedIn: [linkedin.com/in/i-ankitkumar](https://www.linkedin.com/in/i-ankitkumar)
+- GitHub: [github.com/i-ankitkumar](https://github.com/i-ankitkumar)
+- Resume: [resume.pdf](https://iankitkumar.in/resume.pdf)
+- Languages: English (C1, fluent), Hindi (native), German (A2, basic)
+- Status: Open to software & AI engineering roles in Germany. EU Blue Card eligible.
+
+## Optional
+
+- [Full sitemap](https://iankitkumar.in/sitemap-index.xml)
+- [robots.txt](https://iankitkumar.in/robots.txt)
+- [Source repository](https://github.com/i-ankitkumar/iankitkumar.in)

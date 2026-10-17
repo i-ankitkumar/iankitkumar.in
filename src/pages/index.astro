@@ -61,6 +61,15 @@ const skillGroups: { title: string; items: string[] }[] = [
   <!-- HERO -->
   <section class="hero">
     <div class="container stack">
+      <img
+        class="portrait"
+        src={SITE.photoUrl}
+        alt={`${SITE.name} — portrait`}
+        width="96"
+        height="96"
+        loading="eager"
+        decoding="async"
+      />
       <div class="meta">
         <span class="meta-item"><strong>Infrastructure → Software &amp; AI Engineering</strong></span>
         <span class="meta-item"><strong>Splunk · Azure · AWS · Terraform</strong></span>
@@ -70,12 +79,12 @@ const skillGroups: { title: string; items: string[] }[] = [
       </div>
       <h1 class="display">
         Infrastructure engineer<br />
-        becoming a software<br />
-        <span style="color: var(--accent); font-style: italic;">&amp; AI engineer.</span>
+        shipping software<br />
+        <span style="color: var(--accent); font-style: italic;">&amp; AI tooling.</span>
       </h1>
       <p class="lead lede">
-              Running Splunk multi-site clusters and Azure foundations at Wolters Kluwer. Building toward software and AI engineering — MCP, AI-assisted ops, runbooks that scale.
-            </p>
+        Running Splunk multi-site clusters and Azure foundations at Wolters Kluwer. Building MCP, AI-assisted ops, and runbooks that scale.
+      </p>
       <div class="actions">
         <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
           Resume <span class="arr">↓</span>

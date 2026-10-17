@@ -19,7 +19,11 @@ const statusLabel: Record<string, string> = {
 <div class="cert-item reveal" data-confirm={data.confirm || undefined}>
   <div>
     <div class="name">
-      {data.name}
+      {data.verifyUrl ? (
+        <a href={data.verifyUrl} target="_blank" rel="noopener noreferrer">{data.name}</a>
+      ) : (
+        data.name
+      )}
       <ConfirmMark confirm={data.confirm} />
     </div>
     <div class="issuer">{data.issuer}{data.issued && ` · ${data.issued}`}</div>
