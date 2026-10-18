@@ -10,7 +10,7 @@ export const SITE = {
   role: 'Infrastructure Engineer → Software & AI Engineering',
   tagline: 'Splunk · Azure · AWS · Terraform · MCP',
   description:
-    'Ankit Kumar is an infrastructure engineer shipping software and AI tooling. Splunk multi-site clusters, Azure, AWS, Terraform at Wolters Kluwer; multi-agent AI office (Paperclip + Honcho + GitNexus + Hermes) outside it. Based in Pune, India; relocating to Heidelberg, Germany.',
+    'Ankit Kumar is an infrastructure engineer shipping software and AI tooling. Splunk multi-site clusters, Azure, AWS, Terraform at Wolters Kluwer; multi-agent AI office (Paperclip + Honcho + GitNexus + Hermes) outside it. Based in Pune, India; relocating to Germany.',
 
   // Public contact (routed via Cloudflare Email Routing → real inbox)
   email: 'mail@iankitkumar.in',
@@ -35,11 +35,10 @@ export const SITE = {
   hosting: 'Cloudflare Pages · project iankitkumar-in',
 
   // Public positioning strings — verified against CV
-  location: 'Pune, India — relocating to Heidelberg',
-  locationShort: 'Pune → Heidelberg',
+  location: 'Pune, India — relocating to Germany',
+  locationShort: 'Pune to Germany',
   status: 'Open to software & AI engineering roles in Germany',
   languages: 'English (C1, fluent) · Hindi (native) · German (A2, basic)',
-  eligibility: 'EU Blue Card eligible',
 
   // Primary social handles (used in JSON-LD sameAs)
   sameAs: [
@@ -53,7 +52,7 @@ export const SITE = {
     aws: false, // CV shows deep AWS production use (EC2/SSM/S3/IAM/VPC/etc.)
     mcp: false, // AI-assisted automation initiative at WK validates MCP direction
     aiSecurityTooling: false, // AI-assisted pipeline/log/release initiative at WK validates this
-    relocateHeidelberg: false, // Confirmed in cv.md (Pune → Heidelberg, partner in Heidelberg)
+    relocateGermany: false, // Confirmed in cv.md (Pune → Germany)
     relocateWindow: true, // No specific window has been confirmed
   },
 };

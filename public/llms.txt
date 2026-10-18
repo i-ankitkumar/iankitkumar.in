@@ -1,6 +1,6 @@
 # Ankit Kumar
 
-> Infrastructure engineer at Wolters Kluwer shipping software and AI tooling. Splunk multi-site clusters, Azure, AWS, Terraform at work; MCP, AI-assisted ops, and a multi-agent dev environment (Paperclip + Honcho + GitNexus + Hermes) outside it. Based in Pune, India, relocating to Heidelberg, Germany. EU Blue Card eligible. Open to software and AI engineering roles in Germany.
+> Infrastructure engineer at Wolters Kluwer shipping software and AI tooling. Splunk multi-site clusters, Azure, AWS, Terraform at work; MCP, AI-assisted ops, and a multi-agent dev environment (Paperclip + Honcho + GitNexus + Hermes) outside it. Based in Pune, India, relocating to Germany. Open to software and AI engineering roles in Germany.
 
 ## About
 
@@ -56,7 +56,7 @@
 - GitHub: [github.com/i-ankitkumar](https://github.com/i-ankitkumar)
 - Resume: [resume.pdf](https://iankitkumar.in/resume.pdf)
 - Languages: English (C1, fluent), Hindi (native), German (A2, basic)
-- Status: Open to software & AI engineering roles in Germany. EU Blue Card eligible.
+- Status: Open to software & AI engineering roles in Germany. Relocating from India.
 
 ## Optional
 
