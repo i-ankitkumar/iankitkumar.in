@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <clipPath id="frame"><rect width="1200" height="630"/></clipPath>
+    <clipPath id="portrait"><circle cx="1040" cy="252" r="132"/></clipPath>
+  </defs>
+
+  <!-- Ground: warm off-white (matches bg token, light theme) -->
+  <rect width="1200" height="630" fill="#FAFAF7"/>
+
+  <!-- Accent rule, top-left: editorial marker, not a full bleed -->
+  <rect x="80" y="112" width="88" height="5" fill="#9B1C30"/>
+
+  <!-- Eyebrow: role, mono, letterspaced -->
+  <text x="80" y="176"
+        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
+        font-size="21" letter-spacing="3.4"
+        fill="#6B6B70">INFRASTRUCTURE &#8594; SOFTWARE &amp; AI ENGINEERING</text>
+
+  <!-- Name: serif display, the typographic voice of the site -->
+  <text x="80" y="290"
+        font-family="Georgia,'Source Serif 4','Times New Roman',serif"
+        font-size="88" font-weight="600" letter-spacing="-1.5"
+        fill="#1A1A1F">Ankit Kumar</text>
+
+  <!-- Lede: the claim, sans, matching the hero -->
+  <text x="80" y="352"
+        font-family="Inter,'DejaVu Sans',sans-serif"
+        font-size="27"
+        fill="#3A3A40">I turn three-day infrastructure work into fifteen-minute</text>
+  <text x="80" y="390"
+        font-family="Inter,'DejaVu Sans',sans-serif"
+        font-size="27"
+        fill="#3A3A40">button presses.</text>
+
+  <!-- Stack line: mono, muted -->
+  <text x="80" y="462"
+        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
+        font-size="19" letter-spacing="1.2"
+        fill="#6B6B70">Splunk &#183; Azure &#183; AWS &#183; Terraform &#183; Python &#183; MCP</text>
+
+  <!-- Proof row: two verified numbers, boxed like the site's cert/status chips -->
+  <g font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="17" letter-spacing="1.1">
+    <rect x="80" y="500" width="238" height="46" fill="none" stroke="#C9C5BD" stroke-width="1.5"/>
+    <text x="100" y="530" fill="#1A1A1F">20K+ endpoints</text>
+
+    <rect x="334" y="500" width="330" height="46" fill="none" stroke="#C9C5BD" stroke-width="1.5"/>
+    <text x="354" y="530" fill="#1A1A1F">99.9% upgrade success</text>
+  </g>
+
+  <!-- Footer rule + location/domain -->
+  <line x1="80" y1="580" x2="1120" y2="580" stroke="#E5E2DC" stroke-width="1.5"/>
+  <text x="80" y="608"
+        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
+        font-size="16" letter-spacing="1.6"
+        fill="#6B6B70">PUNE &#8594; GERMANY</text>
+  <text x="1120" y="608" text-anchor="end"
+        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
+        font-size="16" letter-spacing="1.6"
+        fill="#6B6B70">iankitkumar.in</text>
+
+  <!-- Portrait, circular, cropped like the site hero. Slight desaturation
+       to sit in the warm palette. -->
+  <g clip-path="url(#portrait)">
+    <image href="../public/photo.jpg" x="908" y="120" width="264" height="264"
+           preserveAspectRatio="xMidYMin slice"/>
+    <rect x="908" y="120" width="264" height="264" fill="#FAFAF7" opacity="0.06"/>
+  </g>
+  <circle cx="1040" cy="252" r="132" fill="none" stroke="#C9C5BD" stroke-width="1.5"/>
+</svg>
