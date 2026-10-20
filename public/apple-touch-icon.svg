@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ankit Kumar">
+  <rect width="64" height="64" fill="#FAFAF7"/>
+  <text
+    x="32"
+    y="46"
+    font-family="Georgia, 'Times New Roman', 'Source Serif 4', serif"
+    font-size="48"
+    font-weight="600"
+    text-anchor="middle"
+    fill="#9B1C30"
+  >A</text>
+</svg>

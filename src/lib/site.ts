@@ -29,6 +29,8 @@ export const SITE = {
   photoUrl: '/photo.jpg',
   ogImageUrl: '/og-preview.png',
   faviconUrl: '/favicon.svg',
+  faviconDarkUrl: '/favicon-dark.svg',
+  appleTouchIconUrl: '/apple-touch-icon.png',
 
   // Hosting
   siteUrl: 'https://iankitkumar.in',

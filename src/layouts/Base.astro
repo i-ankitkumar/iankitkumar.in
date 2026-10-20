@@ -75,7 +75,11 @@ const jsonLd = {
     <meta name="author" content={SITE.name} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href={SITE.faviconUrl} />
+    <!-- Favicon: serif monogram. Media-scoped pair so the tab mark stays
+         legible in both browser chrome themes (matches theme-color below). -->
+    <link rel="icon" type="image/svg+xml" href={SITE.faviconUrl} media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href={SITE.faviconDarkUrl} media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href={SITE.appleTouchIconUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={ogType} />
