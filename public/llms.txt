@@ -34,6 +34,11 @@
 - [MCP server: Splunk query planner](https://iankitkumar.in/experiments/): TypeScript Model Context Protocol server exposing SPL authoring and indexer cluster health to LLM clients.
 - [AI-assisted triage for Splunk security alerts](https://iankitkumar.in/experiments/): Python pipeline that turns LLM structured output into enriched Splunk notable events (severity, MITRE ATT&CK, next step).
 
+## Tools (open source, built to stop doing something by hand)
+
+- [kittybot](https://iankitkumar.in/tools/kittybot/): Telegram bot that pulls grocery orders from Swiggy Instamart, Zepto, Blinkit and BigBasket, and writes the shared expenses to Kittysplit — only after you approve every split. Python, aiogram, MCP/OAuth, read-only adapters. [Source](https://github.com/i-ankitkumar/kittybot)
+- [All tools](https://iankitkumar.in/tools/)
+
 ## Certifications
 
 - HashiCorp Certified — Terraform Associate (003) — Active. Program: [hashicorp.com](https://www.hashicorp.com/en/products/terraform/terraform-certified-associate)

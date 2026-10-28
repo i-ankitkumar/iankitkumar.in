@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
-import ConfirmMark from '~/components/ConfirmMark.astro';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
