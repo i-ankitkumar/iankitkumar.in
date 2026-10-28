@@ -87,9 +87,29 @@ const experiments = defineCollection({
   }),
 });
 
+const tools = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/tools' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      tagline: z.string(),
+      status: z.enum(['live', 'beta', 'in-progress', 'archived']),
+      summary: z.string(),
+      problem: z.string().optional(),
+      approach: z.string().optional(),
+      how: z.array(z.string()).default([]),
+      stack: z.array(z.string()).default([]),
+      links: z.array(linkShape).default([]),
+      screenshot: z.string().optional(),
+      confirm: z.boolean().default(false),
+      order: z.number().default(100),
+    }),
+});
+
 export const collections = {
   experience,
   projects,
   certs,
   experiments,
+  tools,
 };

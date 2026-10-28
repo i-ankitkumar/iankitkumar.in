@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import ToolCard from '~/components/ToolCard.astro';
+import { SITE } from '~/lib/site';
+
+const tools = (await getCollection('tools')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Tools" description={`Open-source tools by ${SITE.name}: Telegram bots and automation built for real daily friction.`}>
+  <Nav slot="header" />
+
+  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
+    <div class="container stack">
+      <span class="eyebrow">§ Tools</span>
+      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+        Things I built<br />to stop doing them by hand.
+      </h1>
+      <p class="lead">
+        Each one is open source, installable in a couple of commands, and solves a specific piece of daily friction rather than a general problem. If it is listed here, it runs on my own machine first.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
+    <div class="container">
+      <div class="project-grid">
+        {tools.map((tool) => <ToolCard tool={tool} />)}
+      </div>
+      <p class="muted" style="margin-top: var(--s-6); max-width: 60ch;">
+        Tools are additive — they sit on top of services you already use, and they never act without you saying so.
+      </p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Base>
