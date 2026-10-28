@@ -27,6 +27,7 @@ links:
     href: "https://kittysplit.com"
     external: true
 screenshot: "/tools/kittybot/dashboard.png"
+telegram_card: "/tools/kittybot/telegram-approval.png"
 confirm: false
 order: 1
 ---

@@ -101,6 +101,7 @@ const tools = defineCollection({
       stack: z.array(z.string()).default([]),
       links: z.array(linkShape).default([]),
       screenshot: z.string().optional(),
+      telegram_card: z.string().optional(),
       confirm: z.boolean().default(false),
       order: z.number().default(100),
     }),

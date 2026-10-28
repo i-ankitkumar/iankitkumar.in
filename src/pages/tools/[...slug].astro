@@ -54,6 +54,19 @@ const statusLabel: Record<string, string> = {
           />
         </figure>
       )}
+      {data.telegram_card && (
+        <figure style="margin: var(--s-6) 0 0; max-width: 420px;">
+          <img
+            src={data.telegram_card}
+            alt={`The approval message ${data.name} sends`}
+            loading="lazy"
+            style="width: 100%; border: 1px solid var(--rule); border-radius: var(--r-lg, 12px); display: block;"
+          />
+          <figcaption class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); margin-top: var(--s-3);">
+            The approval message the bot sends. Nothing reaches the kitty until you tap a button.
+          </figcaption>
+        </figure>
+      )}
     </div>
   </section>
 
