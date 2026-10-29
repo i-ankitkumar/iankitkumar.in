@@ -4,23 +4,45 @@
       --s2: #111019;
       --s3: #17151F;
       --text: #EBE7E0;
-      --sub: #6E6979;
+      --sub: #9E97AB;  /* was #6E6979 — failed AA on all dark surfaces (3.6-3.8:1); now ~5.2-6.4:1 */
       --dim: #252230;
       --accent: #FF3B1F;
+      --accent-strong: #C7331A;  /* darker accent for selection — passes AA with white text (5.4:1 vs 3.6:1) */
       --lime: #B8FF26;
       --gold: #F4C73E;
       --blue: #4F8EF7;
       --border: rgba(255, 255, 255, .065);
       --ff: 'Space Grotesk', sans-serif;
       --fm: 'JetBrains Mono', monospace;
-      --fs: 'Playfair Display', serif;
+      --fs: 'JetBrains Mono', monospace;  /* was 'Playfair Display', serif — italic-serif-display is an AI-startup tell, see PRODUCT.md Brand Commitments */
       --ease: cubic-bezier(.16, 1, .3, 1);
-      --t-xs: 11px;
-      --t-sm: 13px;
+      --t-xs: 13px;  /* was 11px → 12px → 13px — under the 11px legibility floor for functional UI */
+      --t-sm: 14px;  /* was 13px */
       --t-base: 16px;
       --t-lg: 18px;
       --t-xl: 24px;
       --t-2xl: 30px;
+    }
+
+    /* prefers-reduced-motion: kill the infinite animations for users with the OS-level setting.
+       Everyone else still sees the motion. */
+    @media (prefers-reduced-motion: reduce) {
+      .t-inner, .sdot, .avail-dot, .cm-flame, .tdot {
+        animation: none !important;
+      }
+    }
+
+    /* Screen-reader-only: visible to AT, hidden visually */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     *,
@@ -46,7 +68,7 @@
     }
 
     ::selection {
-      background: var(--accent);
+      background: var(--accent-strong);
       color: #fff
     }
 
@@ -828,7 +850,7 @@
       content: '→';
       color: var(--accent);
       flex-shrink: 0;
-      font-size: 10px
+      font-size: 12px
     }
 
     .p-cta {
@@ -1131,7 +1153,7 @@
 
     .cm-name {
       font-family: var(--fm);
-      font-size: 8px;
+      font-size: 11px;
       letter-spacing: .1em;
       text-transform: uppercase;
       color: rgba(244, 199, 62, .35);
@@ -1160,7 +1182,7 @@
       flex-direction: column;
       gap: 4px;
       font-family: var(--fm);
-      font-size: 11px
+      font-size: 12px
     }
 
     .pt-line {
@@ -1215,7 +1237,7 @@
       align-items: center;
       gap: 4px;
       font-family: var(--fm);
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: .1em;
       text-transform: uppercase;
       padding: 3px 9px;
@@ -1437,7 +1459,7 @@
       font-family: var(--fs);
       font-style: italic;
       font-size: clamp(22px, 3vw, 44px);
-      line-height: 1.18;
+      line-height: 1.5;  /* was 1.18 — mobile detector flagged tight leading */
       color: var(--text);
       border-left: 2px solid var(--accent);
       padding-left: 26px;
@@ -1843,7 +1865,7 @@
 
     .cmodel {
       font-family: var(--fm);
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: .1em;
       color: rgba(184, 255, 38, .5);
       margin-left: auto;
@@ -1994,7 +2016,7 @@
 
     .nvidia-attr {
       font-family: var(--fm);
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: .06em;
       color: var(--sub);
       opacity: .5;
@@ -2114,7 +2136,7 @@
       content: '✅';
       position: absolute;
       left: 0;
-      font-size: 11px;
+      font-size: 12px;
       top: 2px
     }
 
@@ -2509,7 +2531,7 @@
 
     .tsb-key {
       font-family: var(--fm);
-      font-size: 10px;
+      font-size: 12px;
       background: var(--dim);
       border: 1px solid rgba(255, 255, 255, .12);
       color: var(--lime);
@@ -2520,7 +2542,7 @@
 
     .tsb-label {
       font-family: var(--fm);
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: .1em;
       color: var(--sub)
     }
@@ -2536,14 +2558,12 @@
 
     .tsb-cmd {
       font-family: var(--fm);
-      font-size: 10px;
+      font-size: 12px;
       color: var(--sub);
-      opacity: .6
     }
 
     .tsb-cmd .c {
       color: var(--lime);
-      opacity: 1
     }
 
     .nav-hamburger {
@@ -2683,7 +2703,7 @@
       }
 
       .strip-txt {
-        font-size: 9px;
+        font-size: 11px;
         letter-spacing: .1em
       }
 
@@ -2705,7 +2725,7 @@
       }
 
       .btn-hire {
-        font-size: 10px;
+        font-size: 12px;
         padding: 7px 14px
       }
 
@@ -2714,7 +2734,7 @@
       }
 
       .bl {
-        font-size: 11px
+        font-size: 12px
       }
 
       #hero {
@@ -2741,7 +2761,7 @@
       }
 
       .hero-kicker {
-        font-size: 9px;
+        font-size: 11px;
         letter-spacing: .14em;
         margin-bottom: 14px
       }
@@ -2776,7 +2796,7 @@
       }
 
       .hstat .l {
-        font-size: 9px;
+        font-size: 11px;
         letter-spacing: .1em
       }
 
@@ -2864,14 +2884,14 @@
       }
 
       .cm-name {
-        font-size: 10px;
+        font-size: 12px;
         writing-mode: horizontal-tb;
         letter-spacing: .08em
       }
 
       .port-terminal {
         padding: 10px 12px;
-        font-size: 10px
+        font-size: 12px
       }
 
       .about-grid {
@@ -2959,7 +2979,7 @@
       }
 
       .cl-val {
-        font-size: 11px;
+        font-size: 12px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -3019,7 +3039,7 @@
       }
 
       .btn-hire {
-        font-size: 9px;
+        font-size: 11px;
         padding: 6px 12px
       }
 
@@ -3088,7 +3108,7 @@
       }
 
       .aw-chip {
-        font-size: 9px;
+        font-size: 11px;
         padding: 4px 9px
       }
 
@@ -3109,7 +3129,7 @@
       }
 
       .foot-template-btn {
-        font-size: 9px;
+        font-size: 11px;
         padding: 5px 10px
       }
     }

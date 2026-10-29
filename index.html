@@ -94,9 +94,10 @@
       <div class="tout" id="tout"></div>
     </div>
     <div class="tin-row">
-      <span class="tprompt">ankit@ops:~$</span>
+      <label for="tinput" class="sr-only">Terminal command</label>
+      <span class="tprompt" aria-hidden="true">ankit@ops:~$</span>
       <input class="tinput" id="tinput" type="text" autocomplete="off" spellcheck="false"
-        placeholder="type 'help' to see all commands">
+        placeholder="type 'help' to see all commands" aria-label="Terminal command">
     </div>
   </div>
 
@@ -141,7 +142,6 @@
     <div class="hero-ghost" aria-hidden="true">A</div>
     <div class="hero-vtag" aria-hidden="true">Mumbai → Germany</div>
     <div class="hero-body">
-      <p class="hero-kicker" aria-hidden="true">DevOps · Cloud Infrastructure · Splunk · Azure</p>
       <h1 class="hero-hl">
         <span class="hr"><span class="hs">I</span><span class="hg">keep</span><span class="hser">systems</span></span>
         <span class="hr" style="padding-left:7%"><span class="hs">up.</span><span class="ha">I</span></span>
@@ -159,7 +159,7 @@
     </div>
   </section>
 
-  <div class="ticker" role="marquee" aria-label="Skills and highlights">
+  <div class="ticker" role="region" aria-label="Skills and highlights">
     <div class="t-inner" id="ticker-inner"></div>
   </div>
 
@@ -168,7 +168,7 @@
   <template id="tmpl-services">
     <p class="services-intro reveal">
       4+ years in enterprise infrastructure and operations.
-      <strong>Here is how I show up</strong> — depending on who you are.
+      <strong>Here is how I show up</strong>, depending on who you are.
     </p>
     <div class="persona-grid" id="persona-grid" role="list"></div>
     <div class="term-hint reveal d5">
@@ -184,7 +184,7 @@
     <div class="about-grid">
       <div class="photo-col reveal">
         <div class="photo-frame">
-          <img class="photo-img" src="./assets/photo.jpg" alt="Ankit Kumar" itemprop="image">
+          <img class="photo-img" src="./assets/photo.jpg" alt="Ankit Kumar" itemprop="image" decoding="async" fetchpriority="high">
         </div>
         <div class="photo-cap" style="margin-top:16px">
           <strong itemprop="name">Ankit Kumar</strong>
@@ -200,7 +200,7 @@
       </div>
       <div class="about-txt">
         <blockquote class="about-quote reveal">
-          "I run platforms that have to stay up — and automate the work that should not be manual."
+          "I run platforms that have to stay up, and automate the work that should not be manual."
         </blockquote>
         <div class="about-body reveal d1" id="about-body"></div>
         <div class="about-awards reveal d2" id="about-awards"></div>
@@ -221,7 +221,7 @@
   <template id="tmpl-contact">
     <div class="contact-grid">
       <div>
-        <h3 class="contact-hl reveal">Let us<br><span>build</span><br>reliability.</h3>
+        <h2 class="contact-hl reveal">Let us<br><span>build</span><br>reliability.</h2>
         <p class="contact-sub reveal d1">DevOps / SRE conversations for Germany and the EU are welcome. Every message gets a real reply.</p>
         <div class="clinks reveal d2" id="contact-links"></div>
       </div>
@@ -231,7 +231,7 @@
             <div class="avail-dot"></div>Open to Opportunities
           </div>
           <div class="avail-ttl">Actively Seeking</div>
-          <div class="avail-desc">Open to DevOps Engineer, SRE, Cloud Infrastructure, and Platform Engineering roles — with a strong preference for Germany / EU.</div>
+          <div class="avail-desc">Open to DevOps Engineer, SRE, Cloud Infrastructure, and Platform Engineering roles, with a strong preference for Germany / EU.</div>
           <div class="avail-grid">
             <span class="av-t">DevOps</span>
             <span class="av-t">SRE</span>
