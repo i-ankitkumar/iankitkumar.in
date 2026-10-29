@@ -84,7 +84,11 @@ check "/work/splunk-multisite-migration/" 200  text/html
 check "/experience/"       200  text/html
 check "/certs/"            200  text/html
 check "/experiments/"      200  text/html
+check "/tools/"            200  text/html
+check "/tools/kittybot/"   200  text/html
 check "/contact/"          200  text/html
+check "/tools/kittybot/dashboard.png"      200  image/png
+check "/tools/kittybot/telegram-approval.png" 200  image/png
 check "/sitemap-index.xml" 200  application/xml
 check "/resume.pdf"        200  application/pdf
 check "/robots.txt"        200  text/plain
