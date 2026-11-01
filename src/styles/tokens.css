@@ -15,12 +15,13 @@
   --muted-2: #808080;
   --rule: #EBEBEB;
   --rule-strong: #171717;
-  --accent: #0072F5;
-  --accent-soft: #0068D6;
+  --accent: #0068D6;
+  --accent-soft: #0057C0;
   --accent-tint: #EBF5FF;
+  --brand: #0072F5;
   --ship: #FF5B4F;
-  --preview: #DE1D8D;
-  --develop: #0A72EF;
+  --preview: #C2187A;
+  --develop: #0A5FCC;
 
   /* Typography */
   --font-sans: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -102,6 +103,7 @@
   --accent: #3291FF;
   --accent-soft: #66B0FF;
   --accent-tint: #10243B;
+  --brand: #3291FF;
   --ship: #FF7A6F;
   --preview: #F14BA5;
   --develop: #4C97FF;
@@ -131,6 +133,7 @@
     --accent: #3291FF;
     --accent-soft: #66B0FF;
     --accent-tint: #10243B;
+    --brand: #3291FF;
     --ship: #FF7A6F;
     --preview: #F14BA5;
     --develop: #4C97FF;
