@@ -49,7 +49,7 @@ const statusLabel: Record<string, string> = {
             src={data.screenshot}
             alt={`${data.name} dashboard`}
             loading="lazy"
-            style="width: 100%; border: 1px solid var(--rule); border-radius: var(--r-lg, 12px); display: block;"
+            style="width: 100%; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
           />
         </figure>
       )}
@@ -59,7 +59,7 @@ const statusLabel: Record<string, string> = {
             src={data.telegram_card}
             alt={`The approval message ${data.name} sends`}
             loading="lazy"
-            style="width: 100%; border: 1px solid var(--rule); border-radius: var(--r-lg, 12px); display: block;"
+            style="width: 100%; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
           />
           <figcaption class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); margin-top: var(--s-3);">
             The approval message the bot sends. Nothing reaches the kitty until you tap a button.
@@ -79,9 +79,9 @@ const statusLabel: Record<string, string> = {
             {data.stack.length > 0 && (
               <>
                 <dt>Stack</dt>
-                <dd>
+                <dd class="tags">
                   {data.stack.map((s) => (
-                    <span style="display:inline-block; padding:0.2rem 0.55rem; border:1px solid var(--rule); border-radius:var(--r-pill); font-family:var(--font-mono); font-size:var(--t-xs); color:var(--muted); margin:0 0.3rem 0.3rem 0;">{s}</span>
+                    <span class="tag">{s}</span>
                   ))}
                 </dd>
               </>

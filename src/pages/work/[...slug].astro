@@ -64,9 +64,9 @@ const blocks: { title: string; body?: string }[] = [
             {data.stack.length > 0 && (
               <>
                 <dt>Stack</dt>
-                <dd>
+                <dd class="tags">
                   {data.stack.map((s) => (
-                                    <span style="display:inline-block; padding:0.2rem 0.55rem; border:1px solid var(--rule); border-radius:var(--r-pill); font-family:var(--font-mono); font-size:var(--t-xs); color:var(--muted); margin:0 0.3rem 0.3rem 0;">{s}</span>
+                                <span class="tag">{s}</span>
                                   ))}
                 </dd>
               </>

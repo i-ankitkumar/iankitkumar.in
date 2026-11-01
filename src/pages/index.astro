@@ -61,25 +61,27 @@ const skillGroups: { title: string; items: string[] }[] = [
   <!-- HERO -->
   <section class="hero">
     <div class="container stack">
-      <img
-        class="portrait"
-        src={SITE.photoUrl}
-        alt={`${SITE.name} — portrait`}
-        width="96"
-        height="96"
-        loading="eager"
-        decoding="async"
-      />
+      <div class="portrait">
+        <img
+          src={SITE.photoUrl}
+          alt={`${SITE.name} — portrait`}
+          width="96"
+          height="96"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <span class="eyebrow">Infrastructure Engineer → Software &amp; AI Engineering</span>
       <div class="meta">
-        <span class="meta-item"><strong>Infrastructure → Software &amp; AI Engineering</strong></span>
         <span class="meta-item"><strong>Splunk · Azure · AWS · Terraform</strong></span>
-        <span class="meta-item"><strong>20K+ endpoints</strong> · 99.9% upgrade success</span>
-        <span class="meta-item"><strong>Pune</strong> to Germany</span>
+        <span class="meta-item"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</span>
+        <span class="meta-item"><strong>Pune</strong> · relocating to Germany</span>
       </div>
       <h1 class="display">
-        Infrastructure engineer<br />
-        shipping software<br />
-        <span style="color: var(--accent); font-style: italic;">&amp; AI tooling.</span>
+        Shipping software<br />
+        and AI tooling<br />
+        on top of five years<br />
+        of platform engineering.
       </h1>
       <p class="lead lede">
         I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python — and lately a stack of AI agents that share memory.
@@ -97,6 +99,28 @@ const skillGroups: { title: string; items: string[] }[] = [
       </p>
     </div>
   </section>
+
+  <!-- METRICS -->
+  <Section title="By the numbers" id="numbers" intro="Production outcomes from the last five years — the ones I'd defend in an interview.">
+    <div class="metric-grid">
+      <div class="metric-card reveal">
+        <div class="value">20,000+</div>
+        <div class="label">Windows endpoints under global patch operations across 79 factories and 70 countries.</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="value">99.9%</div>
+        <div class="label">Upgrade success rate across a multi-cloud Splunk estate, with automatic rollback on failure.</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="value">2,500+</div>
+        <div class="label">Azure and AWS subscriptions scanned continuously for tech debt; 2,000+ resources remediated.</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="value">10 min</div>
+        <div class="label">Splunk index provisioning turnaround, down from three to five days.</div>
+      </div>
+    </div>
+  </Section>
 
   <!-- ABOUT / POSITIONING -->
   <Section title="About" id="about" intro="A short version of where I've been and where I'm heading.">

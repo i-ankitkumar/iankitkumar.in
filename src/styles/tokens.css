@@ -1,44 +1,50 @@
 /* ------------------------------------------------------------------
  * iankitkumar.in — Design tokens
- * Premium typographic system. Warm editorial neutrals + restrained accent.
+ * Vercel design system: monochrome canvas, Geist / Geist Mono,
+ * shadow-as-border, three-weight type hierarchy.
  * ------------------------------------------------------------------ */
 
 :root {
   /* Color — light theme (default) */
-  --bg: #FAFAF7;
+  --bg: #FFFFFF;
   --surface: #FFFFFF;
-  --fg: #1A1A1F;
-  --fg-soft: #3A3A40;
-  --muted: #6B6B70;
-  --rule: #E5E2DC;
-  --rule-strong: #C9C5BD;
-  --accent: #9B1C30;
-  --accent-soft: #B64358;
-  --accent-tint: rgba(155, 28, 48, 0.08);
+  --surface-2: #FAFAFA;
+  --fg: #171717;
+  --fg-soft: #4D4D4D;
+  --muted: #666666;
+  --muted-2: #808080;
+  --rule: #EBEBEB;
+  --rule-strong: #171717;
+  --accent: #0072F5;
+  --accent-soft: #0068D6;
+  --accent-tint: #EBF5FF;
+  --ship: #FF5B4F;
+  --preview: #DE1D8D;
+  --develop: #0A72EF;
 
   /* Typography */
-  --font-serif: 'Source Serif 4', 'Tiempos', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, monospace;
+  --font-sans: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
-  /* Type scale (modular, ~1.25) */
-  --t-xs: 0.78rem;
+  /* Type scale */
+  --t-xs: 0.75rem;
   --t-sm: 0.875rem;
   --t-base: 1rem;
-  --t-lg: 1.125rem;
-  --t-xl: 1.333rem;
-  --t-2xl: 1.777rem;
-  --t-3xl: 2.369rem;
-  --t-4xl: 3.157rem;
-  --t-display: clamp(2.75rem, 5.5vw + 0.5rem, 4.75rem);
+  --t-lg: 1.25rem;
+  --t-xl: 1.5rem;
+  --t-2xl: 2rem;
+  --t-3xl: 2.5rem;
+  --t-4xl: 3.25rem;
+  --t-display: clamp(2.75rem, 6.5vw, 4.5rem);
 
   /* Line heights */
-  --lh-tight: 1.1;
+  --lh-tight: 1.05;
   --lh-snug: 1.25;
-  --lh-normal: 1.55;
-  --lh-loose: 1.7;
+  --lh-normal: 1.5;
+  --lh-loose: 1.8;
 
-  /* Spacing (8px scale + half steps) */
+  /* Spacing (8px base, Vercel skips 20/24 in the primary scale) */
   --s-1: 0.25rem;
   --s-2: 0.5rem;
   --s-3: 0.75rem;
@@ -52,14 +58,15 @@
 
   /* Layout */
   --measure: 68ch;
-  --container: 76rem;
-  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --container: 75rem;
+  --gutter: clamp(1.25rem, 4vw, 2rem);
 
   /* Radii */
   --r-sm: 4px;
-  --r-md: 8px;
-  --r-lg: 14px;
-  --r-pill: 999px;
+  --r-md: 6px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-pill: 9999px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -68,40 +75,75 @@
   --dur-2: 320ms;
   --dur-3: 560ms;
 
-  /* Elevation (subtle, paper-like) */
-  --shadow-1: 0 1px 2px rgba(26, 26, 31, 0.04);
-  --shadow-2: 0 4px 12px rgba(26, 26, 31, 0.06);
+  /* Depth — shadow-as-border is the signature Vercel technique */
+  --ring: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  --ring-light: rgb(235, 235, 235) 0px 0px 0px 1px;
+  --card-stack:
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 2px 2px,
+    rgba(0, 0, 0, 0.04) 0px 8px 8px -8px,
+    #FAFAFA 0px 0px 0px 1px;
+  --shadow-1: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  --shadow-2:
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.04) 0px 2px 2px;
 }
 
 :root[data-theme='dark'] {
-  --bg: #0F0F12;
-  --surface: #17171C;
-  --fg: #E8E6E1;
-  --fg-soft: #C7C5BF;
-  --muted: #9C9C9E;
-  --rule: #26262C;
-  --rule-strong: #3A3A42;
-  --accent: #D85A6E;
-  --accent-soft: #E07A8B;
-  --accent-tint: rgba(216, 90, 110, 0.12);
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.32);
-  --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.40);
+  --bg: #0A0A0A;
+  --surface: #111111;
+  --surface-2: #171717;
+  --fg: #EDEDED;
+  --fg-soft: #A1A1A1;
+  --muted: #8F8F8F;
+  --muted-2: #7A7A7A;
+  --rule: #262626;
+  --rule-strong: #EDEDED;
+  --accent: #3291FF;
+  --accent-soft: #66B0FF;
+  --accent-tint: #10243B;
+  --ship: #FF7A6F;
+  --preview: #F14BA5;
+  --develop: #4C97FF;
+  --ring: rgba(255, 255, 255, 0.10) 0px 0px 0px 1px;
+  --ring-light: rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
+  --card-stack:
+    rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.4) 0px 2px 2px,
+    #171717 0px 0px 0px 1px;
+  --shadow-1: rgba(255, 255, 255, 0.10) 0px 0px 0px 1px;
+  --shadow-2:
+    rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.4) 0px 2px 2px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0F0F12;
-    --surface: #17171C;
-    --fg: #E8E6E1;
-    --fg-soft: #C7C5BF;
-    --muted: #9C9C9E;
-    --rule: #26262C;
-    --rule-strong: #3A3A42;
-    --accent: #D85A6E;
-    --accent-soft: #E07A8B;
-    --accent-tint: rgba(216, 90, 110, 0.12);
-    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.32);
-    --shadow-2: 0 4px 12px rgba(0, 0, 0, 0.40);
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --surface-2: #171717;
+    --fg: #EDEDED;
+    --fg-soft: #A1A1A1;
+    --muted: #8F8F8F;
+    --muted-2: #7A7A7A;
+    --rule: #262626;
+    --rule-strong: #EDEDED;
+    --accent: #3291FF;
+    --accent-soft: #66B0FF;
+    --accent-tint: #10243B;
+    --ship: #FF7A6F;
+    --preview: #F14BA5;
+    --develop: #4C97FF;
+    --ring: rgba(255, 255, 255, 0.10) 0px 0px 0px 1px;
+    --ring-light: rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
+    --card-stack:
+      rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
+      rgba(0, 0, 0, 0.4) 0px 2px 2px,
+      #171717 0px 0px 0px 1px;
+    --shadow-1: rgba(255, 255, 255, 0.10) 0px 0px 0px 1px;
+    --shadow-2:
+      rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
+      rgba(0, 0, 0, 0.4) 0px 2px 2px;
   }
 }
 

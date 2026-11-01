@@ -10,7 +10,7 @@ export const SITE = {
   role: 'Infrastructure Engineer → Software & AI Engineering',
   tagline: 'Splunk · Azure · AWS · Terraform · MCP',
   description:
-    'Infra engineer in Pune, relocating to Germany. Turns three-day infrastructure work into fifteen-minute button presses — Splunk, Terraform, Python.',
+    'Infrastructure engineer in Pune, relocating to Germany. Turns three-day infrastructure work into fifteen-minute button presses — Splunk, Terraform, Python, AI tooling.',
 
   // Public contact (routed via Cloudflare Email Routing → real inbox)
   email: 'mail@iankitkumar.in',

@@ -66,8 +66,8 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#FAFAF7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0F0F12" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
 
     <title>{pageTitle}</title>
@@ -104,6 +104,8 @@ const jsonLd = {
     <!-- Theme bootstrap — runs before paint to avoid FOUC -->
     <script is:inline>
       (() => {
+        // Marks JS availability so CSS can safely hide .reveal elements.
+        document.documentElement.classList.add('js');
         const stored = localStorage.getItem('theme');
         const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
         const theme = stored ?? (prefersDark ? 'dark' : 'light');
@@ -116,7 +118,7 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
     />
   </head>
   <body class={bodyClass}>

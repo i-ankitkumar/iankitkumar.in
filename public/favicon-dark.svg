@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ankit Kumar">
-  <text
-    x="32"
-    y="46"
-    font-family="Georgia, 'Times New Roman', 'Source Serif 4', serif"
-    font-size="48"
-    font-weight="600"
-    text-anchor="middle"
-    fill="#E8E6E1"
-  >A</text>
+  <rect width="64" height="64" rx="14" fill="#0A0A0A"/>
+  <path d="M20 45 L28.6 19 h6.8 L44 45 h-6.3 l-1.9-6.2H28.2L26.3 45H20Zm10.1-11.3h3.8L32 26.9l-1.9 6.8Z" fill="#EDEDED"/>
+  <rect x="41" y="16.5" width="5" height="5" rx="1.8" fill="#3291FF"/>
 </svg>

@@ -4,7 +4,6 @@ import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
 import ExperimentCard from '~/components/ExperimentCard.astro';
-import ConfirmMark from '~/components/ConfirmMark.astro';
 import { SITE } from '~/lib/site';
 
 const experiments = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
@@ -15,12 +14,12 @@ const experiments = (await getCollection('experiments')).sort((a, b) => a.data.o
 
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
-      <span class="eyebrow">§ Experiments</span>
+      <span class="eyebrow">{experiments.length} experiments · experimental</span>
       <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
         Software &amp; AI engineering,<br />outside the day job.
       </h1>
       <p class="lead">
-        The work that takes me from infrastructure engineering toward software and AI engineering. Most of this is experimental and the entries below carry a <ConfirmMark confirm label="verify" /> marker — verify before citing externally.
+        The work that takes me from infrastructure engineering toward software and AI engineering. Both entries are experimental — the direction is tested, the production claims are not, and neither is presented as shipped.
       </p>
     </div>
   </section>

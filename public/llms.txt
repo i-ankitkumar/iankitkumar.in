@@ -4,6 +4,7 @@
 
 ## About
 
+- [Key numbers (20,000+ endpoints, 99.9% upgrade success, 2,500+ subscriptions scanned)](https://iankitkumar.in/#numbers)
 - [About + career direction](https://iankitkumar.in/#about)
 - [Experience (3 roles)](https://iankitkumar.in/experience/)
 - [Stack and tools](https://iankitkumar.in/#stack)

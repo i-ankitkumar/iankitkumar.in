@@ -13,7 +13,7 @@ body {
   font-family: var(--font-sans);
   font-size: var(--t-base);
   line-height: var(--lh-normal);
-  font-feature-settings: 'kern', 'liga', 'calt', 'ss01';
+  font-feature-settings: 'liga', 'calt';
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,50 +22,50 @@ body {
 img, picture, video, canvas, svg { display: block; max-width: 100%; }
 input, button, textarea, select { font: inherit; color: inherit; }
 button { background: none; border: 0; cursor: pointer; }
-a { color: var(--accent); text-decoration: none; text-underline-offset: 0.18em; transition: color var(--dur-1) var(--ease-out); }
+a { color: var(--accent); text-decoration: none; transition: color var(--dur-1) var(--ease-out); }
 a:hover { color: var(--accent-soft); }
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
   border-radius: var(--r-sm);
 }
-
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--fg); color: var(--bg); }
 
 /* ------------------------------------------------------------------
- * Typography helpers
+ * Typography helpers — three weights only: 400 read, 500 interact, 600 announce
  * ------------------------------------------------------------------ */
-.serif { font-family: var(--font-serif); font-feature-settings: 'kern', 'liga', 'onum'; }
+.serif { font-family: var(--font-sans); }
 .mono { font-family: var(--font-mono); }
 .display {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-display);
   line-height: var(--lh-tight);
-  letter-spacing: -0.02em;
-  font-weight: 400;
+  letter-spacing: -0.055em;
+  font-weight: 600;
   color: var(--fg);
+  text-wrap: balance;
 }
 .h1 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-3xl);
-  line-height: var(--lh-tight);
-  letter-spacing: -0.015em;
-  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  font-weight: 600;
   margin: 0;
 }
 .h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-2xl);
-  line-height: var(--lh-snug);
-  letter-spacing: -0.01em;
-  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.032em;
+  font-weight: 600;
   margin: 0;
 }
 .h3 {
   font-family: var(--font-sans);
   font-size: var(--t-lg);
-  line-height: var(--lh-snug);
-  letter-spacing: -0.005em;
+  line-height: 1.25;
+  letter-spacing: -0.016em;
   font-weight: 600;
   margin: 0;
 }
@@ -85,7 +85,7 @@ a:focus-visible, button:focus-visible {
   line-height: var(--lh-loose);
   color: var(--fg-soft);
   max-width: 60ch;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.008em;
 }
 
 /* ------------------------------------------------------------------
@@ -101,11 +101,7 @@ a:focus-visible, button:focus-visible {
 .stack-lg > * + * { margin-top: var(--s-7); }
 .stack-xl > * + * { margin-top: var(--s-8); }
 
-.rule {
-  border: 0;
-  border-top: 1px solid var(--rule);
-  margin: var(--s-7) 0;
-}
+.rule { border: 0; border-top: 1px solid var(--rule); margin: var(--s-7) 0; }
 .rule-strong { border-top-color: var(--rule-strong); }
 
 /* ------------------------------------------------------------------
@@ -116,9 +112,9 @@ a:focus-visible, button:focus-visible {
   top: 0;
   z-index: 20;
   background: color-mix(in oklab, var(--bg) 88%, transparent);
-  backdrop-filter: saturate(160%) blur(10px);
-  -webkit-backdrop-filter: saturate(160%) blur(10px);
-  border-bottom: 1px solid var(--rule);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  box-shadow: var(--ring);
 }
 .site-header .container {
   display: flex;
@@ -128,10 +124,10 @@ a:focus-visible, button:focus-visible {
   min-height: 64px;
 }
 .brand {
-  font-family: var(--font-serif);
-  font-size: var(--t-lg);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: var(--font-sans);
+  font-size: var(--t-base);
+  font-weight: 600;
+  letter-spacing: -0.024em;
   color: var(--fg);
 }
 .brand:hover { color: var(--fg); }
@@ -139,36 +135,32 @@ a:focus-visible, button:focus-visible {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: clamp(var(--s-3), 2.5vw, var(--s-5));
+  gap: clamp(var(--s-3), 2vw, var(--s-5));
 }
 .site-nav a {
   color: var(--fg-soft);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--t-sm);
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  letter-spacing: -0.008em;
   position: relative;
-  padding: 0.25rem 0;
+  padding: 0.35rem 0;
 }
 .site-nav a:hover { color: var(--fg); }
-.site-nav a[aria-current='page']::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: -2px;
-  height: 1px;
-  background: var(--accent);
-}
+.site-nav a[aria-current='page'] { color: var(--fg); font-weight: 600; }
 .theme-toggle {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.4rem 0.6rem;
-  border: 1px solid var(--rule);
-  border-radius: var(--r-pill);
-  transition: color var(--dur-1), border-color var(--dur-1);
+  padding: 0.4rem 0.7rem;
+  box-shadow: var(--ring);
+  border-radius: var(--r-md);
+  transition: color var(--dur-1), box-shadow var(--dur-1);
 }
-.theme-toggle:hover { color: var(--fg); border-color: var(--rule-strong); }
+.theme-toggle:hover { color: var(--fg); }
 
 /* ------------------------------------------------------------------
  * Hero
@@ -177,16 +169,29 @@ a:focus-visible, button:focus-visible {
   padding-block: clamp(var(--s-8), 9vw, var(--s-10)) clamp(var(--s-7), 7vw, var(--s-9));
   position: relative;
 }
+/* The source photo is a waist-up environmental shot. A plain
+   object-fit:cover crop at 96px renders a tiny figure rather than a
+   face, so the frame scales the image up and offsets the crop window
+   onto the head (measured from the source 768x1024 image). */
 .hero .portrait {
   width: clamp(72px, 8vw, 96px);
   height: clamp(72px, 8vw, 96px);
   border-radius: 50%;
-  object-fit: cover;
-  object-position: center 20%;
-  border: 1px solid var(--rule-strong);
-  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--ring);
   display: block;
   margin-bottom: var(--s-4);
+  background: var(--surface-2);
+}
+.hero .portrait img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260%;
+  max-width: none;
+  height: auto;
+  transform: translate(-26.4%, -20.4%);
   filter: saturate(0.92);
 }
 .hero .meta {
@@ -198,6 +203,7 @@ a:focus-visible, button:focus-visible {
 .hero .meta-item {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.04em;
 }
@@ -206,10 +212,7 @@ a:focus-visible, button:focus-visible {
   font-weight: 500;
   margin-right: 0.4rem;
 }
-.hero .lede {
-  max-width: 64ch;
-  margin-top: var(--s-5);
-}
+.hero .lede { max-width: 64ch; margin-top: var(--s-5); }
 .hero .actions {
   display: flex;
   flex-wrap: wrap;
@@ -222,28 +225,30 @@ a:focus-visible, button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--t-sm);
-  letter-spacing: 0.04em;
-  padding: 0.7rem 1.1rem;
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--r-pill);
+  font-weight: 500;
+  letter-spacing: -0.008em;
+  padding: 0.6rem 1rem;
+  border: 0;
+  border-radius: var(--r-md);
   color: var(--fg);
   background: transparent;
-  transition: background-color var(--dur-1), border-color var(--dur-1), color var(--dur-1);
+  box-shadow: var(--ring);
+  transition: background-color var(--dur-1), box-shadow var(--dur-1), color var(--dur-1);
 }
-.btn:hover { color: var(--fg); border-color: var(--fg); background: var(--surface); }
+.btn:hover { color: var(--fg); background: var(--surface-2); }
 .btn.primary {
   background: var(--fg);
   color: var(--bg);
-  border-color: var(--fg);
+  box-shadow: none;
 }
-.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--fg-soft); color: var(--bg); }
 .btn .arr { transition: transform var(--dur-1) var(--ease-out); }
 .btn:hover .arr { transform: translateX(3px); }
 
 /* ------------------------------------------------------------------
- * Sections
+ * Sections — separation by rules and whitespace, no color variation
  * ------------------------------------------------------------------ */
 section.page-section {
   padding-block: clamp(var(--s-7), 6vw, var(--s-9));
@@ -254,10 +259,44 @@ section.page-section .section-head {
   margin-bottom: var(--s-6);
 }
 .section-head .title {
-  font-family: var(--font-serif);
-  font-size: var(--t-2xl);
-  letter-spacing: -0.01em;
+  font-family: var(--font-sans);
+  font-size: var(--t-3xl);
+  font-weight: 600;
+  letter-spacing: -0.04em;
   margin: 0;
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------
+ * Metric cards
+ * ------------------------------------------------------------------ */
+.metric-grid {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 56rem) {
+  .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.metric-card {
+  padding: var(--s-5);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--card-stack);
+}
+.metric-card .value {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.metric-card .label {
+  margin-top: var(--s-3);
+  font-size: var(--t-sm);
+  line-height: 1.5;
+  color: var(--fg-soft);
 }
 
 /* ------------------------------------------------------------------
@@ -265,7 +304,7 @@ section.page-section .section-head {
  * ------------------------------------------------------------------ */
 .project-grid {
   display: grid;
-  gap: var(--s-6);
+  gap: var(--s-5);
   grid-template-columns: 1fr;
 }
 @media (min-width: 56rem) {
@@ -273,34 +312,36 @@ section.page-section .section-head {
 }
 .project-card {
   display: block;
-  padding: var(--s-6);
+  padding: var(--s-5);
   background: var(--surface);
-  border: 1px solid var(--rule);
+  border: 0;
   border-radius: var(--r-lg);
+  box-shadow: var(--ring);
   color: inherit;
   position: relative;
-  transition: border-color var(--dur-2), transform var(--dur-2), box-shadow var(--dur-2);
+  transition: box-shadow var(--dur-2), transform var(--dur-2), background-color var(--dur-2);
 }
 .project-card:hover {
   color: inherit;
-  border-color: var(--rule-strong);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--card-stack);
 }
 .project-card .type {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
-  letter-spacing: 0.12em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: var(--s-3);
 }
 .project-card h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-xl);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  letter-spacing: -0.024em;
   margin: 0 0 var(--s-3);
+  padding-right: 6rem;
 }
 .project-card p {
   color: var(--fg-soft);
@@ -308,18 +349,20 @@ section.page-section .section-head {
   font-size: var(--t-sm);
   line-height: var(--lh-loose);
 }
-.project-card .tags {
+.tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2);
 }
-.project-card .tag {
+.tag {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
-  padding: 0.18rem 0.55rem;
-  border: 1px solid var(--rule);
-  border-radius: var(--r-pill);
+  padding: 0.15rem 0.5rem;
+  box-shadow: var(--ring-light);
+  border-radius: var(--r-sm);
+  white-space: nowrap;
 }
 .project-card .status {
   position: absolute;
@@ -327,7 +370,8 @@ section.page-section .section-head {
   right: var(--s-5);
   font-family: var(--font-mono);
   font-size: var(--t-xs);
-  color: var(--accent);
+  font-weight: 500;
+  color: var(--muted);
 }
 
 /* ------------------------------------------------------------------
@@ -347,26 +391,29 @@ section.page-section .section-head {
 .proj-detail .meta dt {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
   margin-top: var(--s-4);
 }
+.proj-detail .meta dt:first-child { margin-top: 0; }
 .proj-detail .meta dd {
   margin: 0.25rem 0 0;
   font-size: var(--t-sm);
   color: var(--fg-soft);
 }
 .proj-detail .prose h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-lg);
-  letter-spacing: -0.01em;
-  margin: var(--s-5) 0 var(--s-2);
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: -0.016em;
+  margin: var(--s-6) 0 var(--s-2);
 }
-.proj-detail .prose p { margin: 0 0 var(--s-4); line-height: var(--lh-loose); }
+.proj-detail .prose h3:first-child { margin-top: 0; }
+.proj-detail .prose p { margin: 0 0 var(--s-4); line-height: var(--lh-loose); color: var(--fg-soft); }
 .proj-detail .prose ul { padding-left: 1.1em; margin: 0 0 var(--s-4); }
-.proj-detail .prose li { margin: 0.25rem 0; line-height: var(--lh-loose); }
+.proj-detail .prose li { margin: 0.25rem 0; line-height: var(--lh-loose); color: var(--fg-soft); }
 
 /* ------------------------------------------------------------------
  * Experience timeline
@@ -389,14 +436,15 @@ section.page-section .section-head {
 .timeline-item .period {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
 }
 .timeline-item .role {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-xl);
-  letter-spacing: -0.01em;
-  font-weight: 500;
+  letter-spacing: -0.024em;
+  font-weight: 600;
   margin: 0;
 }
 .timeline-item .company {
@@ -405,14 +453,11 @@ section.page-section .section-head {
   color: var(--muted);
   margin: 0.2rem 0 var(--s-3);
 }
-.timeline-item ul {
-  padding-left: 1.1em;
-  margin: var(--s-3) 0 0;
-}
-.timeline-item li { margin: 0.3rem 0; line-height: var(--lh-loose); }
+.timeline-item ul { padding-left: 1.1em; margin: var(--s-3) 0 0; }
+.timeline-item li { margin: 0.3rem 0; line-height: var(--lh-loose); color: var(--fg-soft); }
 
 /* ------------------------------------------------------------------
- * Skills grid
+ * Skills — flat columns, hairline separation
  * ------------------------------------------------------------------ */
 .skill-grid {
   display: grid;
@@ -428,16 +473,17 @@ section.page-section .section-head {
 .skill-group h3 {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 0 0 var(--s-3);
 }
 .skill-group ul { list-style: none; padding: 0; margin: 0; }
 .skill-group li {
-  padding: 0.25rem 0;
+  padding: 0.4rem 0;
   color: var(--fg-soft);
-  border-bottom: 1px dashed var(--rule);
+  border-bottom: 1px solid var(--rule);
 }
 .skill-group li:last-child { border-bottom: 0; }
 
@@ -454,8 +500,8 @@ section.page-section .section-head {
 }
 .cert-item {
   padding: var(--s-4) var(--s-5);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
+  box-shadow: var(--ring);
+  border-radius: var(--r-lg);
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -463,31 +509,28 @@ section.page-section .section-head {
   background: var(--surface);
 }
 .cert-item .name {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: var(--t-base);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.012em;
   font-weight: 500;
 }
 .cert-item .issuer {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.04em;
 }
 .cert-item .status {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.cert-item .status.active { color: var(--accent); }
-.cert-item .status.in-progress {
-  color: var(--fg-soft);
-  background: var(--accent-tint);
-  padding: 0.1rem 0.5rem;
-  border-radius: var(--r-pill);
-}
+.cert-item .status.active { color: var(--develop); }
+.cert-item .status.in-progress { color: var(--preview); }
 
 /* ------------------------------------------------------------------
  * Confirm badge (developer-only annotation)
@@ -495,10 +538,11 @@ section.page-section .section-head {
 [data-confirm] .confirm-mark {
   font-family: var(--font-mono);
   font-size: 0.7em;
-  color: var(--accent);
-  border: 1px solid currentColor;
+  font-weight: 500;
+  color: var(--preview);
+  box-shadow: var(--ring);
   padding: 0.05rem 0.4rem;
-  border-radius: var(--r-pill);
+  border-radius: var(--r-sm);
   margin-left: 0.4em;
   letter-spacing: 0.06em;
   vertical-align: middle;
@@ -511,7 +555,6 @@ section.page-section .section-head {
   margin-top: var(--s-9);
   padding-block: var(--s-7) var(--s-6);
   border-top: 1px solid var(--rule);
-  background: var(--surface);
 }
 .site-footer .container {
   display: grid;
@@ -521,8 +564,9 @@ section.page-section .section-head {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-3) var(--s-5);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--t-sm);
+  font-weight: 500;
 }
 .site-footer .links a { color: var(--fg-soft); }
 .site-footer .links a:hover { color: var(--fg); }
@@ -533,6 +577,7 @@ section.page-section .section-head {
   gap: var(--s-3);
   font-family: var(--font-mono);
   font-size: var(--t-xs);
+  font-weight: 500;
   color: var(--muted);
   letter-spacing: 0.04em;
 }
@@ -548,24 +593,33 @@ section.page-section .section-head {
   padding: var(--s-7) var(--gutter);
 }
 .notfound .code {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(5rem, 12vw, 9rem);
-  color: var(--accent);
+  font-weight: 600;
+  color: var(--fg);
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.06em;
 }
 
 /* ------------------------------------------------------------------
- * Reveal-on-scroll (restrained)
+ * Reveal-on-scroll
+ * Only hides content when JS is present to reveal it again — without
+ * JS the .reveal elements would stay at opacity 0 forever.
  * ------------------------------------------------------------------ */
-.reveal {
+.js .reveal {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity var(--dur-3) var(--ease-out), transform var(--dur-3) var(--ease-out);
 }
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ------------------------------------------------------------------
