@@ -1,6 +1,6 @@
 ---
 name: "NIDS using ML and DL"
-type: "Research · Open Source"
+type: "Open Source"
 status: "research"
 period: "2022"
 summary: "Network intrusion detection with classical ML and deep learning approaches, parallel to the MLP experiment. Open source; a learning artifact, not a production system."

@@ -1,6 +1,6 @@
 ---
 name: "Multi-cloud Splunk upgrade automation"
-type: "Release Engineering · Production"
+type: "Release Engineering"
 status: "shipped"
 period: "2024"
 summary: "Multi-cloud automation (AWS SSM/EC2 + Azure Run Command) for Splunk Enterprise upgrades with automatic rollback. 20,000+ endpoints upgraded at a 99.9% success rate; failed deployments self-revert instead of becoming incidents."

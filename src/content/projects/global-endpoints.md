@@ -1,6 +1,6 @@
 ---
 name: "Global Windows endpoint operations"
-type: "Endpoint Ops · Production"
+type: "Endpoint Ops"
 status: "shipped"
 period: "2021 – 2022"
 summary: "Ran global Windows endpoint operations for Colgate GBS — 20,000+ endpoints, 79 factories, 70 countries — with patch ops, software distribution, and zero-day emergency response."

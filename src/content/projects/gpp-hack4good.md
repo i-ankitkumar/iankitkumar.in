@@ -1,6 +1,6 @@
 ---
 name: "GPP Hack4Good"
-type: "Hackathon · Team"
+type: "Hackathon"
 status: "shipped"
 period: "2021"
 summary: "Hackathon project work under time pressure. A small team build, publicly available."

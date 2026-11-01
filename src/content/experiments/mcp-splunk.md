@@ -1,6 +1,6 @@
 ---
 name: "MCP server: Splunk query planner"
-type: "MCP · Experimental"
+type: "MCP"
 category: "mcp"
 status: "experimental"
 period: "2026"

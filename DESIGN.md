@@ -15,7 +15,7 @@ colors:
   brand: "#0072F5"
   print-canvas: "#FFFFFF"
   print-ink: "#000000"
-  status-ship: "#FF5B4F"
+  status-ship: "#C4362B"
   status-preview: "#C2187A"
   status-develop: "#0A5FCC"
   canvas-dark: "#0A0A0A"
@@ -29,7 +29,7 @@ colors:
 typography:
   display:
     fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 5vw, 3.75rem)"
+    fontSize: "clamp(2.25rem, 4.2vw, 3.25rem)"
     fontWeight: 600
     lineHeight: 1.05
     letterSpacing: "-0.055em"
@@ -46,7 +46,7 @@ typography:
     lineHeight: 1.05
     letterSpacing: "-0.055em"
   metric-value:
-    fontFamily: "Geist, system-ui, sans-serif"
+    fontFamily: "Geist Mono, ui-monospace, monospace"
     fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
     fontWeight: 600
     lineHeight: 1.05
@@ -108,9 +108,9 @@ components:
     padding: "1.5rem"
   tag:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink-soft}"
+    textColor: "{colors.ink-muted}"
     rounded: "{rounded.sm}"
-    padding: "0.25rem 0.5rem"
+    padding: "0.15rem 0.5rem"
   eyebrow:
     textColor: "{colors.ink-muted}"
     typography: "{typography.label}"
@@ -151,8 +151,11 @@ identifying.
 `--brand` is the brighter Vercel blue and is **decorative only** - the favicon, the logo mark, the
 OG card. It is not a text colour; at 4.44:1 on white it fails AA for body text.
 
-Status colours (`--ship` `#FF5B4F`, `--preview` `#C2187A`, `--develop` `#0A5FCC`) label project
-states. They never carry meaning alone; each is paired with a text label.
+Status colours (`--ship` `#C4362B`, `--preview` `#C2187A`, `--develop` `#0A5FCC`) label project
+states. They never carry meaning alone; each is paired with a text label. All three clear AA on
+white (`--ship` 5.37, `--preview` 5.67, `--develop` 5.96) and on the dark canvas (`--ship` 6.23,
+`--preview` 5.93, `--develop` 6.77). `--ship` was `#FF5B4F` and failed AA at 3.06:1 - it is
+darkened, because a token nobody uses is still a trap for the next person who reaches for it.
 
 ## Typography
 
@@ -186,9 +189,8 @@ The nav is a hamburger below `56rem`. A plain inline nav overflows at 390px.
 Shadow-as-border is the signature technique: `rgba(0,0,0,0.08) 0px 0px 0px 1px` draws a hairline
 without a border, so it sits inside the element's box and never shifts layout.
 
-Three depths: `--ring` (hairline only), `--shadow-1` (hairline plus a 2px lift), and
-`--card-stack` (hairline, 2px lift, and an 8px ambient shadow). Dark theme inverts the ring to
-`rgb(235,235,235)` at the same 8% alpha.
+Two depths: `--ring` (hairline only) and `--card-stack` (hairline, 2px lift, and an 8px ambient
+shadow). Dark theme inverts the ring to `rgb(235,235,235)` at the same 8% alpha.
 
 ## Shapes
 
@@ -204,14 +206,22 @@ panels, 9999px for pills. Nothing is fully round except pills.
 title, both in mono uppercase. A card title is a heading (`h2` on listing pages, `h3` inside a
 `Section`), so the document outline stays flat and valid.
 
-**Tags.** Mono, uppercase, `--r-sm`, on `--surface`. They list tools, never categories of people.
+The type label holds a **category** ("Infrastructure", "AI Engineering", "Open Source", "Hackathon")
+and the status chip holds the **state** ("Live", "Shipped", "Research"). A card states its status
+exactly once.
+
+**Tags.** Mono, sentence case, `--r-sm`, on `--surface`. They list tools, never categories of people.
+Sentence case, not uppercase: an uppercase tag row reads as noise next to an uppercase eyebrow.
 
 **Eyebrows.** Mono uppercase with a count, not a section number: `6 credentials`,
 `3 roles - 2021 to present`. They give the reader a quantity before the headline. Editorial
 section numbers (`§ Work`) are retired.
 
-**Metric cells.** `--surface-2`, `--r-lg`, a tabular-figure value and a mono label. They carry a
-real production number, never a vanity metric.
+**Metric cells.** `--surface-2`, `--r-lg`, a monospace tabular-figure value and a mono label.
+They carry a real production number, never a vanity metric. The value is monospace so the four
+figures lock to a grid; the label is mono because it is a caption, not prose. The grid is one
+column below `30rem` and only reaches four columns at `68rem` - at 390px a two-up metric cell
+held a 7-line label.
 
 **Portrait.** A pre-cropped 384px WebP (`/photo.webp`, 14 KB) framed by a plain
 `object-fit: cover` circle. The full-size `/photo.jpg` is kept only as the JSON-LD
@@ -224,6 +234,18 @@ real production number, never a vanity metric.
 that can throw, a 1.5s failsafe reveals everything regardless, and `@media print` forces
 `opacity: 1` because print has no scrolling. Without the print rule, printing the homepage emits
 section headings with none of the evidence.
+
+**Experiments.** `/experiments/` lists the AI/MCP work and each card opens a detail page at
+`/experiments/<slug>/` with the same rail-plus-prose shape as a project. The depth mechanism
+serves the software work too, not only the infrastructure work. The experiments collection's
+schema declares every field its entries author; an undeclared key is stripped before it reaches
+a template, so a field that is written but not declared silently disappears.
+
+**The `verify` badge.** A claim still pending verification carries `confirm: true` in its content
+entry and renders a `verify` badge. The badge renders **zero** times today, and that is correct:
+every published claim is verified. A badge on a verified claim would be a lie, so the badge is
+never decorative. When a claim does become unverified, the flag belongs on the content entry
+that makes the claim, not on a site-wide config object.
 
 **Do**
 

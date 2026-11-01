@@ -1,6 +1,6 @@
 ---
 name: "Splunk multi-site cluster migration"
-type: "Infrastructure · Production"
+type: "Infrastructure"
 status: "shipped"
 period: "2024"
 summary: "Architected and led the migration of Wolters Kluwer's Splunk deployment from a single-site indexer cluster to a multi-site clustered topology, taking the architecture through WK ARC (Architecture Review Committee) certification."

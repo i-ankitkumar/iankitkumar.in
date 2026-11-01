@@ -37,7 +37,6 @@ a:focus-visible, button:focus-visible {
 /* ------------------------------------------------------------------
  * Typography helpers — three weights only: 400 read, 500 interact, 600 announce
  * ------------------------------------------------------------------ */
-.serif { font-family: var(--font-sans); }
 .mono { font-family: var(--font-mono); }
 .display {
   font-family: var(--font-sans);
@@ -137,7 +136,7 @@ a:focus-visible, button:focus-visible {
   color: var(--fg);
 }
 .brand:hover { color: var(--fg); }
-.brand .dot { color: var(--accent); }
+.brand .dot { color: var(--brand); }
 .site-nav {
   display: flex;
   align-items: center;
@@ -259,7 +258,6 @@ section.page-section {
   border-top: 1px solid var(--rule);
 }
 section.page-section .section-head {
-  display: block;
   margin-bottom: var(--s-6);
 }
 .section-head .title {
@@ -277,19 +275,22 @@ section.page-section .section-head {
 .metric-grid {
   display: grid;
   gap: var(--s-5);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
-@media (min-width: 56rem) {
+@media (min-width: 30rem) {
+  .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 68rem) {
   .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 .metric-card {
   padding: var(--s-5);
-  background: var(--surface);
+  background: var(--surface-2);
   border-radius: var(--r-lg);
   box-shadow: var(--card-stack);
 }
 .metric-card .value {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--t-metric);
   font-weight: 600;
   letter-spacing: -0.04em;
@@ -298,9 +299,19 @@ section.page-section .section-head {
 }
 .metric-card .label {
   margin-top: var(--s-3);
-  font-size: var(--t-sm);
-  line-height: 1.5;
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.55;
   color: var(--fg-soft);
+}
+
+/* Section-traversal links ("All projects ->"). WCAG 2.5.8 target size. */
+.section-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
 }
 
 /* ------------------------------------------------------------------
@@ -366,6 +377,7 @@ section.page-section .section-head {
   font-size: var(--t-xs);
   font-weight: 500;
   color: var(--muted);
+  background: var(--surface);
   padding: 0.15rem 0.5rem;
   box-shadow: var(--ring-light);
   border-radius: var(--r-sm);
@@ -525,6 +537,12 @@ section.page-section .section-head {
   letter-spacing: -0.012em;
   font-weight: 500;
 }
+/* WCAG 2.5.8: the cert-name link is a standalone target, so it needs a
+   24px hit area even though the text itself is only 21px tall. */
+.cert-item .name a {
+  display: inline-block;
+  padding-block: 0.15rem;
+}
 .cert-item .issuer {
   font-family: var(--font-mono);
   font-size: var(--t-xs);
@@ -579,7 +597,12 @@ section.page-section .section-head {
   font-size: var(--t-sm);
   font-weight: 500;
 }
-.site-footer .links a { color: var(--fg-soft); }
+.site-footer .links a {
+  color: var(--fg-soft);
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
 .site-footer .links a:hover { color: var(--fg); }
 .site-footer .meta-line {
   display: flex;

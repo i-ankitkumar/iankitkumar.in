@@ -1,6 +1,6 @@
 ---
 name: "iankitkumar.in + blog.iankitkumar.in"
-type: "Personal Site · Production"
+type: "Personal Site"
 status: "live"
 period: "2024 – ongoing"
 summary: "This site (Astro, Cloudflare Pages) and the sibling blog (Astro + Brutal theme, Cloudflare Pages). End-to-end ownership from DNS to deploy."

@@ -1,6 +1,6 @@
 ---
 name: "IDS using MLP + GridSearchCV"
-type: "Research · Open Source"
+type: "Open Source"
 status: "research"
 period: "2022"
 summary: "Open-source intrusion-detection experiments using a multilayer perceptron with hyperparameter search via GridSearchCV. Academic / research side of my security interest."

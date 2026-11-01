@@ -1,6 +1,6 @@
 ---
 name: "AI-assisted triage for Splunk security alerts"
-type: "Security Tooling · Experimental"
+type: "Security Tooling"
 category: "security-tooling"
 status: "experimental"
 period: "2026"

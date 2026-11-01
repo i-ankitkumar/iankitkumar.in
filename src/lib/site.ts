@@ -93,7 +93,14 @@ export const SITE = {
     'https://blog.iankitkumar.in',
   ],
 
-  // Confirms — set true on claims still pending user verification
+  // Confirms — set true on claims still pending user verification.
+  //
+  // These are the site-level claims that do not belong to a single
+  // content entry. Every one of them is currently confirmed, so none of
+  // them renders a `verify` badge: a badge on a verified claim would be
+  // a lie. relocateWindow stays true because no window is published —
+  // the site says "relocating to Germany" and never claims a date, so
+  // there is no unverified claim on the page to mark.
   confirm: {
     aws: false, // CV shows deep AWS production use (EC2/SSM/S3/IAM/VPC/etc.)
     mcp: false, // AI-assisted automation initiative at WK validates MCP direction

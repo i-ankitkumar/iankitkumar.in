@@ -73,7 +73,7 @@ const skillGroups: { title: string; items: string[] }[] = [
       </div>
       <span class="eyebrow">Infrastructure Engineer → Software &amp; AI Engineering</span>
       <div class="meta">
-        <span class="meta-item"><strong>Splunk · Azure · AWS · Terraform</strong></span>
+        <span class="meta-item"><strong>{SITE.tagline}</strong></span>
         <span class="meta-item"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</span>
         <span class="meta-item"><strong>Pune</strong> · relocating to Germany</span>
       </div>
@@ -113,7 +113,7 @@ const skillGroups: { title: string; items: string[] }[] = [
         <div class="label">Azure and AWS subscriptions scanned continuously for tech debt; 2,000+ resources remediated.</div>
       </div>
       <div class="metric-card reveal">
-        <div class="value">10 min</div>
+        <div class="value">15 min</div>
         <div class="label">Splunk index provisioning turnaround, down from three to five days.</div>
       </div>
     </div>
@@ -143,7 +143,7 @@ const skillGroups: { title: string; items: string[] }[] = [
       {featured.map((p) => <ProjectCard project={p} headingLevel="h3" />)}
     </div>
     <p class="muted" style="margin-top: var(--s-6);">
-      <a href="/work/">All projects →</a>
+      <a class="section-more" href="/work/">All projects →</a>
     </p>
   </Section>
 
@@ -174,7 +174,7 @@ const skillGroups: { title: string; items: string[] }[] = [
       {experiments.map((exp) => <ExperimentCard exp={exp} headingLevel="h3" />)}
     </div>
     <p class="muted" style="margin-top: var(--s-6);">
-      <a href="/experiments/">All experiments →</a>
+      <a class="section-more" href="/experiments/">All experiments →</a>
     </p>
   </Section>
 

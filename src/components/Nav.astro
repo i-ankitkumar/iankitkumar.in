@@ -12,6 +12,15 @@ const navItems: { href: string; label: string }[] = [
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+// A detail route (/work/splunk-multisite-migration/) belongs to its
+// section (/work). Mark the section current so the nav keeps showing
+// where the visitor is once they go deep.
+const sectionFor = (path: string) => {
+  const parts = path.split('/').filter(Boolean);
+  return parts.length > 1 ? `/${parts[0]}` : path;
+};
+const currentSection = sectionFor(currentPath);
 ---
 
 <header class="site-header">
@@ -23,7 +32,8 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       {navItems.map((item) => {
         const itemPath = item.href.replace(/\/$/, '') || '/';
         const isExternal = item.href.startsWith('http');
-        const isCurrent = !isExternal && itemPath === currentPath;
+        const isCurrent =
+          !isExternal && (itemPath === currentPath || itemPath === currentSection);
         return (
           <a
             href={item.href}
@@ -66,8 +76,19 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
     toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   };
+  // The nav precedes the toggle in the DOM, so a keyboard user who opens
+  // the menu and presses Tab lands in the page body instead of the menu
+  // they just revealed. Move focus into the menu on open, and back to
+  // the toggle on Escape.
+  const focusFirstItem = () => {
+    const first = nav?.querySelector<HTMLAnchorElement>('a');
+    first?.focus();
+  };
   toggle?.addEventListener('click', () => {
-    setOpen(!nav?.classList.contains('is-open'));
+    const open = !nav?.classList.contains('is-open');
+    setOpen(open);
+    if (open) focusFirstItem();
+    else toggle?.focus();
   });
   // Close the menu after following a link.
   nav?.addEventListener('click', (e) => {
@@ -75,7 +96,10 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
   });
   // Close on Escape.
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
+    if (e.key === 'Escape' && nav?.classList.contains('is-open')) {
+      setOpen(false);
+      toggle?.focus();
+    }
   });
   // Reset state when the viewport grows past the mobile breakpoint.
   const mq = matchMedia('(min-width: 56rem)');

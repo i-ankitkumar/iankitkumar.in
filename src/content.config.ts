@@ -63,7 +63,6 @@ const certs = defineCollection({
   schema: z.object({
     name: z.string(),
     issuer: z.string(),
-    issued: z.string().optional(),
     status: z.enum(['active', 'expired', 'in-progress']),
     verifyUrl: z.string().url().optional(),
     confirm: z.boolean().default(false),
@@ -79,7 +78,12 @@ const experiments = defineCollection({
     status: z.enum(['live', 'shipped', 'in-progress', 'experimental', 'archived']),
     summary: z.string(),
     problem: z.string().optional(),
-    approach: z.string().optional(),
+    architecture: z.string().optional(),
+    implementation: z.string().optional(),
+    results: z.string().optional(),
+    period: z.string().optional(),
+    type: z.string().optional(),
+    tags: z.array(z.string()).default([]),
     stack: z.array(z.string()).default([]),
     links: z.array(linkShape).default([]),
     confirm: z.boolean().default(true), // experiments are usually new — default to needing review

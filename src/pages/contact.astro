@@ -24,38 +24,48 @@ import { SITE } from '~/lib/site';
     <div class="container">
       <div class="stack-lg" style="max-width: var(--measure);">
         <div>
-          <span class="eyebrow">Email</span>
+          <h2 class="eyebrow" style="margin: 0;">Email</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
             <span class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); display: block; margin-top: 0.4rem;">
-              Cloudflare Email Routing → {SITE.emailDirect}
+              Use this one. It is routed by Cloudflare straight to my inbox.
             </span>
           </p>
         </div>
 
         <div>
-          <span class="eyebrow">LinkedIn</span>
+          <h2 class="eyebrow" style="margin: 0;">Phone</h2>
+          <p class="lead" style="margin-top: var(--s-2);">
+            <a href={`tel:${SITE.phone.replace(/\s/g, '')}`}>{SITE.phone}</a>
+            <span class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); display: block; margin-top: 0.4rem;">
+              India number, so it is best for a WhatsApp message or a late call.
+            </span>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="eyebrow" style="margin: 0;">LinkedIn</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.linkedin} target="_blank" rel="noopener">{SITE.linkedin.replace('https://', '')}</a>
           </p>
         </div>
 
         <div>
-          <span class="eyebrow">GitHub</span>
+          <h2 class="eyebrow" style="margin: 0;">GitHub</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.github} target="_blank" rel="noopener">{SITE.github.replace('https://', '')}</a>
           </p>
         </div>
 
         <div>
-          <span class="eyebrow">Resume</span>
+          <h2 class="eyebrow" style="margin: 0;">Resume</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.resumeUrl} target="_blank" rel="noopener">Download PDF ↓</a>
           </p>
         </div>
 
         <div>
-          <span class="eyebrow">Blog</span>
+          <h2 class="eyebrow" style="margin: 0;">Blog</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.blog} target="_blank" rel="noopener">{SITE.blog.replace('https://', '')} ↗</a>
           </p>

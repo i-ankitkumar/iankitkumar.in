@@ -14,7 +14,7 @@ const experiments = (await getCollection('experiments')).sort((a, b) => a.data.o
 
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
-      <span class="eyebrow">{experiments.length} experiments · experimental</span>
+      <span class="eyebrow">{experiments.length} experiment{experiments.length === 1 ? '' : 's'} · experimental</span>
       <h1 class="display" style="font-size: var(--t-page-display);">
         Software &amp; AI engineering,<br />outside the day job.
       </h1>
@@ -30,7 +30,7 @@ const experiments = (await getCollection('experiments')).sort((a, b) => a.data.o
         {experiments.map((exp) => <ExperimentCard exp={exp} />)}
       </div>
       <p class="muted" style="margin-top: var(--s-6); max-width: 60ch;">
-        Two experiments in this category right now. New ones land here as they're prototyped.
+        {experiments.length} experiment{experiments.length === 1 ? '' : 's'} in this category right now. New ones land here as they're prototyped.
       </p>
     </div>
   </section>

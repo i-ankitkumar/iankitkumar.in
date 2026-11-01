@@ -14,7 +14,7 @@ const roles = (await getCollection('experience')).sort((a, b) => a.data.order - 
 
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
-      <span class="eyebrow">{roles.length} roles · 2021 to present</span>
+      <span class="eyebrow">{roles.length} role{roles.length === 1 ? '' : 's'} · 2021 to present</span>
       <h1 class="display" style="font-size: var(--t-page-display);">Where I've worked, what I owned.</h1>
       <p class="lead">
         Most recent first. Each role has a one-line summary, the work I owned, and the tools I used.

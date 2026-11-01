@@ -1,6 +1,6 @@
 ---
 name: "Tech-debt scanning across 2,500+ subscriptions"
-type: "Reliability · Production"
+type: "Reliability"
 status: "shipped"
 period: "2024"
 summary: "Python and PowerShell scan automation that detects tech debt across cloud, OS, and database layers in 2,500+ Azure and AWS subscriptions, with Azure DevOps remediation pipelines that resolve 2,000+ flagged resources on demand."

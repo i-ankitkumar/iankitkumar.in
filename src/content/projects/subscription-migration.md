@@ -1,6 +1,6 @@
 ---
 name: "Subscription migration across 25 Azure tenants"
-type: "Cloud Governance · Production"
+type: "Cloud Governance"
 status: "shipped"
 period: "2024"
 summary: "Led the 2.5–3 month migration of 200–300 Azure subscriptions across 25 non-primary tenants into the WK CTC (Security) Team structure, with standard governance policies deployed at management-group level and ServiceNow CAM kept in sync throughout."

@@ -17,7 +17,7 @@ const certs = (await getCollection('certs')).sort((a, b) => {
 
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
-      <span class="eyebrow">{certs.length} credentials</span>
+      <span class="eyebrow">{certs.length} credential{certs.length === 1 ? '' : 's'}</span>
       <h1 class="display" style="font-size: var(--t-page-display);">Verified, in order of recency.</h1>
       <p class="lead">
         Active first. In-progress next. Expired last — kept on the page because they shaped what I built on top.

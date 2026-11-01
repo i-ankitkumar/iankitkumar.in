@@ -1,6 +1,6 @@
 ---
 name: "Splunk dashboards for SOC2 + financial reporting"
-type: "Observability · Production"
+type: "Observability"
 status: "shipped"
 period: "2022 – 2024"
 summary: "Designed and built the Splunk dashboards and data-protection controls that gave Wolters Kluwer's leadership and audit teams real-time SOC2 visibility and clean financial-reporting signals."
