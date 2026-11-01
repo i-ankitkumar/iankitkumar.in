@@ -15,7 +15,7 @@ const tools = (await getCollection('tools')).sort((a, b) => a.data.order - b.dat
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
       <span class="eyebrow">{tools.length} open-source tools</span>
-      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+      <h1 class="display" style="font-size: var(--t-page-display);">
         Things I built<br />to stop doing them by hand.
       </h1>
       <p class="lead">

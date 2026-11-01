@@ -32,7 +32,7 @@ const statusLabel: Record<string, string> = {
         <a href="/tools/" class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs);">← All tools</a>
       </p>
       <span class="eyebrow">{data.tagline}</span>
-      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem); margin-top: var(--s-3);">
+      <h1 class="display" style="font-size: var(--t-page-display); margin-top: var(--s-3);">
         {data.name}
       </h1>
       <p class="lead" style="margin-top: var(--s-5);">{data.summary}</p>
@@ -91,19 +91,19 @@ const statusLabel: Record<string, string> = {
         <div class="prose">
           {data.problem && (
             <>
-              <h3>Problem</h3>
+              <h2>Problem</h2>
               <p>{data.problem}</p>
             </>
           )}
           {data.approach && (
             <>
-              <h3>Approach</h3>
+              <h2>Approach</h2>
               <p>{data.approach}</p>
             </>
           )}
           {data.how.length > 0 && (
             <>
-              <h3>How it works</h3>
+              <h2>How it works</h2>
               <ul>
                 {data.how.map((item) => <li>{item}</li>)}
               </ul>

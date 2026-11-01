@@ -148,6 +148,36 @@ confirm_in_html=$(grep -rc 'confirm-mark' dist/index.html dist/experiments/index
 echo "  src confirm:true files = $confirm_in_source"
 echo "  confirm-mark rendered in home + experiments pages = $confirm_in_html"
 
+# --- 10. impeccable design audit --------------------------------------------
+echo "[10] impeccable design audit"
+if command -v npx >/dev/null 2>&1; then
+  audit_port=8898
+  (cd dist && python3 -m http.server "$audit_port" --bind 127.0.0.1 >/dev/null 2>&1) &
+  audit_pid=$!
+  # wait for the server
+  for _ in $(seq 1 20); do
+    if curl -sf "http://127.0.0.1:$audit_port/" >/dev/null 2>&1; then break; fi
+    sleep 0.5
+  done
+  routes=$(find dist -name "index.html" | sed 's|^dist||; s|index\.html$||' | sort)
+  routes="$routes /contact/ /certs/ /experience/ /experiments/ /tools/ /work/"
+  urls=""
+  for r in $routes; do urls="$urls http://127.0.0.1:$audit_port$r"; done
+  audit_out=$(npx --yes impeccable@4.8.0 detect --quiet $urls 2>&1)
+  kill "$audit_pid" 2>/dev/null || true
+  if echo "$audit_out" | grep -qiE '^[0-9]+ (anti-pattern|findings)'; then
+    echo "$audit_out" | tail -3
+  fi
+  if echo "$audit_out" | grep -qiE 'found|anti-pattern' && \
+     ! echo "$audit_out" | grep -qE '\b0 (anti-patterns|findings)'; then
+    bad "impeccable found design anti-patterns (see output above)"
+  else
+    ok "impeccable: no design anti-patterns"
+  fi
+else
+  echo "  SKIP npx not available"
+fi
+
 # --- summary ----------------------------------------------------------------
 echo
 if [[ $fail -eq 0 ]]; then

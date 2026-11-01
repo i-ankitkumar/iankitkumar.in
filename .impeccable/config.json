@@ -1,0 +1,28 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "marketing-buzzword",
+      "hero-eyebrow-chip",
+      "overused-font"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": []
+  },
+  "designSystem": {
+    "note": "Ignores below are decisions, not oversights. Each one has a reason and a reviewer.",
+    "rules": {
+      "marketing-buzzword": {
+        "reason": "The site quotes the CV's own language (RPO/RTO targets for mission-critical Splunk). That wording is verified against career-ops/cv.md and must not drift.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions"
+      },
+      "hero-eyebrow-chip": {
+        "reason": "The mono uppercase eyebrow carrying a count ('6 credentials', '3 roles - 2021 to present') is a binding product decision, not decoration. It replaces editorial section numbers and gives the recruiter a scannable quantity before the headline.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions: Section eyebrows carry a count"
+      },
+      "overused-font": {
+        "reason": "Geist + Geist Mono is the binding typographic identity of this site. Vercel's system, chosen deliberately. Changing the typeface is a rebrand, not a fix, and requires Ankit's explicit sign-off.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions: Premium typographic aesthetic is binding"
+      }
+    }
+  }
+}

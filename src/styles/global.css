@@ -11,6 +11,9 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+  /* Pull a word down beside a short last line so paragraphs do not end on a
+     one-word orphan. Chrome and Safari support this; Firefox ignores it. */
+  text-wrap: pretty;
   font-size: var(--t-base);
   line-height: var(--lh-normal);
   font-feature-settings: 'liga', 'calt';
@@ -46,6 +49,7 @@ a:focus-visible, button:focus-visible {
   text-wrap: balance;
 }
 .h1 {
+  text-wrap: balance;
   font-family: var(--font-sans);
   font-size: var(--t-3xl);
   line-height: 1.2;
@@ -62,6 +66,7 @@ a:focus-visible, button:focus-visible {
   margin: 0;
 }
 .h3 {
+  text-wrap: balance;
   font-family: var(--font-sans);
   font-size: var(--t-lg);
   line-height: 1.25;
@@ -84,7 +89,7 @@ a:focus-visible, button:focus-visible {
   font-size: var(--t-lg);
   line-height: var(--lh-loose);
   color: var(--fg-soft);
-  max-width: 60ch;
+  max-width: 50ch;
   letter-spacing: -0.008em;
 }
 
@@ -286,7 +291,7 @@ section.page-section .section-head {
 }
 .metric-card .value {
   font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: var(--t-metric);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.05;
@@ -335,7 +340,9 @@ section.page-section .section-head {
   color: var(--muted);
   margin-bottom: var(--s-3);
 }
+.project-card h2,
 .project-card h3 {
+  text-wrap: balance;
   font-family: var(--font-sans);
   font-size: var(--t-xl);
   font-weight: 600;
@@ -348,6 +355,7 @@ section.page-section .section-head {
   margin: 0 0 var(--s-4);
   font-size: var(--t-sm);
   line-height: var(--lh-loose);
+  max-width: 54ch;
 }
 .tags {
   display: flex;
@@ -403,22 +411,26 @@ section.page-section .section-head {
   font-size: var(--t-sm);
   color: var(--fg-soft);
 }
-.proj-detail .prose h3 {
+.proj-detail .prose h2 {
+  text-wrap: balance;
   font-family: var(--font-sans);
   font-size: var(--t-lg);
   font-weight: 600;
   letter-spacing: -0.016em;
   margin: var(--s-6) 0 var(--s-2);
 }
-.proj-detail .prose h3:first-child { margin-top: 0; }
-.proj-detail .prose p { margin: 0 0 var(--s-4); line-height: var(--lh-loose); color: var(--fg-soft); }
+.proj-detail .prose h2:first-child { margin-top: 0; }
+.proj-detail .prose p { margin: 0 0 var(--s-4); line-height: var(--lh-loose); color: var(--fg-soft); max-width: 54ch; }
 .proj-detail .prose ul { padding-left: 1.1em; margin: 0 0 var(--s-4); }
-.proj-detail .prose li { margin: 0.25rem 0; line-height: var(--lh-loose); color: var(--fg-soft); }
+.proj-detail .prose li { margin: 0.25rem 0; line-height: var(--lh-loose); color: var(--fg-soft); max-width: 54ch; }
 
 /* ------------------------------------------------------------------
  * Experience timeline
  * ------------------------------------------------------------------ */
 .timeline { display: grid; gap: var(--s-7); }
+.timeline-item ul {
+  max-width: 54ch;
+}
 .timeline-item {
   display: grid;
   gap: var(--s-3);
@@ -594,7 +606,7 @@ section.page-section .section-head {
 }
 .notfound .code {
   font-family: var(--font-sans);
-  font-size: clamp(5rem, 12vw, 9rem);
+  font-size: var(--t-oversize);
   font-weight: 600;
   color: var(--fg);
   line-height: 1;
@@ -627,6 +639,6 @@ section.page-section .section-head {
  * ------------------------------------------------------------------ */
 @media print {
   .site-header, .site-footer, .actions, .theme-toggle { display: none !important; }
-  body { background: #fff; color: #000; }
-  a { color: #000; text-decoration: underline; }
+  body { background: var(--print-canvas); color: var(--print-ink); }
+  a { color: var(--print-ink); text-decoration: underline; }
 }

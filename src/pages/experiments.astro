@@ -15,7 +15,7 @@ const experiments = (await getCollection('experiments')).sort((a, b) => a.data.o
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
       <span class="eyebrow">{experiments.length} experiments · experimental</span>
-      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+      <h1 class="display" style="font-size: var(--t-page-display);">
         Software &amp; AI engineering,<br />outside the day job.
       </h1>
       <p class="lead">

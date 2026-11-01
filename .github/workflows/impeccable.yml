@@ -1,0 +1,62 @@
+name: Impeccable design audit
+
+# Runs the Impeccable detector against the built site on every push and PR.
+# The detector is deterministic - no LLM, no API key - so a failure here is a
+# real regression, not a flaky judgement call.
+#
+# Configuration lives in .impeccable/config.json. The ignores there are
+# decisions with a written reason; add to that file rather than suppressing
+# inline, so the reason survives.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the site
+        run: npm run build
+
+      - name: Serve the build
+        run: |
+          python3 -m http.server 8899 --bind 127.0.0.1 --directory dist &
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:8899/ >/dev/null; then break; fi
+            sleep 1
+          done
+          curl -sf http://127.0.0.1:8899/ >/dev/null
+
+      - name: Detect design anti-patterns
+        run: |
+          ROUTES=$(find dist -name "index.html" | sed 's|^dist||; s|index\.html$||' | sort)
+          ROUTES="$ROUTES /contact/ /certs/ /experience/ /experiments/ /tools/ /work/"
+          URLS=""
+          for r in $ROUTES; do URLS="$URLS http://127.0.0.1:8899$r"; done
+          npx --yes impeccable@4.8.0 detect --github $URLS
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Impeccable audit"
+            echo ""
+            echo "- Repo: \`iankitkumar.in\`"
+            echo "- Config: \`.impeccable/config.json\`"
+            echo "- Design tokens: \`src/styles/tokens.css\`, \`src/styles/global.css\`"
+            echo ""
+            echo "Findings are annotated on the commit. Read \`.impeccable/config.json\` for the ignored rules and why."
+          } >> "$GITHUB_STEP_SUMMARY"

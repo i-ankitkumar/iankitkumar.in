@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
       <span class="eyebrow">{projects.length} projects</span>
-      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem);">
+      <h1 class="display" style="font-size: var(--t-page-display);">
         Projects, in order<br />of how often I talk about them.
       </h1>
       <p class="lead">

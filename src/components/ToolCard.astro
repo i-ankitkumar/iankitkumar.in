@@ -3,10 +3,13 @@ import type { CollectionEntry } from 'astro:content';
 import ConfirmMark from './ConfirmMark.astro';
 
 export interface Props {
+  /** 'h2' on a listing page; 'h3' inside a <Section> that already has an h2. */
+  headingLevel?: 'h2' | 'h3';
   tool: CollectionEntry<'tools'>;
 }
 
-const { tool } = Astro.props;
+const { tool, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
 const { data } = tool;
 
 const statusLabel: Record<string, string> = {
@@ -20,10 +23,10 @@ const statusLabel: Record<string, string> = {
 <article class="project-card reveal" data-confirm={data.confirm || undefined}>
   <span class="type">Tool</span>
   <span class="status">{statusLabel[data.status] ?? data.status}</span>
-  <h3>
+  <Heading>
     <a href={`/tools/${tool.id}/`}>{data.name}</a>
     <ConfirmMark confirm={data.confirm} />
-  </h3>
+  </Heading>
   <p>{data.summary}</p>
   {data.stack.length > 0 && (
     <div class="tags">

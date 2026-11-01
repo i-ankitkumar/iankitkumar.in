@@ -19,6 +19,9 @@
   --accent-soft: #0057C0;
   --accent-tint: #EBF5FF;
   --brand: #0072F5;
+  /* Print palette: paper and ink, always. */
+  --print-canvas: #FFFFFF;
+  --print-ink: #000000;
   --ship: #FF5B4F;
   --preview: #C2187A;
   --develop: #0A5FCC;
@@ -37,7 +40,13 @@
   --t-2xl: 2rem;
   --t-3xl: 2.5rem;
   --t-4xl: 3.25rem;
-  --t-display: clamp(2.75rem, 6.5vw, 4.5rem);
+  --t-display: clamp(2.5rem, 5vw, 3.75rem);
+  /* Page-level h1: a notch below the homepage display size. */
+  --t-page-display: clamp(2.25rem, 4.5vw, 3.75rem);
+  /* Metric card value. */
+  --t-metric: clamp(1.75rem, 3vw, 2.5rem);
+  /* 404 page numeral. */
+  --t-oversize: clamp(5rem, 12vw, 9rem);
 
   /* Line heights */
   --lh-tight: 1.05;
@@ -58,11 +67,12 @@
   --s-10: 8rem;
 
   /* Layout */
-  --measure: 68ch;
+  --measure: 54ch;
   --container: 75rem;
   --gutter: clamp(1.25rem, 4vw, 2rem);
 
   /* Radii */
+  --r-xs: 1px;
   --r-sm: 4px;
   --r-md: 6px;
   --r-lg: 8px;

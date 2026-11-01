@@ -84,7 +84,7 @@ const skillGroups: { title: string; items: string[] }[] = [
         of platform engineering.
       </h1>
       <p class="lead lede">
-        I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python — and lately a stack of AI agents that share memory.
+        I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python, and lately a stack of AI agents that share memory.
       </p>
       <div class="actions">
         <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
@@ -94,14 +94,14 @@ const skillGroups: { title: string; items: string[] }[] = [
         <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href={`mailto:${SITE.email}`}>Email</a>
       </div>
-      <p class="muted" style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.06em;">
+      <p class="muted" style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.02em;">
         Currently at Wolters Kluwer · {SITE.languages}
       </p>
     </div>
   </section>
 
   <!-- METRICS -->
-  <Section title="By the numbers" id="numbers" intro="Production outcomes from the last five years — the ones I'd defend in an interview.">
+  <Section title="By the numbers" id="numbers" intro="Production outcomes from the last five years: the ones I'd defend in an interview.">
     <div class="metric-grid">
       <div class="metric-card reveal">
         <div class="value">20,000+</div>
@@ -126,16 +126,16 @@ const skillGroups: { title: string; items: string[] }[] = [
   <Section title="About" id="about" intro="A short version of where I've been and where I'm heading.">
     <div class="prose" style="max-width: var(--measure);">
       <p>
-        I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune — Splunk multi-site clusters, Azure landing zones, Terraform across 2,500+ subscriptions, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
+        I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune: Splunk multi-site clusters, Azure landing zones, Terraform across 2,500+ subscriptions, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
       </p>
       <p>
-        At WK I drove an <strong>AI-assisted automation initiative</strong> for pipeline-failure detection, log analysis, and release tagging — and I'm building on top of that with software-engineering work: an MCP server that lets language models query Splunk the way an SRE would, and a small Python pipeline that turns LLM structured output into enriched security alerts.
+        At WK I drove an <strong>AI-assisted automation initiative</strong> for pipeline-failure detection, log analysis, and release tagging, and I'm building on top of that with software-engineering work: an MCP server that lets language models query Splunk the way an SRE would, and a small Python pipeline that turns LLM structured output into enriched security alerts.
       </p>
       <p>
-        My daily work stack is multi-agent too: <strong>Paperclip</strong> for orchestration, <strong>Honcho</strong> for persistent cross-agent memory, <strong>GitNexus</strong> for codebase knowledge graphs, <strong>Hermes</strong> as the agent runtime — with specialised agents for dev, qa, infra, marketing, and design. Same MCP-and-shared-memory primitives as the WK work, just with more agents on a personal workstation. Five years of platform engineering is what I'm bringing. Software and AI engineering is where I'm going.
+        My daily work stack is multi-agent too: <strong>Paperclip</strong> for orchestration, <strong>Honcho</strong> for persistent cross-agent memory, <strong>GitNexus</strong> for codebase knowledge graphs, <strong>Hermes</strong> as the agent runtime, with specialised agents for dev, qa, infra, marketing, and design. Same MCP-and-shared-memory primitives as the WK work, just with more agents on a personal workstation. Five years of platform engineering is what I'm bringing. Software and AI engineering is where I'm going.
       </p>
       <p>
-        Open to software and AI engineering roles in Germany — relocating from India.
+        Open to software and AI engineering roles in Germany, relocating from India.
       </p>
     </div>
   </Section>
@@ -143,7 +143,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   <!-- FEATURED WORK -->
   <Section title="Selected work" id="work" intro="Four pieces I'd talk through in an interview. The full list is on the work page.">
     <div class="project-grid">
-      {featured.map((p) => <ProjectCard project={p} />)}
+      {featured.map((p) => <ProjectCard project={p} headingLevel="h3" />)}
     </div>
     <p class="muted" style="margin-top: var(--s-6);">
       <a href="/work/">All projects →</a>
@@ -174,7 +174,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   <!-- EXPERIMENTS PREVIEW -->
   <Section title="Experiments" id="experiments" intro="Software and AI engineering work outside my day job.">
     <div class="project-grid">
-      {experiments.map((exp) => <ExperimentCard exp={exp} />)}
+      {experiments.map((exp) => <ExperimentCard exp={exp} headingLevel="h3" />)}
     </div>
     <p class="muted" style="margin-top: var(--s-6);">
       <a href="/experiments/">All experiments →</a>

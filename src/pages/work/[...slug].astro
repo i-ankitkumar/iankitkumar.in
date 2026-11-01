@@ -41,7 +41,7 @@ const blocks: { title: string; body?: string }[] = [
         <a href="/work/" class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs);">← All work</a>
       </p>
       <span class="eyebrow">{data.type}</span>
-      <h1 class="display" style="font-size: clamp(2.25rem, 4.5vw, 3.75rem); margin-top: var(--s-3);">{data.name}</h1>
+      <h1 class="display" style="font-size: var(--t-page-display); margin-top: var(--s-3);">{data.name}</h1>
       <p class="lead" style="margin-top: var(--s-5);">{data.summary}</p>
       <div class="actions" style="margin-top: var(--s-5);">
         {data.links.map((l) => (
@@ -75,7 +75,7 @@ const blocks: { title: string; body?: string }[] = [
         </aside>
         <div class="prose">
           {blocks.filter((b) => b.body).map((b) => (
-            <h3>{b.title}</h3>
+            <h2>{b.title}</h2>
             <p>{b.body}</p>
           ))}
           {Content && <Content />}

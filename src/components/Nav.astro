@@ -102,7 +102,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     width: 16px;
     height: 1.5px;
     background: currentColor;
-    border-radius: 1px;
+    border-radius: var(--r-xs);
     transition: transform var(--dur-1) var(--ease-out), opacity var(--dur-1) var(--ease-out);
   }
   .nav-toggle-bars { position: relative; }

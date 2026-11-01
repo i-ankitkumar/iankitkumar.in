@@ -4,9 +4,12 @@ import ConfirmMark from './ConfirmMark.astro';
 
 export interface Props {
   role: CollectionEntry<'experience'>;
+  /** 'h2' on a listing page; 'h3' inside a <Section> that already has an h2. */
+  headingLevel?: 'h2' | 'h3';
 }
 
-const { role } = Astro.props;
+const { role, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
 const { data } = role;
 ---
 
@@ -17,10 +20,10 @@ const { data } = role;
     <br />{data.location}
   </div>
   <div>
-    <h3 class="role">
+    <Heading class="role">
       {data.role}
       <ConfirmMark confirm={data.confirm} />
-    </h3>
+    </Heading>
     <p class="company">{data.company}{data.current && <span class="muted"> — current</span>}</p>
     <p class="muted" style="margin:0; max-width:64ch; line-height:1.65;">{data.summary}</p>
     {data.bullets.length > 0 && (

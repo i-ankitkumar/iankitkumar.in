@@ -29,3 +29,15 @@ Thumbs.db
 
 # tooling
 .wrangler/
+
+# Impeccable harness bundles. Regenerate with:
+#   npx impeccable install --project
+# The upstream copy is tracked at pbakaus/impeccable; vendoring ~11 MB of
+# skill files into a portfolio repo is noise. The detector config in
+# .impeccable/config.json IS tracked, because the ignores carry reasons.
+.agents/
+.claude/
+.codex/
+.hermes/
+.opencode/
+.pi/

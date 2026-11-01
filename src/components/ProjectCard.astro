@@ -5,9 +5,16 @@ import ConfirmMark from './ConfirmMark.astro';
 export interface Props {
   project: CollectionEntry<'projects'>;
   size?: 'sm' | 'md';
+  /**
+   * Heading level for the card title.
+   * 'h2' on a listing page (the h1 is followed straight by the cards).
+   * 'h3' inside a <Section>, which already renders an h2 title.
+   */
+  headingLevel?: 'h2' | 'h3';
 }
 
-const { project, size = 'md' } = Astro.props;
+const { project, size = 'md', headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
 const { data, id } = project;
 
 const statusLabel: Record<string, string> = {
@@ -22,10 +29,10 @@ const statusLabel: Record<string, string> = {
 <a class={`project-card reveal ${size === 'sm' ? 'is-visible' : ''}`} href={`/work/${id}/`} data-confirm={data.confirm || undefined}>
   <span class="type">{data.type}</span>
   {data.status && <span class="status">{statusLabel[data.status] ?? data.status}</span>}
-  <h3>
+  <Heading>
     {data.name}
     <ConfirmMark confirm={data.confirm} label={data.confirm ? 'verify' : undefined} />
-  </h3>
+  </Heading>
   <p>{data.summary}</p>
   {data.tags.length > 0 && (
     <div class="tags">
@@ -36,5 +43,5 @@ const statusLabel: Record<string, string> = {
 
 <style>
   .project-card.sm { padding: var(--s-5); }
-  .project-card.sm h3 { font-size: var(--t-lg); }
+  .project-card.sm :global(h2), .project-card.sm :global(h3) { font-size: var(--t-lg); }
 </style>
