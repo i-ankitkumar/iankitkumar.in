@@ -115,7 +115,7 @@ check "/tools/"            200  text/html
 check "/tools/kittybot/"   200  text/html
 check "/contact/"          200  text/html
 check "/tools/kittybot/dashboard.webp"      200  image/webp
-check "/tools/kittybot/pending.webp"        200  image/webp
+check "/photo.webp"                   200  image/webp
 check "/tools/kittybot/telegram-approval.png" 200  image/png
 check "/sitemap-index.xml" 200  application/xml
 check "/resume.pdf"        200  application/pdf
