@@ -81,6 +81,36 @@ if [[ ! -s "$OUT_PDF" ]]; then
   exit 3
 fi
 
+# Normalise the PDF metadata so the build is byte-reproducible.
+#
+# Chromium stamps CreationDate/ModDate into every PDF, so two builds of
+# identical content produce different bytes. The site's resume URL carries
+# a sha256 of this file, so without this the ?v= query changes on every
+# rebuild even when nothing about the CV changed - which defeats the point
+# of content-addressing it and churns the cache for no reason.
+#
+# qpdf normalises the document id and we overwrite the dates with a fixed
+# epoch. Result: identical input always yields identical bytes.
+echo "    normalising PDF metadata for reproducibility"
+if command -v uv >/dev/null 2>&1; then
+  uv run --quiet --with pikepdf python - "$OUT_PDF" <<'PY'
+import os, pikepdf, sys
+
+path = sys.argv[1]
+tmp = path + ".normalised"
+pdf = pikepdf.open(path)
+# A fixed epoch, not "now". The point is that two builds of the same
+# content produce the same bytes.
+pdf.docinfo["/CreationDate"] = "D:20260101000000Z"
+pdf.docinfo["/ModDate"] = "D:20260101000000Z"
+pdf.save(tmp, deterministic_id=True, compress_streams=True)
+pdf.close()
+os.replace(tmp, path)
+PY
+else
+  echo "    WARNING: uv not found, PDF will not be byte-reproducible"
+fi
+
 echo "[3/4] verifying..."
 PAGES="$(pdfinfo "$OUT_PDF" | awk '/^Pages:/ {print $2}')"
 DIMS="$(pdfinfo "$OUT_PDF" | awk -F': +' '/^Page size:/ {print $2}')"
