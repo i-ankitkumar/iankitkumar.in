@@ -41,6 +41,7 @@ a:focus-visible, button:focus-visible {
 .mono { font-family: var(--font-mono); }
 .display {
   font-family: var(--font-sans);
+  line-height: 1.02;
   font-size: var(--t-display);
   line-height: var(--lh-tight);
   letter-spacing: -0.055em;
@@ -171,13 +172,12 @@ a:focus-visible, button:focus-visible {
  * Hero
  * ------------------------------------------------------------------ */
 .hero {
-  padding-block: clamp(var(--s-8), 9vw, var(--s-10)) clamp(var(--s-7), 7vw, var(--s-9));
+  padding-block: clamp(var(--s-7), 6vw, var(--s-9)) clamp(var(--s-6), 5vw, var(--s-8));
   position: relative;
 }
-/* The source photo is a waist-up environmental shot. A plain
-   object-fit:cover crop at 96px renders a tiny figure rather than a
-   face, so the frame scales the image up and offsets the crop window
-   onto the head (measured from the source 768x1024 image). */
+/* The portrait is pre-cropped to the face and served as a 384px WebP
+   (14 KB instead of 235 KB), so it needs no scaling hack here: a plain
+   centred cover of a square image is the whole job. */
 .hero .portrait {
   width: clamp(72px, 8vw, 96px);
   height: clamp(72px, 8vw, 96px);
@@ -191,12 +191,11 @@ a:focus-visible, button:focus-visible {
 }
 .hero .portrait img {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 260%;
-  max-width: none;
-  height: auto;
-  transform: translate(-26.4%, -20.4%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   filter: saturate(0.92);
 }
 .hero .meta {
@@ -217,7 +216,7 @@ a:focus-visible, button:focus-visible {
   font-weight: 500;
   margin-right: 0.4rem;
 }
-.hero .lede { max-width: 64ch; margin-top: var(--s-5); }
+.hero .lede { margin-top: var(--s-5); }
 .hero .actions {
   display: flex;
   flex-wrap: wrap;
@@ -611,6 +610,8 @@ section.page-section .section-head {
   color: var(--fg);
   line-height: 1;
   letter-spacing: -0.06em;
+  /* It is the page's h1 now, so drop the browser's default margins. */
+  margin: 0;
 }
 
 /* ------------------------------------------------------------------
@@ -641,4 +642,16 @@ section.page-section .section-head {
   .site-header, .site-footer, .actions, .theme-toggle { display: none !important; }
   body { background: var(--print-canvas); color: var(--print-ink); }
   a { color: var(--print-ink); text-decoration: underline; }
+  /* The reveal mechanism starts every .reveal element at opacity 0 and
+     reveals it with an IntersectionObserver. In print there is no scrolling,
+     so anything below the fold never gets revealed and prints blank:
+     section headings printed, but no metric cards, no project cards, no
+     skills, no certifications. Force them visible. */
+  .js .reveal { opacity: 1 !important; transform: none !important; }
+  /* Keep each card whole rather than splitting it across a page break. */
+  .metric-card, .project-card, .cert-item, .timeline-item, .skill-group {
+    break-inside: avoid;
+  }
+  .page-section { break-inside: auto; }
+  @page { margin: 14mm; }
 }

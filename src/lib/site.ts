@@ -66,7 +66,11 @@ export const SITE = {
 
   // Static assets
   resumeUrl: resumeUrl(),
-  photoUrl: '/photo.jpg',
+  // The rendered portrait: pre-cropped to the face, 384px WebP, 14 KB.
+  photoUrl: '/photo.webp',
+  // The full-size source, kept for the JSON-LD Person image where a
+  // crawler wants something larger than a 96px display crop.
+  photoSourceUrl: '/photo.jpg',
   ogImageUrl: '/og-preview.png',
   faviconUrl: '/favicon.svg',
   faviconDarkUrl: '/favicon-dark.svg',

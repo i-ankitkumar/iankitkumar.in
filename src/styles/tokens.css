@@ -40,7 +40,7 @@
   --t-2xl: 2rem;
   --t-3xl: 2.5rem;
   --t-4xl: 3.25rem;
-  --t-display: clamp(2.5rem, 5vw, 3.75rem);
+  --t-display: clamp(2.25rem, 4.2vw, 3.25rem);
   /* Page-level h1: a notch below the homepage display size. */
   --t-page-display: clamp(2.25rem, 4.5vw, 3.75rem);
   /* Metric card value. */

@@ -48,8 +48,11 @@ const statusLabel: Record<string, string> = {
           <img
             src={data.screenshot}
             alt={`${data.name} dashboard`}
+            width="1640"
+            height="1153"
             loading="lazy"
-            style="width: 100%; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
+            decoding="async"
+            style="width: 100%; height: auto; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
           />
         </figure>
       )}
@@ -58,8 +61,11 @@ const statusLabel: Record<string, string> = {
           <img
             src={data.telegram_card}
             alt={`The approval message ${data.name} sends`}
+            width="800"
+            height="479"
             loading="lazy"
-            style="width: 100%; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
+            decoding="async"
+            style="width: 100%; height: auto; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
           />
           <figcaption class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); margin-top: var(--s-3);">
             The approval message the bot sends. Nothing reaches the kitty until you tap a button.

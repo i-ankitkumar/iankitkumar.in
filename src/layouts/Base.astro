@@ -27,7 +27,7 @@ const jsonLd = {
   '@type': 'Person',
   name: SITE.name,
   url: SITE.siteUrl,
-  image: new URL(SITE.photoUrl, SITE.siteUrl).toString(),
+  image: new URL(SITE.photoSourceUrl, SITE.siteUrl).toString(),
   email: SITE.emailDirect,
   telephone: SITE.phone,
   jobTitle: SITE.role,
@@ -106,7 +106,15 @@ const jsonLd = {
       (() => {
         // Marks JS availability so CSS can safely hide .reveal elements.
         document.documentElement.classList.add('js');
-        const stored = localStorage.getItem('theme');
+        // Storage can throw: Firefox "Block cookies and site data", an
+        // enterprise MDM policy, or dom.storage.enabled=false. An unguarded
+        // read here would abort the bootstrap before the theme is applied.
+        let stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch {
+          stored = null;
+        }
         const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
         const theme = stored ?? (prefersDark ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
@@ -137,10 +145,25 @@ const jsonLd = {
     <script>
       const root: HTMLElement = document.documentElement;
       const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+      const label = document.querySelector<HTMLElement>('[data-theme-label]');
+
+      // Persist the theme without letting a storage failure abort the caller.
+      // Order matters: the DOM state is written first, so a throwing
+      // setItem can never leave the button's aria-pressed out of sync.
+      const persist = (t: 'light' | 'dark') => {
+        try {
+          localStorage.setItem('theme', t);
+        } catch {
+          // Storage is blocked. The theme still applies for this session.
+        }
+      };
       const apply = (t: 'light' | 'dark') => {
         root.dataset.theme = t;
-        localStorage.setItem('theme', t);
-        if (toggle) toggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+        toggle?.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+        // A visible label, not just aria-pressed: a sighted user needs to
+        // know which theme is active.
+        if (label) label.textContent = t === 'dark' ? 'Dark' : 'Light';
+        persist(t);
       };
       toggle?.addEventListener('click', () => {
         const next: 'light' | 'dark' = root.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -149,7 +172,15 @@ const jsonLd = {
       // Reflect initial state on toggle
       apply(root.dataset.theme === 'dark' ? 'dark' : 'light');
 
-      // Reveal-on-scroll
+      // Reveal-on-scroll.
+      //
+      // The observer is constructed and the elements are observed BEFORE
+      // anything that can throw, so a storage failure upstream can never
+      // leave these elements permanently invisible. A failsafe reveals
+      // everything after 1.5s regardless, in case the observer never fires.
+      const revealAll = () => {
+        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+      };
       const io = new IntersectionObserver(
         (entries: IntersectionObserverEntry[]) => {
           for (const e of entries) {
@@ -162,6 +193,7 @@ const jsonLd = {
         { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
       );
       document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      window.setTimeout(revealAll, 1500);
     </script>
   </body>
 </html>

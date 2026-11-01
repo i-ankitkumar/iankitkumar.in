@@ -213,7 +213,17 @@ section numbers (`§ Work`) are retired.
 **Metric cells.** `--surface-2`, `--r-lg`, a tabular-figure value and a mono label. They carry a
 real production number, never a vanity metric.
 
+**Portrait.** A pre-cropped 384px WebP (`/photo.webp`, 14 KB) framed by a plain
+`object-fit: cover` circle. The full-size `/photo.jpg` is kept only as the JSON-LD
+`Person.image`, where a crawler wants more than a 96px display crop.
+
 ## Do's and Don'ts
+
+**Reveal-on-scroll.** `.reveal` elements start at `opacity: 0` and are revealed by an
+`IntersectionObserver`. Three things keep this safe: the observer is constructed before anything
+that can throw, a 1.5s failsafe reveals everything regardless, and `@media print` forces
+`opacity: 1` because print has no scrolling. Without the print rule, printing the homepage emits
+section headings with none of the evidence.
 
 **Do**
 

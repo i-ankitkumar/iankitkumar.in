@@ -10,7 +10,7 @@ import { SITE } from '~/lib/site';
 
   <section class="notfound">
     <div>
-      <div class="code">404</div>
+      <h1 class="code">404</h1>
       <p class="lead" style="margin-top: var(--s-4);">This page doesn't exist.</p>
       <p class="muted" style="margin-top: var(--s-2);">It may have moved, or never have.</p>
       <div class="actions" style="margin-top: var(--s-6); justify-content: center;">
@@ -18,9 +18,18 @@ import { SITE } from '~/lib/site';
         <a class="btn" href="/work/">Work</a>
         <a class="btn" href="/contact/">Contact</a>
       </div>
-      <p class="muted" style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs);">
+      <p class="muted" data-missing-path style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs);">
         {SITE.siteUrl}{Astro.url.pathname}
       </p>
+      <script is:inline>
+        // This page is prerendered, so Astro.url.pathname is always the
+        // /404 route rather than the path the visitor actually requested.
+        // Replace it at runtime with the real one.
+        const el = document.querySelector('[data-missing-path]');
+        if (el && location.pathname && !location.pathname.startsWith('/404')) {
+          el.textContent = location.origin + location.pathname;
+        }
+      </script>
     </div>
   </section>
 
