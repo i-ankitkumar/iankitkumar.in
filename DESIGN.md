@@ -213,9 +213,20 @@ exactly once.
 **Tags.** Mono, sentence case, `--r-sm`, on `--surface`. They list tools, never categories of people.
 Sentence case, not uppercase: an uppercase tag row reads as noise next to an uppercase eyebrow.
 
-**Eyebrows.** Mono uppercase with a count, not a section number: `6 credentials`,
-`3 roles - 2021 to present`. They give the reader a quantity before the headline. Editorial
-section numbers (`§ Work`) are retired.
+**Eyebrows.** Mono uppercase, not a section number. They do one of three jobs depending on the
+page:
+
+- **A count** on an index page: `11 projects`, `6 credentials`, `3 roles - 2021 to present`,
+  `2 experiments`, `1 open-source tool`, `6 ways to reach me`. It gives the reader a quantity
+  before the headline.
+- **A category** on a detail page: `Infrastructure`, `Open Source`, `Security Tooling`. It tells
+  the reader what kind of work this is before the title. It is dropped when the title already
+  leads with it, so the two never stutter.
+- **The positioning statement** on the homepage: `Infrastructure Engineer -> Software & AI
+  Engineering`. This is the brand's central claim and the one thing on the site that states the
+  pivot outright.
+
+Editorial section numbers (`§ Work`) are retired.
 
 **Metric cells.** `--surface-2`, `--r-lg`, a monospace tabular-figure value and a mono label.
 They carry a real production number, never a vanity metric. The value is monospace so the four
@@ -265,6 +276,8 @@ that makes the claim, not on a site-wide config object.
 - Do not reintroduce the retired Source Serif 4 / Inter / burgundy identity. Changing the
   typeface is a rebrand and needs Ankit's explicit sign-off.
 - Do not reintroduce editorial section numbers.
-- Do not put a tracked-caps chip above the `h1` unless it carries a real count.
+- Do not put a decorative tracked-caps chip above the `h1`. Every eyebrow must carry
+  information: a count, a category, or the positioning statement. An eyebrow that restates its
+  own `h1` is the failure case.
 - Do not publish a relocation city. Germany only.
 - Do not let a PDF or a text block run wider than the measure.

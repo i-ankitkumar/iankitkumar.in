@@ -12,12 +12,12 @@
     "note": "Ignores below are decisions, not oversights. Each one has a reason and a reviewer.",
     "rules": {
       "marketing-buzzword": {
-        "reason": "The site quotes the CV's own language (RPO/RTO targets for mission-critical Splunk). That wording is verified against career-ops/cv.md and must not drift.",
+        "reason": "The site quotes the CV's own language (RPO/RTO targets for mission-critical Splunk, ARC certification). That wording is verified against career-ops/cv.md and must not drift. Currently zero hits on the live site; the rule is retained so a future edit cannot soften a verified CV phrase into a marketing adjective.",
         "reviewer": "ankit-portfolio-builder skill, Conventions"
       },
       "hero-eyebrow-chip": {
-        "reason": "The mono uppercase eyebrow carrying a count ('6 credentials', '3 roles - 2021 to present') is a binding product decision, not decoration. It replaces editorial section numbers and gives the recruiter a scannable quantity before the headline.",
-        "reviewer": "ankit-portfolio-builder skill, Conventions: Section eyebrows carry a count"
+        "reason": "The mono uppercase eyebrow is a binding product decision, not decoration. It replaces editorial section numbers and carries real information in one of three forms: a count on an index page ('11 projects', '6 credentials'), a category on a detail page ('Infrastructure', 'Security Tooling'), or the positioning statement on the homepage ('Infrastructure Engineer -> Software & AI Engineering'). Eyebrows that merely restate their own h1 were removed rather than ignored.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions: Eyebrows carry information"
       },
       "overused-font": {
         "reason": "Geist + Geist Mono is the binding typographic identity of this site. Vercel's system, chosen deliberately. Changing the typeface is a rebrand, not a fix, and requires Ankit's explicit sign-off.",

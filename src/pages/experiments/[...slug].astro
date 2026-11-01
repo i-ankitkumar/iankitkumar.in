@@ -24,6 +24,20 @@ const statusLabel: Record<string, string> = {
   archived: 'Archived',
 };
 
+const categoryLabel: Record<string, string> = {
+  'ai-agent': 'AI Agent',
+  mcp: 'MCP',
+  'security-tooling': 'Security Tooling',
+  'ml-security': 'ML Security',
+  other: 'Other',
+};
+
+// The eyebrow carries the category. When the title already leads with
+// it ("MCP server: Splunk query planner" under "MCP") repeating it is a
+// stutter, so the eyebrow is dropped in that case.
+const category = data.type ?? categoryLabel[data.category] ?? data.category;
+const showCategory = !data.name.toLowerCase().startsWith(category.toLowerCase());
+
 const blocks: { title: string; body?: string }[] = [
   { title: 'Problem', body: data.problem },
   { title: 'Architecture', body: data.architecture },
@@ -40,7 +54,7 @@ const blocks: { title: string; body?: string }[] = [
       <p style="margin: 0 0 var(--s-4);">
         <a href="/experiments/" class="muted section-more" style="font-family: var(--font-mono); font-size: var(--t-xs);">← All experiments</a>
       </p>
-      <span class="eyebrow">{data.type ?? 'Experiment'}</span>
+      {showCategory && <span class="eyebrow">{category}</span>}
       <h1 class="display" style="font-size: var(--t-page-display); margin-top: var(--s-3);">{data.name}</h1>
       <p class="lead" style="margin-top: var(--s-5);">{data.summary}</p>
       <div class="actions" style="margin-top: var(--s-5);">

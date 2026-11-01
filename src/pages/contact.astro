@@ -3,6 +3,10 @@ import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
 import { SITE } from '~/lib/site';
+
+// The contact methods, in one place, so the eyebrow count cannot drift
+// from what the page actually renders.
+const CONTACT_METHODS = ['email', 'phone', 'linkedin', 'github', 'resume', 'blog'];
 ---
 
 <Base title="Contact" description={`Contact details for ${SITE.name}: email, LinkedIn, GitHub, resume.`}>
@@ -10,7 +14,7 @@ import { SITE } from '~/lib/site';
 
   <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
     <div class="container stack">
-      <span class="eyebrow">Get in touch</span>
+      <span class="eyebrow">{CONTACT_METHODS.length} ways to reach me</span>
       <h1 class="display" style="font-size: var(--t-page-display);">
         The fastest route<br />is email.
       </h1>
