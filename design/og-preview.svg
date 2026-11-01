@@ -2,68 +2,72 @@
   <defs>
     <clipPath id="frame"><rect width="1200" height="630"/></clipPath>
     <clipPath id="portrait"><circle cx="1040" cy="252" r="132"/></clipPath>
+    <radialGradient id="glow" cx="0.88" cy="0.05" r="0.62">
+      <stop offset="0%" stop-color="#0072F5" stop-opacity="0.10"/>
+      <stop offset="42%" stop-color="#0072F5" stop-opacity="0.03"/>
+      <stop offset="68%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <!-- Ground: warm off-white (matches bg token, light theme) -->
-  <rect width="1200" height="630" fill="#FAFAF7"/>
+  <!-- Canvas: pure white, the Vercel surface -->
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- Accent rule, top-left: editorial marker, not a full bleed -->
-  <rect x="80" y="112" width="88" height="5" fill="#9B1C30"/>
-
-  <!-- Eyebrow: role, mono, letterspaced -->
-  <text x="80" y="176"
-        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
-        font-size="21" letter-spacing="3.4"
-        fill="#6B6B70">INFRASTRUCTURE &#8594; SOFTWARE &amp; AI ENGINEERING</text>
-
-  <!-- Name: serif display, the typographic voice of the site -->
-  <text x="80" y="290"
-        font-family="Georgia,'Source Serif 4','Times New Roman',serif"
-        font-size="88" font-weight="600" letter-spacing="-1.5"
-        fill="#1A1A1F">Ankit Kumar</text>
-
-  <!-- Lede: the claim, sans, matching the hero -->
-  <text x="80" y="352"
-        font-family="Inter,'DejaVu Sans',sans-serif"
-        font-size="27"
-        fill="#3A3A40">I turn three-day infrastructure work into fifteen-minute</text>
-  <text x="80" y="390"
-        font-family="Inter,'DejaVu Sans',sans-serif"
-        font-size="27"
-        fill="#3A3A40">button presses.</text>
-
-  <!-- Stack line: mono, muted -->
-  <text x="80" y="462"
-        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
-        font-size="19" letter-spacing="1.2"
-        fill="#6B6B70">Splunk &#183; Azure &#183; AWS &#183; Terraform &#183; Python &#183; MCP</text>
-
-  <!-- Proof row: two verified numbers, boxed like the site's cert/status chips -->
-  <g font-family="'JetBrains Mono','DejaVu Sans Mono',monospace" font-size="17" letter-spacing="1.1">
-    <rect x="80" y="500" width="238" height="46" fill="none" stroke="#C9C5BD" stroke-width="1.5"/>
-    <text x="100" y="530" fill="#1A1A1F">20K+ endpoints</text>
-
-    <rect x="334" y="500" width="330" height="46" fill="none" stroke="#C9C5BD" stroke-width="1.5"/>
-    <text x="354" y="530" fill="#1A1A1F">99.9% upgrade success</text>
+  <!-- Brand mark: the same path-based "A" as favicon.svg, no font dependency -->
+  <g transform="translate(80, 72)">
+    <rect width="56" height="56" rx="14" fill="#171717"/>
+    <g transform="scale(0.875)">
+      <path d="M20 45 L28.6 19 h6.8 L44 45 h-6.3 l-1.9-6.2H28.2L26.3 45H20Zm10.1-11.3h3.8L32 26.9l-1.9 6.8Z" fill="#FFFFFF"/>
+      <rect x="41" y="16.5" width="5" height="5" rx="1.8" fill="#0072F5"/>
+    </g>
   </g>
 
-  <!-- Footer rule + location/domain -->
-  <line x1="80" y1="580" x2="1120" y2="580" stroke="#E5E2DC" stroke-width="1.5"/>
-  <text x="80" y="608"
-        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
-        font-size="16" letter-spacing="1.6"
-        fill="#6B6B70">PUNE &#8594; GERMANY</text>
-  <text x="1120" y="608" text-anchor="end"
-        font-family="'JetBrains Mono','DejaVu Sans Mono',monospace"
-        font-size="16" letter-spacing="1.6"
-        fill="#6B6B70">iankitkumar.in</text>
+  <!-- Name: Geist 600, tight tracking -->
+  <text x="156" y="110"
+        font-family="Geist,'Liberation Sans',sans-serif"
+        font-size="30" font-weight="600" letter-spacing="-0.9"
+        fill="#171717">Ankit Kumar<tspan fill="#0072F5">.</tspan></text>
 
-  <!-- Portrait, circular, cropped like the site hero. Slight desaturation
-       to sit in the warm palette. -->
+  <!-- Headline: Geist 600, the compressed display treatment -->
+  <text x="80" y="262"
+        font-family="Geist,'Liberation Sans',sans-serif"
+        font-size="74" font-weight="600" letter-spacing="-4.1"
+        fill="#171717">Shipping software</text>
+  <text x="80" y="338"
+        font-family="Geist,'Liberation Sans',sans-serif"
+        font-size="74" font-weight="600" letter-spacing="-4.1"
+        fill="#171717">and AI tooling.</text>
+
+  <!-- Lede: the role arc, sans, muted -->
+  <text x="80" y="398"
+        font-family="Geist,'Liberation Sans',sans-serif"
+        font-size="27"
+        fill="#4D4D4D">Infrastructure engineer &#8594; Software &amp; AI Engineering.</text>
+
+  <!-- Meta row: mono, the technical voice -->
+  <g font-family="'Geist Mono','Liberation Mono',monospace" font-size="19" font-weight="500" letter-spacing="0.8">
+    <text x="80" y="472" fill="#171717">Splunk &#183; Azure &#183; AWS &#183; Terraform</text>
+    <text x="500" y="472" fill="#666666">Pune &#8594; Germany</text>
+  </g>
+
+  <!-- Footer rule + domain -->
+  <line x1="80" y1="536" x2="1120" y2="536" stroke="#EBEBEB" stroke-width="1.5"/>
+  <text x="80" y="578"
+        font-family="'Geist Mono','Liberation Mono',monospace"
+        font-size="16" font-weight="500" letter-spacing="1.4"
+        fill="#666666">Open to software &amp; AI engineering roles in Germany</text>
+  <text x="1120" y="578" text-anchor="end"
+        font-family="'Geist Mono','Liberation Mono',monospace"
+        font-size="16" font-weight="500" letter-spacing="1.4"
+        fill="#666666">iankitkumar.in</text>
+
+  <!-- Portrait, circular, cropped onto the face like the site hero.
+       The source photo is a waist-up environmental shot, so the crop is
+       zoomed and offset to the head rather than using a plain slice. -->
   <g clip-path="url(#portrait)">
-    <image href="../public/photo.jpg" x="908" y="120" width="264" height="264"
+    <image href="../public/photo.jpg" x="812" y="-42" width="456" height="608"
            preserveAspectRatio="xMidYMin slice"/>
-    <rect x="908" y="120" width="264" height="264" fill="#FAFAF7" opacity="0.06"/>
+    <rect x="908" y="120" width="264" height="264" fill="#FFFFFF" opacity="0.04"/>
   </g>
-  <circle cx="1040" cy="252" r="132" fill="none" stroke="#C9C5BD" stroke-width="1.5"/>
+  <circle cx="1040" cy="252" r="132" fill="none" stroke="#EBEBEB" stroke-width="1.5"/>
 </svg>
