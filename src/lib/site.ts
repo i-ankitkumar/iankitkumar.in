@@ -4,6 +4,46 @@
  * Anything you can verify lives here; anything still under review is flagged with `confirm: true`.
  */
 
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+/**
+ * Content-address the resume PDF.
+ *
+ * The PDF is served from a stable path (/resume.pdf) so the link never
+ * breaks, but Cloudflare's zone-level cache rule pins PDFs at a 4-hour
+ * TTL and overrides the origin's Cache-Control. A visitor who fetched the
+ * old PDF kept seeing it after a rebuild. Appending the file's hash turns
+ * the URL into a new cache key whenever the content changes, so a rebuild
+ * is visible immediately without touching the zone rules.
+ *
+ * Build-time only: this module is imported exclusively from Astro
+ * frontmatter, never from a client script.
+ */
+function resumeUrl(): string {
+  // Astro rewrites import.meta.url when it bundles this module, so resolve
+  // the PDF from the project root instead. `astro build` runs there.
+  const candidates = [
+    join(process.cwd(), 'public', 'resume.pdf'),
+    join(process.cwd(), '..', 'public', 'resume.pdf'),
+  ];
+  for (const path of candidates) {
+    try {
+      if (!existsSync(path)) continue;
+      const hash = createHash('sha256')
+        .update(readFileSync(path))
+        .digest('hex')
+        .slice(0, 8);
+      return `/resume.pdf?v=${hash}`;
+    } catch {
+      // try the next candidate
+    }
+  }
+  // No PDF yet (fresh clone) - fall back to the bare path.
+  return '/resume.pdf';
+}
+
 export const SITE = {
   name: 'Ankit Kumar',
   // Lead headline on the hero — matches the user's new brief
@@ -25,7 +65,7 @@ export const SITE = {
   youtube: '', // not used in this surface
 
   // Static assets
-  resumeUrl: '/resume.pdf',
+  resumeUrl: resumeUrl(),
   photoUrl: '/photo.jpg',
   ogImageUrl: '/og-preview.png',
   faviconUrl: '/favicon.svg',

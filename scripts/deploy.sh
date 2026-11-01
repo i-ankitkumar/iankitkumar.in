@@ -39,9 +39,36 @@ set -a
 source "$ENV_FILE"
 set +a
 
-# --- build -------------------------------------------------------------------
+# --- build ------------------------------------------------------------------
 echo "[1/3] building..."
+# Rebuild the resume PDF first so the content hash in SITE.resumeUrl matches
+# the file actually being published. If the PDF changes, the URL changes, and
+# visitors get the new file instead of a cached copy under the same path.
+if [[ -f "$PROJECT_DIR/design/resume.html" ]]; then
+  echo "    rebuilding resume.pdf..."
+  bash "$PROJECT_DIR/scripts/build-resume.sh" >/dev/null 2>&1 \
+    || echo "    WARNING: resume build failed, publishing the existing PDF"
+fi
 npm run build
+
+# llms.txt is a static file, so it cannot compute the PDF hash itself.
+# Substitute the placeholder with the hash of the PDF that was just built.
+RESUME_HASH=$(sha256sum public/resume.pdf | cut -c1-8)
+if grep -q '__RESUME_HASH__' dist/llms.txt 2>/dev/null; then
+  python3 - "$RESUME_HASH" <<'PY'
+import pathlib, sys
+h = sys.argv[1]
+p = pathlib.Path('dist/llms.txt')
+p.write_text(p.read_text(encoding='utf-8').replace('__RESUME_HASH__', h), encoding='utf-8')
+PY
+fi
+
+# The site's Resume links must carry the PDF's hash. If the bare path made it
+# into the build, visitors would keep hitting their cached copy.
+if ! grep -q 'href="/resume.pdf?v=' "$PROJECT_DIR/dist/index.html"; then
+  echo "ERROR: built HTML has no versioned resume URL - aborting" >&2
+  exit 5
+fi
 
 # --- deploy ------------------------------------------------------------------
 echo "[2/3] deploying to CF Pages ($PROJECT_NAME / $BRANCH)..."
@@ -92,6 +119,23 @@ check "/tools/kittybot/pending.webp"        200  image/webp
 check "/tools/kittybot/telegram-approval.png" 200  image/png
 check "/sitemap-index.xml" 200  application/xml
 check "/resume.pdf"        200  application/pdf
+
+# The PDF the site links to must be exactly one page and match the build.
+resume_href=$(grep -oE '/resume\.pdf\?v=[a-f0-9]+' "$PROJECT_DIR/dist/index.html" | head -1)
+if [[ -n "$resume_href" ]]; then
+  if curl -sS "$PREVIEW_URL$resume_href" -o /tmp/deploy-resume.pdf 2>/dev/null; then
+    pages=$(pdfinfo /tmp/deploy-resume.pdf 2>/dev/null | awk '/^Pages/{print $2}')
+    if [[ "$pages" == "1" ]]; then
+      echo "  OK   1 page (A4)   $resume_href"
+    else
+      echo "  FAIL $pages pages      $resume_href (expected 1)"
+      fail=1
+    fi
+  else
+    echo "  FAIL could not fetch $resume_href"
+    fail=1
+  fi
+fi
 check "/robots.txt"        200  text/plain
 check "/this-does-not-exist" 404 text/html
 

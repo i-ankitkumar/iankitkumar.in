@@ -9,6 +9,14 @@
 
 /*.pdf
   Content-Type: application/pdf
+  Cache-Control: public, max-age=300, must-revalidate
+  # NOTE: Cloudflare's zone-level cache rule for iankitkumar.in overrides this
+  # to max-age=14400 for anything on the custom domain. The origin header is
+  # still correct (the preview URL honours it), but the custom domain does
+  # not. The site's resume links are therefore content-addressed:
+  # SITE.resumeUrl appends ?v=<sha256[:8]> of public/resume.pdf, so a rebuilt
+  # PDF gets a new cache key and no visitor is stuck on a stale copy.
+  # Do not strip the ?v= parameter from the resume links.
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

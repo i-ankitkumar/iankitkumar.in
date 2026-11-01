@@ -60,7 +60,7 @@
 - Email: [mail@iankitkumar.in](mailto:mail@iankitkumar.in) (forwarded to a real inbox via Cloudflare Email Routing)
 - LinkedIn: [linkedin.com/in/i-ankitkumar](https://www.linkedin.com/in/i-ankitkumar)
 - GitHub: [github.com/i-ankitkumar](https://github.com/i-ankitkumar)
-- Resume: [resume.pdf](https://iankitkumar.in/resume.pdf)
+- Resume: [resume.pdf](https://iankitkumar.in/resume.pdf?v=__RESUME_HASH__)
 - Languages: English (C1, fluent), Hindi (native), German (A2, basic)
 - Status: Open to software & AI engineering roles in Germany. Relocating from India.
 
