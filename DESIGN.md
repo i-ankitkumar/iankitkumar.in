@@ -175,8 +175,8 @@ whitespace and a hairline, never by alternating background colours.
 The homepage sheet is a two-column grid: the letterhead and measured values on the left, the
 report metadata and stamp on the right. It collapses to one column on narrow screens.
 
-Page structure on detail pages is a report header (doctype, title, lead, back link) above a
-metadata rail and the prose column. Prose caps at the measure.
+Page structure on detail pages is a report header (furniture row, title, optional subtitle, lead)
+above a metadata rail and the prose column. Prose caps at the measure.
 
 The nav is a hamburger below `56rem`. A plain inline nav overflows at 390px.
 
@@ -206,10 +206,17 @@ column on narrow screens.
 **Ruled entries.** Work items and experiments are ruled entries on `--surface`, separated by a
 hairline rather than boxed in cards with shadows.
 
-**Report header.** `ReportHead.astro` renders the doctype, the title, the lead, an optional back
-link, and an optional metadata block. Every inner page uses it so the letterhead is consistent.
+**Report header.** `ReportHead.astro` renders the furniture row, the title, an optional subtitle,
+the lead, and an optional metadata block. Every inner page uses it so the letterhead is consistent.
 The prop is `reportType`, not `doctype` — `doctype` is a reserved word in Astro's attribute
 parser and fails the build.
+
+The furniture row is one block holding the document type, the optional category, and the optional
+back link, separated by a rule. They used to be separate stacked blocks, which put a tracked
+uppercase label directly above the title; the design audit reads that as a kicker label, and
+splitting the row also left the back link floating loose above the title. Merging them keeps the
+information and removes the kicker shape. A short descriptive line that is a sentence rather than a
+category — the tool tagline — belongs under the title as `subtitle`, not in the furniture row.
 
 **Current direction.** `ProjectCard.astro` takes an `isCurrent` prop that renders the
 `current-flag` label and the `is-current` state. This is a presentation-layer marker for the

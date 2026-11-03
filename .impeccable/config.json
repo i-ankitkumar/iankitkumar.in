@@ -10,14 +10,14 @@
     "ignoreValues": []
   },
   "designSystem": {
-    "note": "Ignores below are decisions, not oversights. Each one has a reason and a reviewer. They were re-reviewed when the site moved from the monochrome Geist register to the inspection-report register. The cream-palette rule was added after the 2026-11-03 audit, when the detector flagged the paper ground that the selected direction is built on.",
+    "note": "Ignores below are decisions, not oversights. Each one has a reason and a reviewer. They were re-reviewed when the site moved from the monochrome Geist register to the inspection-report register. The cream-palette rule was added after the 2026-11-03 audit, when the detector flagged the paper ground that the selected direction is built on. The hero-eyebrow-chip rationale was rewritten on 2026-11-03 after the detail-page header was restructured, so it describes the furniture line as it now exists.",
     "rules": {
       "marketing-buzzword": {
         "reason": "The site quotes the CV's own language (RPO/RTO targets for mission-critical Splunk, ARC certification). That wording is verified against career-ops/cv.md and must not drift. The inspection-report register adds verdict vocabulary (PASS, IN REVIEW) that is status, not marketing, and is always paired with the record it refers to. Currently zero hits on the live site; the rule is retained so a future edit cannot soften a verified CV phrase into a marketing adjective.",
         "reviewer": "ankit-portfolio-builder skill, Conventions"
       },
       "hero-eyebrow-chip": {
-        "reason": "The mono uppercase eyebrow is a binding product decision, not decoration. In the inspection-report register it carries real information in one of three forms: a count on an index page ('11 projects', '6 credentials'), a category on a detail page ('Infrastructure', 'Security Tooling'), or the report doctype on a page header ('PRÜFPROTOKOLL · INSPECTION REPORT'). The homepage letterhead replaces the old positioning-eyebrow chip with a report header block that states the document type, the subject, and the issue. Eyebrows that merely restate their own h1 were removed rather than ignored.",
+        "reason": "The mono uppercase report furniture is a binding product decision, not decoration. In the inspection-report register the tracked uppercase line carries real information in two forms: a count on an index page ('Prüfprotokoll · Work Register · 11 entries'), or the document type plus category on a detail page ('Prüfprotokoll · Work Record · AI Engineering'). The homepage letterhead replaces the old positioning-eyebrow chip with a report header block that states the document type, the subject, and the issue. Standalone label blocks above a heading were folded into that furniture line rather than ignored: on the 2026-11-03 audit the detail-page category and back link were merged into one furniture row, and the tool tagline became a subtitle under the title. Furniture that merely restated its own h1 was removed, not ignored.",
         "reviewer": "ankit-portfolio-builder skill, Conventions: eyebrows carry information"
       },
       "overused-font": {
