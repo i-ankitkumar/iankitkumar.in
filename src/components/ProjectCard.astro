@@ -11,9 +11,15 @@ export interface Props {
    * 'h3' inside a <Section>, which already renders an h2 title.
    */
   headingLevel?: 'h2' | 'h3';
+  /**
+   * Marks the card as the current direction — the AI/software track.
+   * Renders a "current direction" label and a left rule, so the pivot
+   * is legible without changing the authored project data.
+   */
+  isCurrent?: boolean;
 }
 
-const { project, size = 'md', headingLevel = 'h2' } = Astro.props;
+const { project, size = 'md', headingLevel = 'h2', isCurrent = false } = Astro.props;
 const Heading = headingLevel;
 const { data, id } = project;
 
@@ -26,8 +32,9 @@ const statusLabel: Record<string, string> = {
 };
 ---
 
-<a class={`project-card reveal ${size === 'sm' ? 'is-visible' : ''}`} href={`/work/${id}/`} data-confirm={data.confirm || undefined}>
+<a class={`project-card reveal ${size === 'sm' ? 'is-visible' : ''} ${isCurrent ? 'is-current' : ''}`} href={`/work/${id}/`} data-confirm={data.confirm || undefined}>
   <span class="type">{data.type}</span>
+  {isCurrent && <span class="type current-flag">Current direction</span>}
   {data.status && <span class="status">{statusLabel[data.status] ?? data.status}</span>}
   <Heading>
     {data.name}

@@ -1,5 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ankit Kumar">
-  <rect width="64" height="64" rx="14" fill="#171717"/>
-  <path d="M20 45 L28.6 19 h6.8 L44 45 h-6.3 l-1.9-6.2H28.2L26.3 45H20Zm10.1-11.3h3.8L32 26.9l-1.9 6.8Z" fill="#ffffff"/>
-  <rect x="41" y="16.5" width="5" height="5" rx="1.8" fill="#0072F5"/>
+  <!-- Inspection Report mark: a paper sheet, the inked A, and the passed-verdict blue. -->
+  <rect width="64" height="64" rx="8" fill="#F8F6EF"/>
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="7.25" fill="none" stroke="#1C1B16" stroke-opacity="0.18" stroke-width="1.5"/>
+  <path d="M20 45 L28.6 19 h6.8 L44 45 h-6.3 l-1.9-6.2H28.2L26.3 45H20Zm10.1-11.3h3.8L32 26.9l-1.9 6.8Z" fill="#1C1B16"/>
+  <rect x="41" y="16.5" width="5" height="5" rx="1.2" fill="#1B4B8F"/>
 </svg>

@@ -4,23 +4,21 @@ import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
 import ExperienceCard from '~/components/ExperienceCard.astro';
+import ReportHead from '~/components/ReportHead.astro';
 import { SITE } from '~/lib/site';
 
 const roles = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+
 ---
 
 <Base title="Experience" description={`Career timeline for ${SITE.name}: Wolters Kluwer, Colgate GBS, with focus on Splunk, Azure, Terraform, and reliability engineering.`}>
   <Nav slot="header" />
 
-  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
-    <div class="container stack">
-      <span class="eyebrow">{roles.length} role{roles.length === 1 ? '' : 's'} · 2021 to present</span>
-      <h1 class="display" style="font-size: var(--t-page-display);">Where I've worked, what I owned.</h1>
-      <p class="lead">
-        Most recent first. Each role has a one-line summary, the work I owned, and the tools I used.
-      </p>
-    </div>
-  </section>
+  <ReportHead
+    reportType={`Prüfprotokoll · Experience Register · ${roles.length} roles`}
+    title="Where I've worked, what I owned."
+    lead="Most recent first. Each role has a one-line summary, the work I owned, and the tools I used."
+  />
 
   <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
     <div class="container">

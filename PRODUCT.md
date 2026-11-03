@@ -63,7 +63,7 @@ The product ships across three repos. They share the audience, positioning, evid
 - **Deploy**: `npx wrangler pages deploy dist --project-name=iankitkumar-in --branch=main --commit-dirty=true` (CF Pages Git integration also wired)
 - **Local dev**: `npm install && npm run dev` (Astro at `localhost:4321`); `npm run build` produces `dist/`; `npm run preview` serves the built site
 - **Customization point**: `src/content/` collections (`experiences/`, `projects/`, `certs/`, `experiments/`, `tools/`). Every visible fact has frontmatter; the schema is the source of truth
-- **Visual register**: monochrome precision. Geist and Geist Mono, a near-black ink on white, one blue accent, shadow-as-border instead of CSS borders, generous whitespace. Three type weights only (400 read, 500 interact, 600 announce) and aggressive negative tracking at display sizes
+- **Visual register**: inspection report. A warm paper sheet (`#F8F6EF`) with ink-black rules, IBM Plex Sans reading and IBM Plex Mono measuring. The page is structured as a Prüfprotokoll: letterhead, report metadata, a measured-values table with verdicts, ruled entries, and a verification stamp. Two accent hues only: blue for a passed verdict, rust for one still open. The report is ruled, not rounded — radii stay at 2-3px
 - **What this surface does NOT do**: it does not host the blog (separate repo), generate the SVG cards (Surface 1), or run a backend. All interactivity is client-side JS (theme toggle, scroll-reveal)
 
 ### Surface 3 — Blog at blog.iankitkumar.in (separate repo, not in this workspace)
@@ -91,7 +91,9 @@ The product ships across three repos. They share the audience, positioning, evid
 - The site states "relocating to Germany", not "relocating to Heidelberg". Heidelberg is a partner-linked location and is not published on this surface. The card (Surface 1) is deliberately coarser still: "Pune, India -> Germany".
 - Location is **Pune** for the v2 site (matches the work entries on the CV and the recent memory note about CV/LinkedIn being updated). The CV header still says Mumbai; that is a separate live document.
 - Generated artifacts in content collections are committed and tracked; the public assets in `public/` are copied from the existing live repo and are also committed.
-- Monochrome-precision typographic aesthetic is the only product direction for this surface: Geist, near-black ink on white, one blue accent, shadow-as-border. A pivot to a SaaS-template or terminal-gamified look would be a rebrand, not a redesign. The profile card (Surface 1) keeps its own terminal register; that does not license this surface to follow it.
+- The **inspection-report register is the binding product direction for this surface**: warm paper ground, ink rules, IBM Plex Sans and IBM Plex Mono, blue for a passed verdict and rust for an open one, ruled entries instead of shadow-as-border cards. This replaces the earlier monochrome-precision constraint and was chosen by Ankit from five presented directions. The profile card (Surface 1) keeps its own terminal register; that does not license this surface to follow it, and the report register does not license that surface to abandon terminal.
+- The report metaphor is structural, not decorative: measured values, verdicts, report metadata, and the verification stamp each carry real content. A column of invented tolerances or thresholds is forbidden — there is no source-backed numeric `Grenzwert` in the CV or the content collections, so the site shows measured values and their verdicts instead.
+- Site copy stays English. German appears only as report furniture (Prüfprotokoll, Prüfgegenstand, Ausgabe), always alongside its English meaning.
 
 **Deliberately undecided (do not invent in future work):**
 
@@ -103,7 +105,7 @@ The product ships across three repos. They share the audience, positioning, evid
 
 ## Brand Commitments
 
-- **Monochrome-precision typographic aesthetic is binding.** Geist + Geist Mono, near-black ink on white, one blue accent, shadow-as-border, three type weights (400 read / 500 interact / 600 announce), aggressive negative tracking at display sizes, generous whitespace, restrained motion. Future work preserves this form factor unless the user explicitly reopens the brand.
+- **The inspection-report register is binding.** Warm paper sheet, ink rules, IBM Plex Sans + IBM Plex Mono, blue for a passed verdict and rust for an open one, ruled entries, a measured-values table, and a verification stamp. Three type weights only (400 read / 500 interact / 600 announce). Restrained motion. Future work preserves this form factor unless the user explicitly reopens the brand.
 - **Real name and identity.** "Ankit Kumar", handle `i-ankitkumar`. These are the brand; fictional personas are not.
 - **Honest voice.** No marketing copy. If a statement is a fact (cert, level, eligibility), it is stated as a fact. If it is a value claim, it is softened or omitted. Anything still under review carries a `verify` badge.
 - **Premium dark + light themes.** Light is the default; dark is co-equal and both are first-class. Both pass WCAG AA contrast.
@@ -131,8 +133,10 @@ The product ships across three repos. They share the audience, positioning, evid
 
 ## Accessibility & Inclusion
 
-- Light theme: bg `#FFFFFF`, fg `#171717`, muted `#666666`, accent `#0068D6`. Dark theme: bg `#0A0A0A`, fg `#EDEDED`, muted `#8F8F8F`, accent `#3291FF`. Measured contrast: light fg 17.93, fg-soft 8.45, muted 5.74, accent 5.31; dark fg 16.91, fg-soft 7.66, muted 6.12, accent 6.25. All text roles clear WCAG AA 4.5:1.
-- The brand blue `#0072F5` is reserved for decorative marks (favicon, OG card, logo). Link text uses `#0068D6` because `#0072F5` on white is 4.44:1 — under AA. Do not swap them back.
+- Light theme: bg `#F8F6EF`, surface `#FCFBF5`, fg `#1C1B16`, fg-soft `#3A382F`, muted `#6E6A5C`, accent `#1B4B8F`, rust `#7C2D12`. Dark theme: bg `#171614`, surface `#201E1A`, fg `#EFEBE0`, fg-soft `#CBC5B7`, muted `#9C9486`, accent `#7FB0E3`, rust `#E08A6E`.
+- Measured contrast on the sheet ground: light fg 15.95, fg-soft 10.87, muted 5.01, accent 7.93, rust 8.67; dark fg 15.18, fg-soft 10.51, muted 6.02, accent 7.94, rust 6.91. Every text role clears WCAG AA 4.5:1 on the sheet, the raised surface, and the inset band.
+- The rules are hairlines, not text. `--rule` measures 1.61:1 on the sheet and `--rule-soft` 1.24:1; they are decorative separators and never the only thing carrying meaning.
+- The two accent hues are verdict colours and are used as such. Blue means a verdict passed, rust means one is still open. Do not use either as a generic link colour without also pairing it with the verdict word.
 - Skip link to `#main`. Semantic landmarks (`<header>`, `<main>`, `<footer>`, `<nav>`, `<section>`). `aria-current="page"` on the active nav link. `aria-pressed` on the theme toggle.
 - `@media (prefers-reduced-motion: reduce)` disables transitions and animations.
 - `@media (prefers-color-scheme: dark)` controls the default theme; explicit user choice persists in `localStorage`.

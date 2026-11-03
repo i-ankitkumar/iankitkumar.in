@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
+import ReportHead from '~/components/ReportHead.astro';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -26,54 +27,49 @@ const statusLabel: Record<string, string> = {
 <Base title={data.name} description={data.summary}>
   <Nav slot="header" />
 
-  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
-    <div class="container">
-      <p style="margin: 0 0 var(--s-4);">
-        <a href="/tools/" class="muted section-more" style="font-family: var(--font-mono); font-size: var(--t-xs);">← All tools</a>
-      </p>
-      <span class="eyebrow">{data.tagline}</span>
-      <h1 class="display" style="font-size: var(--t-page-display); margin-top: var(--s-3);">
-        {data.name}
-      </h1>
-      <p class="lead" style="margin-top: var(--s-5);">{data.summary}</p>
-      <div class="actions" style="margin-top: var(--s-5);">
-        {data.links.map((l) => (
-          <a class="btn" href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}>
-            {l.label}{l.external && <span class="arr"> ↗</span>}
-          </a>
-        ))}
-      </div>
-      {data.screenshot && (
-        <figure style="margin: var(--s-6) 0 0;">
-          <img
-            src={data.screenshot}
-            alt={`${data.name} dashboard`}
-            width="1640"
-            height="1153"
-            loading="lazy"
-            decoding="async"
-            style="width: 100%; height: auto; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
-          />
-        </figure>
-      )}
-      {data.telegram_card && (
-        <figure style="margin: var(--s-6) 0 0; max-width: 420px;">
-          <img
-            src={data.telegram_card}
-            alt={`The approval message ${data.name} sends`}
-            width="800"
-            height="479"
-            loading="lazy"
-            decoding="async"
-            style="width: 100%; height: auto; box-shadow: var(--ring); border-radius: var(--r-lg); display: block;"
-          />
-          <figcaption class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); margin-top: var(--s-3);">
-            The approval message the bot sends. Nothing reaches the kitty until you tap a button.
-          </figcaption>
-        </figure>
-      )}
+  <ReportHead
+    reportType="Prüfprotokoll · Tool Record"
+    backHref="/tools/"
+    backLabel="All tools"
+    title={data.name}
+    subtitle={data.tagline}
+    lead={data.summary}
+  >
+    <div slot="actions" class="actions" style="margin-top: var(--s-5);">
+      {data.links.map((l) => (
+        <a class="btn" href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}>
+          {l.label}{l.external && <span class="arr"> ↗</span>}
+        </a>
+      ))}
     </div>
-  </section>
+    {data.screenshot && (
+      <figure class="record-figure">
+        <img
+          src={data.screenshot}
+          alt={`${data.name} dashboard`}
+          width="1640"
+          height="1153"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    )}
+    {data.telegram_card && (
+      <figure class="record-figure" style="max-width: 420px;">
+        <img
+          src={data.telegram_card}
+          alt={`The approval message ${data.name} sends`}
+          width="800"
+          height="479"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); margin-top: var(--s-3);">
+          The approval message the bot sends. Nothing reaches the kitty until you tap a button.
+        </figcaption>
+      </figure>
+    )}
+  </ReportHead>
 
   <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
     <div class="container">
@@ -81,7 +77,7 @@ const statusLabel: Record<string, string> = {
         <aside class="meta">
           <dl style="margin:0;">
             <dt>Status</dt>
-            <dd><span style="color: var(--accent); font-family: var(--font-mono);">{statusLabel[data.status] ?? data.status}</span></dd>
+            <dd><span class="meta-status">{statusLabel[data.status] ?? data.status}</span></dd>
             {data.stack.length > 0 && (
               <>
                 <dt>Stack</dt>

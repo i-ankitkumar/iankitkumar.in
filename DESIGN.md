@@ -1,82 +1,68 @@
 ---
 name: iankitkumar.in
-description: Vercel-inspired monochrome portfolio. Geist type, one blue accent, shadow-as-border.
+description: Inspection Report register. Warm paper sheet, ink rules, IBM Plex Sans and Mono, blue for a passed verdict.
 
 colors:
-  canvas: "#FFFFFF"
-  surface: "#FAFAFA"
-  ink: "#171717"
-  ink-soft: "#4D4D4D"
-  ink-muted: "#666666"
-  rule: "#EBEBEB"
-  accent: "#0068D6"
-  accent-soft: "#0057C0"
-  accent-tint: "#EBF5FF"
-  brand: "#0072F5"
+  sheet: "#F8F6EF"
+  surface: "#FCFBF5"
+  surface-2: "#F1EDE1"
+  ink: "#1C1B16"
+  ink-soft: "#3A382F"
+  ink-muted: "#6E6A5C"
+  rule: "#C9C4B6"
+  rule-soft: "#E3DED0"
+  rule-strong: "#1C1B16"
+  verdict-pass: "#1B4B8F"
+  verdict-open: "#7C2D12"
   print-canvas: "#FFFFFF"
   print-ink: "#000000"
-  status-ship: "#C4362B"
-  status-preview: "#C2187A"
-  status-develop: "#0A5FCC"
-  canvas-dark: "#0A0A0A"
-  surface-dark: "#111111"
-  surface-2-dark: "#171717"
-  ink-dark: "#EDEDED"
-  ink-soft-dark: "#A1A1A1"
-  ink-muted-dark: "#8F8F8F"
-  accent-dark: "#3291FF"
+  sheet-dark: "#171614"
+  surface-dark: "#201E1A"
+  surface-2-dark: "#2A2823"
+  ink-dark: "#EFEBE0"
+  ink-soft-dark: "#CBC5B7"
+  ink-muted-dark: "#9C9486"
+  rule-dark: "#3D3A33"
+  rule-soft-dark: "#2E2C27"
+  verdict-pass-dark: "#7FB0E3"
+  verdict-open-dark: "#E08A6E"
 
 typography:
   display:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(2.25rem, 4.2vw, 3.25rem)"
+    fontFamily: "IBM Plex Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.1rem, 4.6vw, 3.25rem)"
     fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "-0.055em"
-  heading:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "2.5rem"
+    lineHeight: 1.14
+    letterSpacing: "-0.025em"
+  page-display:
+    fontFamily: "IBM Plex Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.8rem, 3.8vw, 2.6rem)"
     fontWeight: 600
-    lineHeight: 1.25
-    letterSpacing: "-0.04em"
-  page-heading:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)"
-    fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "-0.055em"
-  metric-value:
-    fontFamily: "Geist Mono, ui-monospace, monospace"
-    fontSize: "clamp(1.75rem, 3vw, 2.5rem)"
-    fontWeight: 600
-    lineHeight: 1.05
-    letterSpacing: "-0.04em"
-  oversize:
-    fontFamily: "Geist, system-ui, sans-serif"
-    fontSize: "clamp(5rem, 12vw, 9rem)"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "-0.06em"
+    lineHeight: 1.18
+    letterSpacing: "-0.02em"
   body:
-    fontFamily: "Geist, system-ui, sans-serif"
+    fontFamily: "IBM Plex Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: "-0.008em"
+    lineHeight: 1.6
+    letterSpacing: "-0.005em"
   label:
-    fontFamily: "Geist Mono, ui-monospace, monospace"
-    fontSize: "0.75rem"
+    fontFamily: "IBM Plex Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "0.78rem"
     fontWeight: 500
     lineHeight: 1.5
     letterSpacing: "0.1em"
+  metric-value:
+    fontFamily: "IBM Plex Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "1.35rem"
+    fontWeight: 500
+    lineHeight: 1.2
+    letterSpacing: "-0.01em"
 
 rounded:
-  xs: "1px"
-  sm: "4px"
-  md: "6px"
-  lg: "8px"
-  xl: "12px"
-  pill: "9999px"
+  sm: "2px"
+  md: "2px"
+  lg: "3px"
 
 spacing:
   s1: "0.25rem"
@@ -88,30 +74,24 @@ spacing:
   s7: "3rem"
   s8: "4rem"
   s9: "6rem"
-  s10: "8rem"
 
 components:
-  button-primary:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.canvas}"
-    rounded: "{rounded.md}"
-    padding: "0.625rem 1rem"
-  button-secondary:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-    padding: "0.625rem 1rem"
-  card:
-    backgroundColor: "{colors.canvas}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.lg}"
-    padding: "1.5rem"
-  tag:
+  report-table:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.ink-muted}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+  ruled-entry:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.sm}"
-    padding: "0.15rem 0.5rem"
-  eyebrow:
+    padding: "1rem 1.25rem"
+  verdict-pass:
+    textColor: "{colors.verdict-pass}"
+    typography: "{typography.label}"
+  verdict-open:
+    textColor: "{colors.verdict-open}"
+    typography: "{typography.label}"
+  label:
     textColor: "{colors.ink-muted}"
     typography: "{typography.label}"
 ---
@@ -124,119 +104,127 @@ A personal engineering portfolio for an infrastructure engineer moving into soft
 engineering. The audience is a recruiter skimming for five seconds, then a hiring manager
 reading for two minutes. Every visual decision serves that order.
 
-The system is **Vercel-inspired**: a monochrome canvas, one blue accent, Geist and Geist Mono,
-hairline rules instead of heavy borders, and shadow-as-border for depth. It replaced an earlier
-warm-serif identity and is binding.
+The system is the **Inspection Report** register: a warm paper sheet, ink-black rules, IBM Plex
+Sans for reading and IBM Plex Mono for measuring. The page is a Prüfprotokoll — letterhead,
+report metadata, a measured-values table with verdicts, ruled entries, a verification stamp.
+It was chosen by Ankit from five presented directions and replaced the earlier monochrome Geist
+system. It is binding.
+
+The metaphor is structural, not decorative. Every part of it carries content: the metadata block
+states what was inspected, the measured-values table states what was found, the verdict column
+states whether it passed, and the stamp closes the document. A report with no measurements in it
+is decoration, which is why there is no invented tolerance column.
 
 Light and dark are equal citizens. Both ship from the same token names, swapped at
 `:root[data-theme='dark']`, with a `prefers-color-scheme` fallback for users who have not chosen.
 
 ## Colors
 
-Monochrome does the structural work; the accent only ever marks something actionable or
-identifying.
+The paper carries the structure; the two accent hues carry verdicts and nothing else.
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `--bg` / `--surface` | `#FFFFFF` | `#0A0A0A` | Canvas, cards |
-| `--surface-2` | `#FAFAFA` | `#171717` | Subtle raised areas, metric cells |
-| `--fg` | `#171717` | `#EDEDED` | Headlines, primary text |
-| `--fg-soft` | `#4D4D4D` | `#A1A1A1` | Body copy, summaries |
-| `--muted` | `#666666` | `#8F8F8F` | Labels, eyebrows, captions |
-| `--rule` | `#EBEBEB` | `#262626` | Hairlines, section dividers |
-| `--accent` | `#0068D6` | `#3291FF` | Links, focus rings, the arrow |
-| `--brand` | `#0072F5` | `#3291FF` | Decorative brand marks only |
+| `--bg` | `#F8F6EF` | `#171614` | The sheet |
+| `--surface` | `#FCFBF5` | `#201E1A` | A raised block on the sheet |
+| `--surface-2` | `#F1EDE1` | `#2A2823` | An inset band, table headers |
+| `--fg` | `#1C1B16` | `#EFEBE0` | Headlines, primary text |
+| `--fg-soft` | `#3A382F` | `#CBC5B7` | Body copy, summaries |
+| `--muted` | `#6E6A5C` | `#9C9486` | Labels, captions, metadata keys |
+| `--rule` | `#C9C4B6` | `#3D3A33` | Hairlines, table rules |
+| `--rule-soft` | `#E3DED0` | `#2E2C27` | Faint separators |
+| `--rule-strong` | `#1C1B16` | `#EFEBE0` | The document edge, heavy rules |
+| `--accent` | `#1B4B8F` | `#7FB0E3` | A verdict that passed |
+| `--brand` | `#7C2D12` | `#E08A6E` | The doctype, an open verdict |
 
-`--accent` is the link colour and is measured for WCAG AA on its background (5.31:1 on white).
-`--brand` is the brighter Vercel blue and is **decorative only** - the favicon, the logo mark, the
-OG card. It is not a text colour; at 4.44:1 on white it fails AA for body text.
+Measured contrast on the sheet ground: light fg 15.95, fg-soft 10.87, muted 5.01, accent 7.93,
+rust 8.67; dark fg 15.18, fg-soft 10.51, muted 6.02, accent 7.94, rust 6.91. Every text role
+clears AA 4.5:1 on the sheet, the raised surface, and the inset band.
 
-Status colours (`--ship` `#C4362B`, `--preview` `#C2187A`, `--develop` `#0A5FCC`) label project
-states. They never carry meaning alone; each is paired with a text label. All three clear AA on
-white (`--ship` 5.37, `--preview` 5.67, `--develop` 5.96) and on the dark canvas (`--ship` 6.23,
-`--preview` 5.93, `--develop` 6.77). `--ship` was `#FF5B4F` and failed AA at 3.06:1 - it is
-darkened, because a token nobody uses is still a trap for the next person who reaches for it.
+The rules are hairlines, not text. `--rule` measures 1.61:1 on the sheet and `--rule-soft`
+1.24:1. They are decorative separators and never the only thing carrying meaning.
+
+`--accent` and `--brand` are verdict colours, used as verdicts. Blue means the check passed,
+rust means it is still open. Each is always paired with the word, so colour never carries the
+meaning alone.
 
 ## Typography
 
-Geist for everything a reader reads, Geist Mono for anything a reader scans or a machine parses.
+IBM Plex Sans for everything a reader reads, IBM Plex Mono for anything a reader scans or a
+machine parses.
 
 **Three weights only.** 400 reads, 500 interacts, 600 announces. Nothing else. A fourth weight
 reads as an accident.
 
-Headlines are aggressively tracked tight, down to `-0.055em` at display size. Body copy runs
-`-0.008em`. Mono labels run wide at `0.1em` in uppercase, which is what makes them scan as labels
-rather than sentences.
+Display sizes run slightly negative (`-0.025em` at `--t-display`); mono labels run wide at
+`0.1em` in uppercase, which is what makes them scan as labels rather than sentences.
 
-The measure is `--measure: 54ch`. Note that `ch` is the width of `0`, which is roughly 1.45x the
-average glyph in Geist, so 54ch renders about 78 characters. Do not set a measure in `ch` by
-eyeballing the number.
+The measure is `--measure: 68ch`. Note that `ch` is the width of `0`, which is narrower than the
+average glyph in IBM Plex Sans, so 68ch renders noticeably more than 68 characters. Do not set a
+measure in `ch` by eyeballing the number.
+
+**Fonts are self-hosted.** `src/styles/fonts.css` loads 18 local WOFF2 files: Latin and Latin
+Extended for IBM Plex Sans and Mono at 400/500/600, plus six symbol subsets carrying `U+2192`
+and `U+2197`. The ordinary Latin subsets do not contain the arrow, which is why the symbol files
+exist. Do not reintroduce a Google Fonts request and do not drop the symbol subsets.
 
 ## Layout
 
-Container is `75rem` with a `clamp(1.25rem, 4vw, 2rem)` gutter. Sections separate by whitespace
-and a `1px` hairline, never by alternating background colours.
+Container is `1180px` with a `clamp(1.25rem, 4vw, 2.5rem)` gutter. Sections separate by
+whitespace and a hairline, never by alternating background colours.
 
-Spacing is an 8px base with Vercel's gaps: the scale skips 20px and 24px in the primary range.
+The homepage sheet is a two-column grid: the letterhead and measured values on the left, the
+report metadata and stamp on the right. It collapses to one column on narrow screens.
 
-Page structure is two columns on detail pages: a `14rem` metadata rail and the prose column.
-Prose caps at 54ch. Cards sit in a responsive grid that collapses to one column below `56rem`.
+Page structure on detail pages is a report header (doctype, title, lead, back link) above a
+metadata rail and the prose column. Prose caps at the measure.
 
 The nav is a hamburger below `56rem`. A plain inline nav overflows at 390px.
 
 ## Elevation & Depth
 
-Shadow-as-border is the signature technique: `rgba(0,0,0,0.08) 0px 0px 0px 1px` draws a hairline
-without a border, so it sits inside the element's box and never shifts layout.
-
-Two depths: `--ring` (hairline only) and `--card-stack` (hairline, 2px lift, and an 8px ambient
-shadow). Dark theme inverts the ring to `rgb(235,235,235)` at the same 8% alpha.
+The report is ruled, not stacked. Depth comes from ink rules and tonal bands on the sheet, not
+from shadows. `--ring` is a hairline inset border. Cards are separated by a rule and a change
+of surface, not by a drop shadow.
 
 ## Shapes
 
-Radii are small and consistent: 4px for tags, 6px for buttons, 8px for cards, 12px for large
-panels, 9999px for pills. Nothing is fully round except pills.
+Radii are minimal and consistent: 2px for tags and table cells, 3px for panels. The document
+edge is square. Nothing is fully round; there are no pills in this register, because a report
+does not use them.
 
 ## Components
 
-**Buttons.** Primary is ink-on-canvas inverted. Secondary is canvas with a hairline. Both use
-`--r-md` and the same padding. The arrow glyph in a button slides 3px right on hover.
+**Report table.** A ruled table with a mono header row on `--surface-2`. Columns are
+`ITEM`, `MEASURED VALUE`, `EVIDENCE`, `VERDICT`. The verdict cell is mono and coloured by
+verdict. Rows are the site homepage's evidence, and every measured value links to the record
+that carries the number.
 
-**Cards.** Surface canvas with a shadow-as-border. The type label and status pill sit above the
-title, both in mono uppercase. A card title is a heading (`h2` on listing pages, `h3` inside a
-`Section`), so the document outline stays flat and valid.
-
-The type label holds a **category** ("Infrastructure", "AI Engineering", "Open Source", "Hackathon")
-and the status chip holds the **state** ("Live", "Shipped", "Research"). A card states its status
-exactly once.
-
-**Tags.** Mono, sentence case, `--r-sm`, on `--surface`. They list tools, never categories of people.
-Sentence case, not uppercase: an uppercase tag row reads as noise next to an uppercase eyebrow.
-
-**Eyebrows.** Mono uppercase, not a section number. They do one of three jobs depending on the
-page:
-
-- **A count** on an index page: `11 projects`, `6 credentials`, `3 roles - 2021 to present`,
-  `2 experiments`, `1 open-source tool`, `6 ways to reach me`. It gives the reader a quantity
-  before the headline.
-- **A category** on a detail page: `Infrastructure`, `Open Source`, `Security Tooling`. It tells
-  the reader what kind of work this is before the title. It is dropped when the title already
-  leads with it, so the two never stutter.
-- **The positioning statement** on the homepage: `Infrastructure Engineer -> Software & AI
-  Engineering`. This is the brand's central claim and the one thing on the site that states the
-  pivot outright.
-
-Editorial section numbers (`§ Work`) are retired.
-
-**Metric cells.** `--surface-2`, `--r-lg`, a monospace tabular-figure value and a mono label.
-They carry a real production number, never a vanity metric. The value is monospace so the four
+**Measured values.** A real production number, never a vanity metric. The value is monospace so
 figures lock to a grid; the label is mono because it is a caption, not prose. The grid is one
-column below `30rem` and only reaches four columns at `68rem` - at 390px a two-up metric cell
-held a 7-line label.
+column on narrow screens.
 
-**Portrait.** A pre-cropped 384px WebP (`/photo.webp`, 14 KB) framed by a plain
-`object-fit: cover` circle. The full-size `/photo.jpg` is kept only as the JSON-LD
-`Person.image`, where a crawler wants more than a 96px display crop.
+**Ruled entries.** Work items and experiments are ruled entries on `--surface`, separated by a
+hairline rather than boxed in cards with shadows.
+
+**Report header.** `ReportHead.astro` renders the doctype, the title, the lead, an optional back
+link, and an optional metadata block. Every inner page uses it so the letterhead is consistent.
+The prop is `reportType`, not `doctype` — `doctype` is a reserved word in Astro's attribute
+parser and fails the build.
+
+**Current direction.** `ProjectCard.astro` takes an `isCurrent` prop that renders the
+`current-flag` label and the `is-current` state. This is a presentation-layer marker for the
+AI/software pivot. It does not change authored project data; the flag lives in the component,
+not in the content collection.
+
+**Labels.** Mono uppercase, not a section number. They carry a count on an index page
+(`11 projects`, `6 credentials`), a category on a detail page (`Infrastructure`,
+`Security Tooling`), or the report doctype in a page header.
+
+**Portrait.** A pre-cropped 384px WebP (`/photo.webp`) framed by `object-fit: cover` at
+`object-position: 50% 50%`. The source is a 768x1024 environmental shot whose face sits in the
+lower-left, so the crop is a 360x360 window at `+200+245` taken from the original. The
+full-size `/photo.jpg` is kept only as the JSON-LD `Person.image`, where a crawler wants more
+than a 96px display crop.
 
 ## Do's and Don'ts
 
@@ -247,37 +235,36 @@ that can throw, a 1.5s failsafe reveals everything regardless, and `@media print
 section headings with none of the evidence.
 
 **Experiments.** `/experiments/` lists the AI/MCP work and each card opens a detail page at
-`/experiments/<slug>/` with the same rail-plus-prose shape as a project. The depth mechanism
-serves the software work too, not only the infrastructure work. The experiments collection's
-schema declares every field its entries author; an undeclared key is stripped before it reaches
-a template, so a field that is written but not declared silently disappears.
+`/experiments/<slug>/` with the same rail-plus-prose shape as a project. The experiments
+collection's schema declares every field its entries author; an undeclared key is stripped
+before it reaches a template, so a field that is written but not declared silently disappears.
 
-**The `verify` badge.** A claim still pending verification carries `confirm: true` in its content
-entry and renders a `verify` badge. The badge renders **zero** times today, and that is correct:
-every published claim is verified. A badge on a verified claim would be a lie, so the badge is
-never decorative. When a claim does become unverified, the flag belongs on the content entry
-that makes the claim, not on a site-wide config object.
+**The `verify` badge.** A claim still pending verification carries `confirm: true` in its
+content entry and renders a `verify` badge. The badge renders **zero** times today, and that is
+correct: every published claim is verified. A badge on a verified claim would be a lie, so the
+badge is never decorative. When a claim does become unverified, the flag belongs on the content
+entry that makes the claim, not on a site-wide config object.
 
 **Do**
 
-- Keep the canvas monochrome. Colour marks one thing at a time.
-- Use `--accent` for anything clickable. `--brand` is for the logo and the OG card only.
+- Keep the sheet warm and the rules inked. The paper is the brand.
+- Use `--accent` for a passed verdict and `--brand` for an open one. Nothing else.
+- Pair every verdict colour with the verdict word.
 - Measure contrast after any palette change. The numbers live in PRODUCT.md.
-- Cap prose at `--measure`. Long lines break the eye's return path.
-- Put the count in the eyebrow.
+- Cap prose at `--measure`.
 - Give every page a single `h1` and never skip a heading level.
 - Run `npx impeccable detect` before deploying.
 
 **Don't**
 
-- Do not introduce a second accent hue, a gradient, or a glassmorphism panel.
-- Do not use `--brand` as a text colour.
+- Do not introduce a third accent hue, a gradient, or a glassmorphism panel.
+- Do not add shadows to create depth. The report is ruled, not stacked.
 - Do not add a fourth font weight.
-- Do not reintroduce the retired Source Serif 4 / Inter / burgundy identity. Changing the
-  typeface is a rebrand and needs Ankit's explicit sign-off.
-- Do not reintroduce editorial section numbers.
-- Do not put a decorative tracked-caps chip above the `h1`. Every eyebrow must carry
-  information: a count, a category, or the positioning statement. An eyebrow that restates its
-  own `h1` is the failure case.
+- Do not reintroduce the Geist / Geist Mono identity, nor the retired Source Serif 4 / Inter /
+  burgundy identity. Changing the typeface is a rebrand and needs Ankit's explicit sign-off.
+- Do not add a numeric tolerance or `Grenzwert` column. No source backs one.
 - Do not publish a relocation city. Germany only.
+- Do not publish "EU Blue Card eligible" on site pages without Ankit's explicit approval. It is
+  a legal-status claim, and it is true on the CV but not cleared for the site.
 - Do not let a PDF or a text block run wider than the measure.
+- Do not reintroduce pills or large radii. The document edge is square.

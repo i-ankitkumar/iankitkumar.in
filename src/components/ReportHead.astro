@@ -1,0 +1,51 @@
+---
+export interface Props {
+  /** Report furniture line, e.g. "Prüfprotokoll · Work Register". */
+  reportType: string;
+  /** Short mono label merged into the report furniture line. */
+  category?: string;
+  /** The page's single h1. */
+  title: string;
+  /** Optional one-line subtitle, rendered below the title. */
+  subtitle?: string;
+  lead?: string;
+  /** Optional "← back" link, rendered in the furniture row. */
+  backHref?: string;
+  backLabel?: string;
+  /** 'display' for the homepage, 'page' for inner pages. */
+  titleSize?: 'display' | 'page';
+}
+
+const { reportType, category, title, subtitle, lead, backHref, backLabel, titleSize = 'page' } = Astro.props;
+
+const hasMeta = Astro.slots.has('meta');
+---
+
+<section class="report-hero">
+  <div class="perf" aria-hidden="true"></div>
+  <div class="container">
+    <div class:list={['report-head', !hasMeta && 'is-single']}>
+      <div>
+        {/* The furniture row is one block: the document type, the category,
+            and the back link share it. Splitting them into separate blocks
+            stacked above the title made the category read as a kicker
+            label, which is what the design audit flags. */}
+        <div class="report-furniture">
+          <p class="doctype">{reportType}{category ? ` · ${category}` : ''}</p>
+          {backHref && (
+            <a href={backHref} class="report-back muted">← {backLabel}</a>
+          )}
+        </div>
+        <h1 class={titleSize === 'display' ? 'display' : 'page-title'}>{title}</h1>
+        {subtitle && <p class="subtitle">{subtitle}</p>}
+        {lead && <p class="lead">{lead}</p>}
+        <slot name="actions" />
+      </div>
+      {hasMeta && (
+        <aside class="report-meta">
+          <slot name="meta" />
+        </aside>
+      )}
+    </div>
+  </div>
+</section>

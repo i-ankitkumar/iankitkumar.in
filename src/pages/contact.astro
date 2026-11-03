@@ -2,33 +2,36 @@
 import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
+import ReportHead from '~/components/ReportHead.astro';
 import { SITE } from '~/lib/site';
 
-// The contact methods, in one place, so the eyebrow count cannot drift
-// from what the page actually renders.
+// The contact methods, in one place, so the count in the report furniture
+// line cannot drift from what the page actually renders.
 const CONTACT_METHODS = ['email', 'phone', 'linkedin', 'github', 'resume', 'blog'];
+
 ---
 
 <Base title="Contact" description={`Contact details for ${SITE.name}: email, LinkedIn, GitHub, resume.`}>
   <Nav slot="header" />
 
-  <section class="hero" style="padding-block: clamp(var(--s-7), 7vw, var(--s-9)) clamp(var(--s-5), 4vw, var(--s-7));">
-    <div class="container stack">
-      <span class="eyebrow">{CONTACT_METHODS.length} ways to reach me</span>
-      <h1 class="display" style="font-size: var(--t-page-display);">
-        The fastest route<br />is email.
-      </h1>
-      <p class="lead">
-        I'm happy to talk about a role, a thing you're working on, or a question about Splunk / Terraform / MCP.
-      </p>
+  <ReportHead
+    reportType={`Prüfprotokoll · Contact · ${CONTACT_METHODS.length} methods`}
+    title="The fastest route is email."
+    lead="I'm happy to talk about a role, a thing you're working on, or a question about Splunk / Terraform / MCP."
+  >
+    <div slot="actions" class="actions" style="margin-top: var(--s-5);">
+      <a class="btn primary" href={`mailto:${SITE.email}`}>{SITE.email} <span class="arr">→</span></a>
+      <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href={SITE.resumeUrl} target="_blank" rel="noopener">Resume (PDF)</a>
     </div>
-  </section>
+  </ReportHead>
 
   <section class="page-section" style="padding-block: var(--s-5) var(--s-9);">
     <div class="container">
-      <div class="stack-lg" style="max-width: var(--measure);">
+      <div class="stack-lg contact-method" style="max-width: var(--measure);">
         <div>
-          <h2 class="eyebrow" style="margin: 0;">Email</h2>
+          <h2 class="contact-label" style="margin: 0;">Email</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
             <span class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); display: block; margin-top: 0.4rem;">
@@ -38,7 +41,7 @@ const CONTACT_METHODS = ['email', 'phone', 'linkedin', 'github', 'resume', 'blog
         </div>
 
         <div>
-          <h2 class="eyebrow" style="margin: 0;">Phone</h2>
+          <h2 class="contact-label" style="margin: 0;">Phone</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={`tel:${SITE.phone.replace(/\s/g, '')}`}>{SITE.phone}</a>
             <span class="muted" style="font-family: var(--font-mono); font-size: var(--t-xs); display: block; margin-top: 0.4rem;">
@@ -48,28 +51,28 @@ const CONTACT_METHODS = ['email', 'phone', 'linkedin', 'github', 'resume', 'blog
         </div>
 
         <div>
-          <h2 class="eyebrow" style="margin: 0;">LinkedIn</h2>
+          <h2 class="contact-label" style="margin: 0;">LinkedIn</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.linkedin} target="_blank" rel="noopener">{SITE.linkedin.replace('https://', '')}</a>
           </p>
         </div>
 
         <div>
-          <h2 class="eyebrow" style="margin: 0;">GitHub</h2>
+          <h2 class="contact-label" style="margin: 0;">GitHub</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.github} target="_blank" rel="noopener">{SITE.github.replace('https://', '')}</a>
           </p>
         </div>
 
         <div>
-          <h2 class="eyebrow" style="margin: 0;">Resume</h2>
+          <h2 class="contact-label" style="margin: 0;">Resume</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.resumeUrl} target="_blank" rel="noopener">Download PDF ↓</a>
           </p>
         </div>
 
         <div>
-          <h2 class="eyebrow" style="margin: 0;">Blog</h2>
+          <h2 class="contact-label" style="margin: 0;">Blog</h2>
           <p class="lead" style="margin-top: var(--s-2);">
             <a href={SITE.blog} target="_blank" rel="noopener">{SITE.blog.replace('https://', '')} ↗</a>
           </p>

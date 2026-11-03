@@ -3,25 +3,30 @@
     "ignoreRules": [
       "marketing-buzzword",
       "hero-eyebrow-chip",
-      "overused-font"
+      "overused-font",
+      "cream-palette"
     ],
     "ignoreFiles": [],
     "ignoreValues": []
   },
   "designSystem": {
-    "note": "Ignores below are decisions, not oversights. Each one has a reason and a reviewer.",
+    "note": "Ignores below are decisions, not oversights. Each one has a reason and a reviewer. They were re-reviewed when the site moved from the monochrome Geist register to the inspection-report register. The cream-palette rule was added after the 2026-11-03 audit, when the detector flagged the paper ground that the selected direction is built on.",
     "rules": {
       "marketing-buzzword": {
-        "reason": "The site quotes the CV's own language (RPO/RTO targets for mission-critical Splunk, ARC certification). That wording is verified against career-ops/cv.md and must not drift. Currently zero hits on the live site; the rule is retained so a future edit cannot soften a verified CV phrase into a marketing adjective.",
+        "reason": "The site quotes the CV's own language (RPO/RTO targets for mission-critical Splunk, ARC certification). That wording is verified against career-ops/cv.md and must not drift. The inspection-report register adds verdict vocabulary (PASS, IN REVIEW) that is status, not marketing, and is always paired with the record it refers to. Currently zero hits on the live site; the rule is retained so a future edit cannot soften a verified CV phrase into a marketing adjective.",
         "reviewer": "ankit-portfolio-builder skill, Conventions"
       },
       "hero-eyebrow-chip": {
-        "reason": "The mono uppercase eyebrow is a binding product decision, not decoration. It replaces editorial section numbers and carries real information in one of three forms: a count on an index page ('11 projects', '6 credentials'), a category on a detail page ('Infrastructure', 'Security Tooling'), or the positioning statement on the homepage ('Infrastructure Engineer -> Software & AI Engineering'). Eyebrows that merely restate their own h1 were removed rather than ignored.",
-        "reviewer": "ankit-portfolio-builder skill, Conventions: Eyebrows carry information"
+        "reason": "The mono uppercase eyebrow is a binding product decision, not decoration. In the inspection-report register it carries real information in one of three forms: a count on an index page ('11 projects', '6 credentials'), a category on a detail page ('Infrastructure', 'Security Tooling'), or the report doctype on a page header ('PRÜFPROTOKOLL · INSPECTION REPORT'). The homepage letterhead replaces the old positioning-eyebrow chip with a report header block that states the document type, the subject, and the issue. Eyebrows that merely restate their own h1 were removed rather than ignored.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions: eyebrows carry information"
       },
       "overused-font": {
-        "reason": "Geist + Geist Mono is the binding typographic identity of this site. Vercel's system, chosen deliberately. Changing the typeface is a rebrand, not a fix, and requires Ankit's explicit sign-off.",
-        "reviewer": "ankit-portfolio-builder skill, Conventions: Premium typographic aesthetic is binding"
+        "reason": "IBM Plex Sans + IBM Plex Mono is the binding typographic identity of this site. It was chosen with Ankit from five presented directions and replaced the earlier Geist/Geist Mono pairing. The self-hosted WOFF2 subsets include Latin, Latin Extended, and dedicated symbol files for U+2192 and U+2197, so the arrow glyphs in the report cannot fall back to a system font. Changing the typeface again is a rebrand, not a fix, and requires Ankit's explicit sign-off.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions: the inspection-report register is binding"
+      },
+      "cream-palette": {
+        "reason": "The warm paper ground (#F8F6EF) is the defining surface of the inspection-report register that Ankit selected from five presented directions. It is a deliberate material choice: the page is a sheet of technical paper on a desk, not a neutral screen background. The value is not a reflex off-white, it is the paper tone of the source sketches, and it is paired with a deliberately non-neutral ink (#1C1B16, warm black), ruled hairline borders in a warm grey, and a rust verdict colour, so the page reads as one material rather than a tinted neutral. The rule would still be worth applying to any future section that adds a cream ground on top of the paper without a material reason for it.",
+        "reviewer": "ankit-portfolio-builder skill, Conventions: the inspection-report register is binding"
       }
     }
   }

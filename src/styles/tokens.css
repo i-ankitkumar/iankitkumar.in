@@ -1,55 +1,40 @@
 /* ------------------------------------------------------------------
  * iankitkumar.in — Design tokens
- * Vercel design system: monochrome canvas, Geist / Geist Mono,
- * shadow-as-border, three-weight type hierarchy.
+ *
+ * Inspection Report register: a warm paper ground, ink-black rules,
+ * one blue for a passed verdict, one rust for a verdict still open.
+ * IBM Plex Sans reads, IBM Plex Mono measures and labels.
  * ------------------------------------------------------------------ */
 
 :root {
-  /* Color — light theme (default) */
-  --bg: #FFFFFF;
-  --surface: #FFFFFF;
-  --surface-2: #FAFAFA;
-  --fg: #171717;
-  --fg-soft: #4D4D4D;
-  --muted: #666666;
-  --rule: #EBEBEB;
-  --rule-strong: #171717;
-  --accent: #0068D6;
-  --accent-soft: #0057C0;
-  --brand: #0072F5;
-  /* Print palette: paper and ink, always. */
+  color-scheme: light;
+
+  /* Typefaces — self-hosted, no third-party request at runtime. */
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Paper + ink */
+  --bg: #F8F6EF;          /* the sheet */
+  --surface: #FCFBF5;     /* a raised block on the sheet */
+  --surface-2: #F1EDE1;   /* an inset band */
+  --fg: #1C1B16;          /* ink */
+  --fg-soft: #3A382F;     /* secondary ink */
+  --muted: #6E6A5C;       /* labels, captions */
+  --rule: #C9C4B6;        /* hairline */
+  --rule-soft: #E3DED0;
+  --rule-strong: #1C1B16; /* heavy rule: the document edge */
+
+  /* Verdicts */
+  --accent: #1B4B8F;      /* passed */
+  --brand: #7C2D12;       /* rust: doctype, open verdicts */
+  --ship: #1B4B8F;
+  --preview: #7C2D12;
+  --develop: #1B4B8F;
+
   --print-canvas: #FFFFFF;
   --print-ink: #000000;
-  --ship: #C4362B;
-  --preview: #C2187A;
-  --develop: #0A5FCC;
 
-  /* Typography */
-  --font-sans: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-
-  /* Type scale */
-  --t-xs: 0.75rem;
-  --t-sm: 0.875rem;
-  --t-base: 1rem;
-  --t-lg: 1.25rem;
-  --t-xl: 1.5rem;
-  --t-2xl: 2rem;
-  --t-3xl: 2.5rem;
-  --t-display: clamp(2.25rem, 4.2vw, 3.25rem);
-  /* Page-level h1: a notch below the homepage display size. */
-  --t-page-display: clamp(2.25rem, 4.5vw, 3.75rem);
-  /* Metric card value. */
-  --t-metric: clamp(1.75rem, 3vw, 2.5rem);
-  /* 404 page numeral. */
-  --t-oversize: clamp(5rem, 12vw, 9rem);
-
-  /* Line heights */
-  --lh-tight: 1.05;
-  --lh-normal: 1.5;
-  --lh-loose: 1.8;
-
-  /* Spacing (8px base, Vercel skips 20/24 in the primary scale) */
+  /* Spacing scale */
   --s-1: 0.25rem;
   --s-2: 0.5rem;
   --s-3: 0.75rem;
@@ -59,93 +44,58 @@
   --s-7: 3rem;
   --s-8: 4rem;
   --s-9: 6rem;
-  --s-10: 8rem;
 
-  /* Layout */
-  --measure: 54ch;
-  --container: 75rem;
-  --gutter: clamp(1.25rem, 4vw, 2rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --container: 1180px;
+  /* 58ch, not 68ch. IBM Plex Sans has a narrow `ch` (the width of "0"):
+     1ch renders only ~1.32 average characters, so 68ch produced lines of
+     90-91 characters, well past the ~75-80 character readability limit.
+     58ch renders ~77 characters in this typeface. */
+  --measure: 58ch;
 
-  /* Radii */
-  --r-xs: 1px;
-  --r-sm: 4px;
-  --r-md: 6px;
-  --r-lg: 8px;
+  /* Type scale */
+  --t-xs: 0.78rem;
+  --t-sm: 0.88rem;
+  --t-base: 1rem;
+  --t-md: 1.125rem;
+  --t-lg: 1.35rem;
+  --t-xl: 1.75rem;
+  --t-display: clamp(2.1rem, 4.6vw, 3.25rem);
+  --t-page-display: clamp(1.8rem, 3.8vw, 2.6rem);
+  --t-oversize: clamp(4rem, 18vw, 8.5rem);
+
+  --lh-tight: 1.18;
+  --lh-base: 1.6;
+  --lh-loose: 1.7;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-1: 160ms;
-  --dur-2: 320ms;
-  --dur-3: 560ms;
+  --dur-1: 120ms;
+  --dur-3: 320ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
 
-  /* Depth — shadow-as-border is the signature Vercel technique */
-  --ring: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  --ring-light: rgb(235, 235, 235) 0px 0px 0px 1px;
-  --card-stack:
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
-    rgba(0, 0, 0, 0.04) 0px 2px 2px,
-    rgba(0, 0, 0, 0.04) 0px 8px 8px -8px,
-    #FAFAFA 0px 0px 0px 1px;
+  /* Shape — the report is ruled, not rounded. */
+  --r-sm: 2px;
+  --r-md: 2px;
+  --r-lg: 3px;
+  --ring: inset 0 0 0 1px var(--rule);
 }
 
 :root[data-theme='dark'] {
-  --bg: #0A0A0A;
-  --surface: #111111;
-  --surface-2: #171717;
-  --fg: #EDEDED;
-  --fg-soft: #A1A1A1;
-  --muted: #8F8F8F;
-  --rule: #262626;
-  --rule-strong: #EDEDED;
-  --accent: #3291FF;
-  --accent-soft: #66B0FF;
-  --brand: #3291FF;
-  --ship: #E8695D;
-  --preview: #F14BA5;
-  --develop: #4C97FF;
-  --ring: rgba(255, 255, 255, 0.10) 0px 0px 0px 1px;
-  --ring-light: rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
-  --card-stack:
-    rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
-    rgba(0, 0, 0, 0.4) 0px 2px 2px,
-    #171717 0px 0px 0px 1px;
-}
+  color-scheme: dark;
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --bg: #0A0A0A;
-    --surface: #111111;
-    --surface-2: #171717;
-    --fg: #EDEDED;
-    --fg-soft: #A1A1A1;
-    --muted: #8F8F8F;
-    --rule: #262626;
-    --rule-strong: #EDEDED;
-    --accent: #3291FF;
-    --accent-soft: #66B0FF;
-    --brand: #3291FF;
-    --ship: #E8695D;
-    --preview: #F14BA5;
-    --develop: #4C97FF;
-    --ring: rgba(255, 255, 255, 0.10) 0px 0px 0px 1px;
-    --ring-light: rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
-    --card-stack:
-      rgba(255, 255, 255, 0.10) 0px 0px 0px 1px,
-      rgba(0, 0, 0, 0.4) 0px 2px 2px,
-      #171717 0px 0px 0px 1px;
-  }
-}
+  --bg: #171614;
+  --surface: #201E1A;
+  --surface-2: #2A2823;
+  --fg: #EFEBE0;
+  --fg-soft: #CBC5B7;
+  --muted: #9C9486;
+  --rule: #3D3A33;
+  --rule-soft: #2E2C27;
+  --rule-strong: #EFEBE0;
 
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-1: 0ms;
-    --dur-2: 0ms;
-    --dur-3: 0ms;
-  }
-  *, *::before, *::after {
-    animation-duration: 0ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0ms !important;
-    scroll-behavior: auto !important;
-  }
+  --accent: #7FB0E3;
+  --brand: #E08A6E;
+  --ship: #7FB0E3;
+  --preview: #E08A6E;
+  --develop: #7FB0E3;
 }

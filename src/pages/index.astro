@@ -12,6 +12,10 @@ import { SITE } from '~/lib/site';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const featured = projects.filter((p) => p.data.featured).slice(0, 4);
 
+// The AI pivot is the current direction. It is marked on the card so the
+// software-and-AI work reads as the live track, not one entry among many.
+const CURRENT_DIRECTION = 'ai-office-stack';
+
 const experiments = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
 
 const certs = (await getCollection('certs'))
@@ -50,6 +54,110 @@ const skillGroups: { title: string; items: string[] }[] = [
     items: ['Model Context Protocol (MCP)', 'AI-assisted Splunk tooling', 'LLM structured-output pipelines', 'Paperclip · Honcho · GitNexus · Hermes', 'Pandas · NumPy · scikit-learn · TensorFlow / Keras'],
   },
 ];
+
+// ---------------------------------------------------------------------
+// The report table.
+//
+// Measured values only. No threshold column: the CV and the content
+// collections carry measured outcomes, not tolerances, so a "limit"
+// column would have to be invented. Every row links to the record
+// that carries the number.
+// ---------------------------------------------------------------------
+type MeasuredRow = {
+  item: string;
+  note: string;
+  value: string;
+  evidence: string;
+  href: string;
+};
+
+const byId = new Map(projects.map((p) => [p.id, p]));
+
+const measuredRows: MeasuredRow[] = [
+  {
+    item: 'Windows endpoints under global patch operations',
+    note: '79 factories, 70 countries',
+    value: '20,000+',
+    evidence: 'Global endpoint operations',
+    href: '/work/global-endpoints/',
+  },
+  {
+    item: 'Upgrade success rate across a multi-cloud Splunk estate',
+    note: 'automatic rollback on failure',
+    value: '99.9%',
+    evidence: 'Automated upgrade runbooks',
+    href: '/work/splunk-upgrade-automation/',
+  },
+  {
+    item: 'Azure and AWS subscriptions scanned for tech debt',
+    note: '2,000+ resources remediated',
+    value: '2,500+',
+    evidence: 'Continuous tech-debt scanning',
+    href: '/work/tech-debt-scanning/',
+  },
+  {
+    item: 'Splunk index provisioning turnaround',
+    note: 'down from three to five days',
+    value: '15 min',
+    evidence: 'Experience record — Wolters Kluwer',
+    href: '/experience/',
+  },
+];
+
+// The direction of work: production records and the software-and-AI
+// track, with the verdict each one actually carries in the content.
+type DirectionRow = {
+  item: string;
+  note: string;
+  status: string;
+  evidence: string;
+  href: string;
+  review: boolean;
+};
+
+const verdictLabel = (status: string): { label: string; review: boolean } => {
+  switch (status) {
+    case 'live':
+      return { label: 'Live', review: false };
+    case 'shipped':
+      return { label: 'Shipped', review: false };
+    case 'in-progress':
+      return { label: 'In progress', review: true };
+    case 'experimental':
+      return { label: 'In review', review: true };
+    case 'research':
+      return { label: 'Research', review: true };
+    default:
+      return { label: status, review: true };
+  }
+};
+
+const directionRows: DirectionRow[] = [];
+
+const currentProject = byId.get(CURRENT_DIRECTION);
+if (currentProject) {
+  const v = verdictLabel(currentProject.data.status);
+  directionRows.push({
+    item: currentProject.data.name,
+    note: currentProject.data.summary,
+    status: v.label,
+    evidence: 'Work record',
+    href: `/work/${currentProject.id}/`,
+    review: v.review,
+  });
+}
+
+for (const exp of experiments) {
+  const v = verdictLabel(exp.data.status);
+  directionRows.push({
+    item: exp.data.name,
+    note: exp.data.summary,
+    status: v.label,
+    evidence: 'Experiment record',
+    href: `/experiments/${exp.id}/`,
+    review: v.review,
+  });
+}
 ---
 
 <Base
@@ -58,69 +166,142 @@ const skillGroups: { title: string; items: string[] }[] = [
 >
   <Nav slot="header" />
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container stack">
-      <div class="portrait">
-        <img
-          src={SITE.photoUrl}
-          alt={`${SITE.name} — portrait`}
-          width="96"
-          height="96"
-          loading="eager"
-          decoding="async"
-        />
+  <!-- REPORT HEADER -->
+  <div class="perf" aria-hidden="true"></div>
+  <section class="report-hero">
+    <div class="container">
+      <div class="report-head">
+        <div>
+          <p class="doctype">Prüfprotokoll · Inspection Report</p>
+
+          <div class="subject">
+            <img
+              class="subject-photo"
+              src={SITE.photoUrl}
+              alt={`${SITE.name} — portrait`}
+              width="96"
+              height="96"
+              loading="eager"
+              decoding="async"
+            />
+            <div>
+              <p class="subject-name">{SITE.name}</p>
+              <p class="subject-role">Infrastructure Engineer → Software &amp; AI Engineering</p>
+              <p class="subject-tag">{SITE.tagline}</p>
+            </div>
+          </div>
+
+          <h1 class="display">
+            Shipping software and AI tooling on top of five years of platform engineering.
+          </h1>
+          <p class="lead lede">
+            I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python, and lately a stack of AI agents that share memory.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
+              Resume <span class="arr">↓</span>
+            </a>
+            <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href={`mailto:${SITE.email}`}>Email</a>
+          </div>
+          <p class="muted report-line" style="margin-top: var(--s-5);">
+            Currently at Wolters Kluwer · {SITE.languages}
+          </p>
+        </div>
+
+        <aside class="report-meta">
+          <dl>
+            <dt>Prüfgegenstand <span class="de">/ Subject</span></dt>
+            <dd>Delivery record</dd>
+            <dt>Prüfer <span class="de">/ Inspector</span></dt>
+            <dd>{SITE.name}</dd>
+            <dt>Ort <span class="de">/ Location</span></dt>
+            <dd>{SITE.location}</dd>
+            <dt>Ausgabe <span class="de">/ Issue</span></dt>
+            <dd>2026</dd>
+          </dl>
+          <p class="report-line"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</p>
+          <div class="stamp" role="img" aria-label="Inspected and accepted by Ankit Kumar, 2026. Self-inspected record.">
+            <b>GEPRÜFT</b>
+            <span>INSPECTED · ABGENOMMEN</span>
+            <em>{SITE.name} · 2026</em>
+          </div>
+        </aside>
       </div>
-      <span class="eyebrow">Infrastructure Engineer → Software &amp; AI Engineering</span>
-      <div class="meta">
-        <span class="meta-item"><strong>{SITE.tagline}</strong></span>
-        <span class="meta-item"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</span>
-        <span class="meta-item"><strong>Pune</strong> · relocating to Germany</span>
-      </div>
-      <h1 class="display">
-        Shipping software and AI tooling on top of five years of platform engineering.
-      </h1>
-      <p class="lead lede">
-        I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python, and lately a stack of AI agents that share memory.
-      </p>
-      <div class="actions">
-        <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
-          Resume <span class="arr">↓</span>
-        </a>
-        <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href={`mailto:${SITE.email}`}>Email</a>
-      </div>
-      <p class="muted" style="margin-top: var(--s-7); font-family: var(--font-mono); font-size: var(--t-xs); letter-spacing: 0.02em;">
-        Currently at Wolters Kluwer · {SITE.languages}
-      </p>
     </div>
   </section>
 
-  <!-- METRICS -->
-  <Section title="By the numbers" id="numbers" intro="Production outcomes from the last five years: the ones I'd defend in an interview.">
-    <div class="metric-grid">
-      <div class="metric-card reveal">
-        <div class="value">20,000+</div>
-        <div class="label">Windows endpoints under global patch operations across 79 factories and 70 countries.</div>
-      </div>
-      <div class="metric-card reveal">
-        <div class="value">99.9%</div>
-        <div class="label">Upgrade success rate across a multi-cloud Splunk estate, with automatic rollback on failure.</div>
-      </div>
-      <div class="metric-card reveal">
-        <div class="value">2,500+</div>
-        <div class="label">Azure and AWS subscriptions scanned continuously for tech debt; 2,000+ resources remediated.</div>
-      </div>
-      <div class="metric-card reveal">
-        <div class="value">15 min</div>
-        <div class="label">Splunk index provisioning turnaround, down from three to five days.</div>
-      </div>
+  <!-- MEASURED VALUES -->
+  <Section title="Measured values" id="numbers" num="A" intro="Production outcomes from the last five years: the ones I'd defend in an interview.">
+    <div class="report-table-wrap">
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th scope="col">Item<small>Prüfgegenstand</small></th>
+            <th scope="col">Measured value<small>Messwert</small></th>
+            <th scope="col">Evidence<small>Nachweis</small></th>
+            <th scope="col">Verdict<small>Bewertung</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          {measuredRows.map((row) => (
+            <tr>
+              <td class="item" data-label="Item">
+                {row.item}
+                <small>{row.note}</small>
+              </td>
+              <td class="value" data-label="Measured value">{row.value}</td>
+              <td class="evidence" data-label="Evidence">
+                <a href={row.href}>{row.evidence}</a>
+              </td>
+              <td data-label="Verdict">
+                <span class="verdict passed">Shipped</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <!-- DIRECTION OF WORK -->
+  <Section title="Direction of work" id="direction" num="B" intro="Where the record stands today: production work that shipped, and the software-and-AI track that is still under review.">
+    <div class="report-table-wrap">
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th scope="col">Entry<small>Prüfgegenstand</small></th>
+            <th scope="col">Status<small>Stand</small></th>
+            <th scope="col">Evidence<small>Nachweis</small></th>
+            <th scope="col">Verdict<small>Bewertung</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          {directionRows.map((row) => (
+            <tr>
+              <td class="item" data-label="Entry">
+                {row.item}
+                <small>{row.note}</small>
+              </td>
+              <td class="value" data-label="Status">{row.status}</td>
+              <td class="evidence" data-label="Evidence">
+                <a href={row.href}>{row.evidence}</a>
+              </td>
+              <td data-label="Verdict">
+                <span class:list={['verdict', row.review ? 'review' : 'passed']}>
+                  {row.review ? 'In review' : 'Delivered'}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </Section>
 
   <!-- ABOUT / POSITIONING -->
-  <Section title="About" id="about" intro="A short version of where I've been and where I'm heading.">
+  <Section title="About" id="about" num="C" intro="A short version of where I've been and where I'm heading.">
     <div class="prose" style="max-width: var(--measure);">
       <p>
         I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune: Splunk multi-site clusters, Azure landing zones, Terraform across 2,500+ subscriptions, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
@@ -138,9 +319,11 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- FEATURED WORK -->
-  <Section title="Selected work" id="work" intro="Four pieces I'd talk through in an interview. The full list is on the work page.">
+  <Section title="Selected work" id="work" num="D" intro="Four pieces I'd talk through in an interview. The full list is on the work page.">
     <div class="project-grid">
-      {featured.map((p) => <ProjectCard project={p} headingLevel="h3" />)}
+      {featured.map((p) => (
+        <ProjectCard project={p} headingLevel="h3" isCurrent={p.id === CURRENT_DIRECTION} />
+      ))}
     </div>
     <p class="muted" style="margin-top: var(--s-6);">
       <a class="section-more" href="/work/">All projects →</a>
@@ -148,7 +331,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- SKILLS -->
-  <Section title="Stack" id="stack" intro="Tools and categories I work with day-to-day.">
+  <Section title="Stack" id="stack" num="E" intro="Tools and categories I work with day-to-day.">
     <div class="skill-grid">
       {skillGroups.map((group) => (
         <div class="skill-group reveal">
@@ -162,14 +345,14 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- CERTS PREVIEW -->
-  <Section title="Certifications" id="certs" intro="Active first, in-progress next, expired last.">
+  <Section title="Certifications" id="certs" num="F" intro="Active first, in-progress next, expired last.">
     <div class="cert-list">
       {certs.map((c) => <CertItem cert={c} />)}
     </div>
   </Section>
 
   <!-- EXPERIMENTS PREVIEW -->
-  <Section title="Experiments" id="experiments" intro="Software and AI engineering work outside my day job.">
+  <Section title="Experiments" id="experiments" num="G" intro="Software and AI engineering work outside my day job.">
     <div class="project-grid">
       {experiments.map((exp) => <ExperimentCard exp={exp} headingLevel="h3" />)}
     </div>
@@ -179,7 +362,7 @@ const skillGroups: { title: string; items: string[] }[] = [
   </Section>
 
   <!-- CONTACT CTA -->
-  <Section title="Get in touch" id="contact" intro="The fastest route is email. The slower routes are linked below.">
+  <Section title="Get in touch" id="contact" num="H" intro="The fastest route is email. The slower routes are linked below.">
     <div class="stack" style="margin-top: var(--s-3);">
       <p class="lead" style="max-width: 50ch;">
         I'm happy to talk about a role, a project, or a thing you're working on.

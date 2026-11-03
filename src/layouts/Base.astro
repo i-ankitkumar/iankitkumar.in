@@ -1,5 +1,8 @@
 ---
 import { SITE } from '~/lib/site';
+// Self-hosted IBM Plex faces, declared before the token layer so the
+// paper-and-ink system can reference them. No third-party font request.
+import '~/styles/fonts.css';
 import '~/styles/global.css';
 
 export interface Props {
@@ -66,8 +69,8 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#F8F6EF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171614" media="(prefers-color-scheme: dark)" />
     <meta name="color-scheme" content="light dark" />
 
     <title>{pageTitle}</title>
@@ -121,13 +124,8 @@ const jsonLd = {
       })();
     </script>
 
-    <!-- Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
-    />
+    <!-- Typography: IBM Plex Sans + IBM Plex Mono, self-hosted from
+         /fonts. Nothing is fetched from a third-party font CDN. -->
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#main">Skip to content</a>
