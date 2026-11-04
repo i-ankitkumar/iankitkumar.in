@@ -897,6 +897,225 @@ code, pre, .mono { font-family: var(--font-mono); }
 }
 
 /* ------------------------------------------------------------------
+   Report block — the qualifications rail, the approval seal, the
+   signature line, and the letterhead hierarchy.
+
+   The rail is a 280px column beside the measured-values table. It
+   carries the qualifications and the languages, both of which come
+   from source records, and it keeps the real state of each
+   certification: a passed one, one still in progress, and one that
+   has expired all read differently.
+
+   The seal is report furniture: a self-inspected approval mark on the
+   page, not an external certification and not a claim that anyone
+   signed a certificate. It sits in the whitespace beside the table's
+   lower right so it never covers readable text.
+   ------------------------------------------------------------------ */
+.report-sheet {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+}
+
+/* The table column keeps a band of whitespace under the table, and the
+   seal sits in it, right-aligned to the table's lower right corner. */
+.report-sheet > .report-table-col {
+  position: relative;
+  padding-bottom: 224px;
+}
+
+.rail {
+  border-left: 2px solid var(--rule-strong);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.rail-block {
+  margin-bottom: var(--s-5);
+}
+
+.rail-h {
+  font-family: var(--font-mono);
+  font-size: 1.1875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 var(--s-4);
+}
+
+.rail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rail-cert {
+  display: flex;
+  gap: 9px;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  margin-bottom: 7px;
+}
+
+.rail-cert .bullet {
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  flex: none;
+  background: var(--accent);
+}
+
+/* A certification still in progress is an open verdict: rust, and it
+   says so in words. */
+.rail-cert.pending .bullet {
+  background: var(--brand);
+}
+
+/* An expired certification is neither passed nor open. It reads as
+   muted and says "expired" in words, so it is never mistaken for a
+   current one. */
+.rail-cert.expired .bullet {
+  background: var(--muted);
+}
+
+.rail-state {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.rail-cert.pending .rail-state {
+  color: var(--brand);
+}
+
+/* The inspector's signature line: the rule, then the caption. */
+.report-sheet .sig {
+  margin-top: auto;
+  border-top: 2px solid var(--rule-strong);
+  padding-top: 12px;
+}
+.report-sheet .sig .line {
+  height: 40px;
+  background: none;
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: var(--s-2);
+}
+.report-sheet .sig span {
+  font-family: var(--font-mono);
+  font-size: 1.1875rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* The approval seal. Rotated, circular, and set in the whitespace
+   under the table's lower right corner, just clear of the rail, so it
+   never sits on readable text. */
+.report-table-col > .seal {
+  position: absolute;
+  right: 20px;
+  /* Set in the whitespace band under the table, tucked against the
+     table's lower right corner and clear of the rail. The selected
+     sketch let the seal overlap the last table rows; that is not
+     reproduced here, because on the live table it would cover
+     readable verdict text. */
+  bottom: 24px;
+  width: 158px;
+  height: 158px;
+  border: 4px double var(--accent);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-13deg);
+  color: var(--accent);
+  opacity: 0.82;
+  /* Multiply lets the seal read as ink on paper in the light theme. In
+     the dark theme it would sink into the background, so there the
+     blend is dropped and the seal is drawn as a plain overlay. */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+:root[data-theme='dark'] .report-table-col > .seal {
+  mix-blend-mode: normal;
+  opacity: 0.55;
+}
+.report-table-col > .seal b {
+  font-family: var(--font-mono);
+  font-size: 1.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+.report-table-col > .seal span {
+  font-family: var(--font-mono);
+  font-size: 1.0625rem;
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+  white-space: nowrap;
+}
+.report-table-col > .seal em {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.9375rem;
+  margin-top: 9px;
+  /* The name wraps to two lines inside the circle, as in the selected
+     sketch, so the line never breaks the ring. */
+  max-width: 11ch;
+  text-align: center;
+}
+
+/* The letterhead: the name as a mono uppercase line above the
+   recruiter sentence, with the role beneath it. */
+.letterhead-name {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin: var(--s-4) 0 0;
+}
+
+.letterhead-role {
+  font-family: var(--font-sans);
+  font-size: 1.375rem;
+  color: var(--fg-soft);
+  margin: var(--s-2) 0 0;
+}
+
+/* On narrow screens the rail stacks under the table and the seal keeps
+   its place beside the table's lower right. */
+@media (max-width: 48rem) {
+  .report-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .report-sheet > .report-table-col {
+    padding-bottom: 0;
+  }
+  .rail {
+    border-left: 0;
+    border-top: 2px solid var(--rule-strong);
+    margin-top: var(--s-5);
+  }
+  .report-table-col > .seal {
+    position: static;
+    margin: var(--s-5) 0 0 auto;
+    transform: none;
+    mix-blend-mode: normal;
+  }
+  .letterhead-name {
+    font-size: 1.75rem;
+  }
+}
+
+/* ------------------------------------------------------------------
    Responsive
    ------------------------------------------------------------------ */
 @media (max-width: 60rem) {
@@ -1012,6 +1231,36 @@ code, pre, .mono { font-family: var(--font-mono); }
   h1, h2, h3 { break-after: avoid; }
 
   .report-table-wrap { border-color: #999; }
+
+  /* The qualifications rail and the seal are furniture for the on-screen
+     inspection report. The printed A4 sheet keeps the baseline
+     pagination, so the rail is dropped there: the certifications and
+     languages are all on their own pages of the site, and the meta
+     column already carries the approval stamp. */
+  .report-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .report-sheet > .report-table-col {
+    padding-bottom: 0;
+  }
+  .report-sheet .rail,
+  .report-table-col > .seal {
+    display: none;
+  }
+
+  /* The letterhead stays compact on paper so the printed page 1 keeps
+     the same content it had before the name became a letterhead line. */
+  .letterhead-name {
+    font-size: 1.5rem;
+    margin-top: var(--s-2);
+  }
+  .letterhead-role {
+    font-size: 0.9375rem;
+  }
+  .subject-photo {
+    width: 48px;
+    height: 48px;
+  }
 
   /* Paper size is pinned so the output does not depend on the print
      dialog's default (Letter on some machines, A4 on others). */

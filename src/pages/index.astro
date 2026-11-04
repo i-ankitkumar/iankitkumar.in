@@ -24,6 +24,51 @@ const certs = (await getCollection('certs'))
     return (rank[a.data.status] ?? 9) - (rank[b.data.status] ?? 9) || a.data.order - b.data.order;
   });
 
+// ---------------------------------------------------------------------
+// The qualifications rail.
+//
+// Every row is source-backed: the certifications come from
+// src/content/certs/*.md and keep their real state (active,
+// in-progress, expired), and the languages come from SITE.languages.
+// Nothing here is invented and no expired record is dressed up as
+// current.
+// ---------------------------------------------------------------------
+type RailRow = { label: string; state: 'active' | 'pending' | 'expired'; suffix?: string };
+
+const railCerts: RailRow[] = certs.map((c) => {
+  // Short display labels, abbreviated from the same source records. The
+  // rail column is 280px wide; the full certification names wrap to four
+  // lines there and stop reading as a list.
+  const short: Record<string, string> = {
+    'az-104': 'AZ-104 Azure Administrator',
+    rhcsa: 'RHCSA',
+    'terraform-associate': 'Terraform Associate (003)',
+    'ai-900': 'AI-900 Azure AI Fundamentals',
+    'az-900': 'AZ-900 Azure Fundamentals',
+    'az-400': 'AZ-400 DevOps Solutions',
+  };
+  const label = short[c.id] ?? c.data.name;
+  if (c.data.status === 'in-progress') {
+    return { label, state: 'pending', suffix: 'in progress' };
+  }
+  if (c.data.status === 'expired') {
+    return { label, state: 'expired', suffix: 'expired' };
+  }
+  return { label, state: 'active' };
+});
+
+// SITE.languages reads "English (C1, fluent) · Hindi (native) · German
+// (A2, basic)". The rail shows one language per row: the name and its
+// level, parsed from that single source string.
+const railLanguages: RailRow[] = SITE.languages.split('·')
+  .map((part) => part.trim())
+  .filter(Boolean)
+  .map((part) => {
+    const m = part.match(/^(.+?)\s*\(([^,)]+)/);
+    if (!m) return { label: part, state: 'active' as const };
+    return { label: `${m[1].trim()} ${m[2].trim()}`, state: 'active' as const };
+  });
+
 const skillGroups: { title: string; items: string[] }[] = [
   {
     title: 'Cloud & Infrastructure',
@@ -174,6 +219,12 @@ for (const exp of experiments) {
         <div>
           <p class="doctype">Prüfprotokoll · Inspection Report</p>
 
+          {/* The letterhead name: mono, uppercase, large, above the
+              recruiter sentence h1. It stays a paragraph so the page
+              keeps exactly one h1. */}
+          <p class="letterhead-name">{SITE.name}</p>
+          <p class="letterhead-role">Infrastructure Engineer → Software &amp; AI Engineering</p>
+
           <div class="subject">
             <img
               class="subject-photo"
@@ -184,11 +235,7 @@ for (const exp of experiments) {
               loading="eager"
               decoding="async"
             />
-            <div>
-              <p class="subject-name">{SITE.name}</p>
-              <p class="subject-role">Infrastructure Engineer → Software &amp; AI Engineering</p>
-              <p class="subject-tag">{SITE.tagline}</p>
-            </div>
+            <p class="subject-tag">{SITE.tagline}</p>
           </div>
 
           <h1 class="display">
@@ -234,34 +281,83 @@ for (const exp of experiments) {
 
   <!-- MEASURED VALUES -->
   <Section title="Measured values" id="numbers" num="A" intro="Production outcomes from the last five years: the ones I'd defend in an interview.">
-    <div class="report-table-wrap">
-      <table class="report-table">
-        <thead>
-          <tr>
-            <th scope="col">Item<small>Prüfgegenstand</small></th>
-            <th scope="col">Measured value<small>Messwert</small></th>
-            <th scope="col">Evidence<small>Nachweis</small></th>
-            <th scope="col">Verdict<small>Bewertung</small></th>
-          </tr>
-        </thead>
-        <tbody>
-          {measuredRows.map((row) => (
-            <tr>
-              <td class="item" data-label="Item">
-                {row.item}
-                <small>{row.note}</small>
-              </td>
-              <td class="value" data-label="Measured value">{row.value}</td>
-              <td class="evidence" data-label="Evidence">
-                <a href={row.href}>{row.evidence}</a>
-              </td>
-              <td data-label="Verdict">
-                <span class="verdict passed">Shipped</span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div class="report-sheet">
+      <div class="report-table-col">
+        <div class="report-table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th scope="col">Item<small>Prüfgegenstand</small></th>
+                <th scope="col">Measured value<small>Messwert</small></th>
+                <th scope="col">Evidence<small>Nachweis</small></th>
+                <th scope="col">Verdict<small>Bewertung</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              {measuredRows.map((row) => (
+                <tr>
+                  <td class="item" data-label="Item">
+                    {row.item}
+                    <small>{row.note}</small>
+                  </td>
+                  <td class="value" data-label="Measured value">{row.value}</td>
+                  <td class="evidence" data-label="Evidence">
+                    <a href={row.href}>{row.evidence}</a>
+                  </td>
+                  <td data-label="Verdict">
+                    <span class="verdict passed">Shipped</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* The approval seal: report furniture, not an attestation. It
+            sits in the whitespace beside the table's lower right, clear
+            of any readable text. */}
+        <div class="seal" role="img" aria-label="Inspected and accepted by Ankit Kumar, 2026. Self-inspected record.">
+          <b>GEPRÜFT</b>
+          <span>ABGENOMMEN</span>
+          <em>Ankit Kumar · 2026</em>
+        </div>
+      </div>
+
+      {/* The qualifications rail. Qualifications and languages only:
+          both come from source records, and the states are the real
+          ones, not a flattened list. */}
+      <aside class="rail" aria-label="Qualifications and languages">
+        <div class="rail-block qual">
+          <h3 class="rail-h">Qualifikationen</h3>
+          <ul class="rail-list">
+            {railCerts.map((row) => (
+              <li class:list={['rail-cert', row.state]}>
+                <span class="bullet" aria-hidden="true" />
+                <span class="rail-cert-label">
+                  {row.label}
+                  {row.suffix && <em class="rail-state">{row.suffix}</em>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rail-block lang">
+          <h3 class="rail-h">Sprachen</h3>
+          <ul class="rail-list">
+            {railLanguages.map((row) => (
+              <li class="rail-cert active">
+                <span class="bullet" aria-hidden="true" />
+                <span class="rail-cert-label">{row.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* The inspector's signature line: report furniture. */}
+        <div class="sig">
+          <div class="line" />
+          <span>Unterschrift Prüfer</span>
+        </div>
+      </aside>
     </div>
   </Section>
 

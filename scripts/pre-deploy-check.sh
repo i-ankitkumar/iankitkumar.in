@@ -88,7 +88,7 @@ for p in pages:
         bad.append((p, 'fetch error'))
         continue
     for h in re.findall(r'href="([^"]+)"', body):
-        if h.startswith(('http', '//', 'mailto:')): continue
+        if h.startswith(('http', '//', 'mailto:', 'tel:')): continue
         path = h.split('#', 1)[0]
         if not path: continue
         try:

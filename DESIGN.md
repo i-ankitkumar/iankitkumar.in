@@ -199,6 +199,34 @@ does not use them.
 verdict. Rows are the site homepage's evidence, and every measured value links to the record
 that carries the number.
 
+**Inspection report sheet.** The measured-values section is a `.report-sheet` grid:
+`minmax(0, 1fr) 280px`. The left column carries the table and a whitespace band under it; the
+right column is the `.rail`, separated from the table by a 2px `--rule-strong` left border. The
+rail holds `QUALIFIKATIONEN` and `SPRACHEN` blocks, then the signature block pinned to the
+rail's bottom by `margin-top: auto`. Below `48rem` the sheet becomes one column, the rail's
+left border becomes a top rule, and the seal drops out of absolute positioning.
+
+**Qualifications rail.** Every row is derived from `src/content/certs/*.md`; the rail never
+authors its own list. States are visible and distinct: `active` rows carry an accent bullet,
+`in-progress` rows carry a `--brand` bullet and the suffix `in progress`, `expired` rows carry a
+muted bullet and the suffix `expired`. A rail that flattens those states into one list is
+lying about the record. The language rows come from `SITE.languages` in `src/lib/site.ts`, one
+language per row, never retyped by hand.
+
+**Approval seal.** A circular, rotated `GEPRÜFT / ABGENOMMEN` mark in the whitespace under the
+table's lower right corner. It is report furniture and a self-inspection cue, not an external
+certification and not an attestation that anyone signed anything, so it keeps the same honest
+`aria-label` semantics as the existing self-inspected stamp. It must never cover readable table
+text: the selected sketch overlapped the last rows, which is not reproduced. In the dark theme
+the multiply blend is dropped, because multiply would sink the seal into the background.
+
+**Signature line.** A ruled line with the mono caption `UNTERSCHRIFT PRÜFER`, pinned to the
+bottom of the rail. It means "a signature belongs here", not "someone signed this".
+
+**Letterhead hierarchy.** The homepage name is a mono uppercase letterhead line above the
+recruiter sentence, with the role line beneath it. The recruiter sentence stays the page's
+single `h1`; the name is a `<p>`, so there is exactly one `h1` on the page.
+
 **Measured values.** A real production number, never a vanity metric. The value is monospace so
 figures lock to a grid; the label is mono because it is a caption, not prose. The grid is one
 column on narrow screens.
