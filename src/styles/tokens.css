@@ -19,6 +19,7 @@
   --surface-2: #F1EDE1;   /* an inset band */
   --fg: #1C1B16;          /* ink */
   --fg-soft: #3A382F;     /* secondary ink */
+  --fg-role: #55534A;     /* the role line under the letterhead name */
   --muted: #6E6A5C;       /* labels, captions */
   --rule: #C9C4B6;        /* hairline */
   --rule-soft: #E3DED0;
@@ -88,6 +89,7 @@
   --surface-2: #2A2823;
   --fg: #EFEBE0;
   --fg-soft: #CBC5B7;
+  --fg-role: #CBC5B7;
   --muted: #9C9486;
   --rule: #3D3A33;
   --rule-soft: #2E2C27;

@@ -1067,7 +1067,7 @@ code, pre, .mono { font-family: var(--font-mono); }
   margin-top: 9px;
   /* The name wraps to two lines inside the circle, as in the selected
      sketch, so the line never breaks the ring. */
-  max-width: 11ch;
+  max-width: 13ch;
   text-align: center;
 }
 
@@ -1086,7 +1086,7 @@ code, pre, .mono { font-family: var(--font-mono); }
 .letterhead-role {
   font-family: var(--font-sans);
   font-size: 1.375rem;
-  color: var(--fg-soft);
+  color: var(--fg-role);
   margin: var(--s-2) 0 0;
 }
 
