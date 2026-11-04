@@ -1044,7 +1044,7 @@ code, pre, .mono { font-family: var(--font-mono); }
 }
 :root[data-theme='dark'] .report-table-col > .seal {
   mix-blend-mode: normal;
-  opacity: 0.55;
+  opacity: 0.75;
 }
 .report-table-col > .seal b {
   font-family: var(--font-mono);
