@@ -1065,9 +1065,8 @@ code, pre, .mono { font-family: var(--font-mono); }
   font-style: normal;
   font-size: 0.9375rem;
   margin-top: 9px;
-  /* The name wraps to two lines inside the circle, as in the selected
-     sketch, so the line never breaks the ring. */
-  max-width: 13ch;
+  /* The name breaks after the middot inside the circle, so the line
+     never breaks the ring. */
   text-align: center;
 }
 
