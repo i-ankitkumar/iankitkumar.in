@@ -106,6 +106,7 @@ check() {
 }
 
 check "/"                  200  text/html
+check "/cv/"                200  text/html
 check "/work/"             200  text/html
 check "/work/splunk-multisite-migration/" 200  text/html
 check "/experience/"       200  text/html

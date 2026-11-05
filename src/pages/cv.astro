@@ -1,0 +1,295 @@
+---
+/**
+ * /cv — the single-page record.
+ *
+ * The reference design keeps everything on one scroll with six anchors.
+ * That is the right shape for a recruiter who does not want to click
+ * through seven pages, and it is the single most useful structural
+ * idea in that design.
+ *
+ * This site does not lose its multi-route structure to gain it: /cv is
+ * an additional view over the same collections, not a replacement for
+ * them. Every entry here links to its own page, so the deep detail is
+ * one click away and the SEO and llms.txt surface is untouched.
+ *
+ * The content is read from the same collections as every other page,
+ * so nothing on this page can drift from the site it summarises.
+ */
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import Section from '~/components/Section.astro';
+import ExperienceCard from '~/components/ExperienceCard.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import ExperimentCard from '~/components/ExperimentCard.astro';
+import { SITE } from '~/lib/site';
+
+const roles = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const certs = (await getCollection('certs')).sort((a, b) => a.data.order - b.data.order);
+const experiments = (await getCollection('experiments')).sort((a, b) => a.data.order - b.data.order);
+const tools = (await getCollection('tools')).sort((a, b) => a.data.order - b.data.order);
+
+const statusLabel: Record<string, string> = {
+  live: 'Live',
+  shipped: 'Shipped',
+  'in-progress': 'In progress',
+  experimental: 'Experimental',
+  archived: 'Archived',
+  research: 'Research',
+  beta: 'Beta',
+  active: 'Active',
+  expired: 'Expired',
+};
+
+// The anchor index at the top of the page. This is the navigation
+// device the reference design uses, and it is the reason a recruiter
+// can jump to the one part they came for.
+const anchors = [
+  { id: 'record', label: 'Record' },
+  { id: 'roles', label: 'Roles' },
+  { id: 'work', label: 'Work' },
+  { id: 'tools', label: 'Tools' },
+  { id: 'certifications', label: 'Certifications' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+
+<Base
+  title="CV — the full record"
+  description={`The complete record for ${SITE.name} on one page: roles, work, tools, certifications, and contact.`}
+>
+  <Nav slot="header" />
+
+  <!-- REPORT HEADER -->
+  <div class="perf" aria-hidden="true"></div>
+  <section class="report-hero">
+    <div class="container">
+      <div class="report-head">
+        <div>
+          <p class="doctype">Prüfprotokoll · Complete Record</p>
+
+          <p class="letterhead-name">{SITE.name}</p>
+          <p class="letterhead-role">{SITE.role}</p>
+
+          <div class="subject">
+            <img
+              class="subject-photo"
+              src={SITE.photoUrl}
+              alt={`${SITE.name} — portrait`}
+              width="96"
+              height="96"
+              loading="eager"
+              decoding="async"
+            />
+            <p class="subject-tag">{SITE.tagline}</p>
+          </div>
+
+          <h1 class="display">
+            The whole record on one page.
+          </h1>
+          <p class="lead lede">
+            Every role, every piece of shipped work, every tool and certification, in one scroll. Each entry links to its own page with the full write-up.
+          </p>
+
+          <div class="actions">
+            <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
+              Resume <span class="arr">↓</span>
+            </a>
+            <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
+            <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href={`mailto:${SITE.email}`}>Email</a>
+          </div>
+        </div>
+
+        <aside class="report-meta">
+          <dl>
+            <dt>Prüfgegenstand <span class="de">/ Subject</span></dt>
+            <dd>Complete delivery record</dd>
+            <dt>Umfang <span class="de">/ Scope</span></dt>
+            <dd>{roles.length} roles · {projects.length} work records · {certs.length} certifications</dd>
+            <dt>Ort <span class="de">/ Location</span></dt>
+            <dd>{SITE.location}</dd>
+            <dt>Ausgabe <span class="de">/ Issue</span></dt>
+            <dd>2026</dd>
+          </dl>
+          <p class="report-line"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</p>
+          <div class="stamp" role="img" aria-label="Inspected and accepted by Ankit Kumar, 2026. Self-inspected record.">
+            <b>GEPRÜFT</b>
+            <span>INSPECTED · ABGENOMMEN</span>
+            <em>{SITE.name} · 2026</em>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE ANCHOR INDEX -->
+  <nav class="anchor-index" aria-label="Sections of this record">
+    <div class="container">
+      <ul>
+        {anchors.map((a) => (
+          <li><a href={`#${a.id}`}>{a.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- A · THE RECORD -->
+  <Section
+    title="The record"
+    id="record"
+    num="A"
+    intro="Who I am, where I am, and what I am looking for. Every claim here traces to the CV."
+  >
+    <div class="record-facts">
+      <dl class="fact-grid">
+        <div>
+          <dt>Location <span class="de">/ Ort</span></dt>
+          <dd>{SITE.location}</dd>
+        </div>
+        <div>
+          <dt>Status <span class="de">/ Status</span></dt>
+          <dd>{SITE.status}</dd>
+        </div>
+        <div>
+          <dt>Languages <span class="de">/ Sprachen</span></dt>
+          <dd>{SITE.languages}</dd>
+        </div>
+        <div>
+          <dt>Email <span class="de">/ E-Mail</span></dt>
+          <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+        </div>
+        <div>
+          <dt>Phone <span class="de">/ Telefon</span></dt>
+          <dd>{SITE.phone} <span class="muted">(WhatsApp, India)</span></dd>
+        </div>
+        <div>
+          <dt>Focus <span class="de">/ Schwerpunkt</span></dt>
+          <dd>Platform engineering · AI-assisted automation · MCP tooling</dd>
+        </div>
+      </dl>
+    </div>
+  </Section>
+
+  <!-- B · ROLES -->
+  <Section
+    title="Roles"
+    id="roles"
+    num="B"
+    intro="Most recent first."
+  >
+    <div class="timeline">
+      {roles.map((role) => (
+        <div id={role.id}>
+          <ExperienceCard role={role} headingLevel="h3" />
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <!-- C · WORK -->
+  <Section
+    title="Work"
+    id="work"
+    num="C"
+    intro="Shipped production work. Each entry links to the full record."
+  >
+    <div class="project-grid">
+      {projects.map((p) => (
+        <ProjectCard project={p} size="sm" headingLevel="h3" />
+      ))}
+    </div>
+    {experiments.length > 0 && (
+      <>
+        <h3 class="sub-head">Experiments <span class="muted">— in review</span></h3>
+        <div class="project-grid">
+          {experiments.map((p) => (
+            <ExperimentCard exp={p} headingLevel="h3" />
+          ))}
+        </div>
+      </>
+    )}
+  </Section>
+
+  <!-- D · TOOLS -->
+  {tools.length > 0 && (
+    <Section title="Tools" id="tools" num="D" intro="Things I built and run.">
+      <ul class="record-list">
+        {tools.map((t) => (
+          <li>
+            <a href={`/tools/${t.id}/`}>
+              <span class="record-list-name">{t.data.name}</span>
+              <span class="record-list-tag">{t.data.tagline}</span>
+              <span class={`status status-${t.data.status}`}>{statusLabel[t.data.status] ?? t.data.status}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  )}
+
+  <!-- E · CERTIFICATIONS -->
+  <Section
+    title="Certifications"
+    id="certifications"
+    num="E"
+    intro="Current, expired, and in progress. All are verifiable at the issuer."
+  >
+    <ul class="record-list">
+      {certs.map((c) => (
+        <li>
+          {c.data.verifyUrl ? (
+            <a href={c.data.verifyUrl} target="_blank" rel="noopener">
+              <span class="record-list-name">{c.data.name}</span>
+              <span class="record-list-tag">{c.data.issuer}</span>
+              <span class={`status status-${c.data.status}`}>{statusLabel[c.data.status] ?? c.data.status}</span>
+            </a>
+          ) : (
+            <span>
+              <span class="record-list-name">{c.data.name}</span>
+              <span class="record-list-tag">{c.data.issuer}</span>
+              <span class={`status status-${c.data.status}`}>{statusLabel[c.data.status] ?? c.data.status}</span>
+            </span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- F · CONTACT -->
+  <Section title="Contact" id="contact" num="F" intro="The fastest way to reach me.">
+    <div class="record-facts">
+      {/* Four facts, so this grid is two columns rather than the
+          three-column default, which would leave a gap. */}
+      <dl class="fact-grid is-2col">
+        <div>
+          <dt>Email <span class="de">/ E-Mail</span></dt>
+          <dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd>
+        </div>
+        <div>
+          <dt>Direct <span class="de">/ Direkt</span></dt>
+          <dd><a href={`mailto:${SITE.emailDirect}`}>{SITE.emailDirect}</a></dd>
+        </div>
+        <div>
+          <dt>Phone <span class="de">/ Telefon</span></dt>
+          <dd>{SITE.phone} <span class="muted">(WhatsApp, India)</span></dd>
+        </div>
+        <div>
+          <dt>Elsewhere <span class="de">/ Andere</span></dt>
+          <dd>
+            <a href={SITE.github} target="_blank" rel="noopener">GitHub</a> ·
+            <a href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a> ·
+            <a href={SITE.blog} target="_blank" rel="noopener">Blog</a>
+          </dd>
+        </div>
+      </dl>
+      <p class="muted" style="margin-top: var(--s-5); max-width: 62ch;">
+        {SITE.status}. Based in {SITE.locationShort}.
+      </p>
+    </div>
+  </Section>
+
+  <Footer slot="footer" />
+</Base>

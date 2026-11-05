@@ -76,7 +76,7 @@ echo "[6] internal links"
 if curl -sS -o /dev/null --max-time 2 "$PREVIEW/" 2>/dev/null; then
   python3 - <<PY
 import re, subprocess, sys
-pages = ['/', '/work', '/experience', '/certs', '/experiments', '/contact',
+pages = ['/', '/work', '/experience', '/certs', '/experiments', '/contact', '/cv',
          '/work/splunk-multisite-migration', '/work/soc2-dashboards',
          '/work/global-endpoints', '/work/ids-mlp-gridsearch',
          '/work/nids-ml-dl', '/work/gpp-hack4good', '/work/portfolio-and-blog']

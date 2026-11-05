@@ -1606,6 +1606,229 @@ code, pre, .mono { font-family: var(--font-mono); }
 }
 
 /* ------------------------------------------------------------------
+   The single-page record (/cv)
+
+   The anchor index is the navigation device: a ruled row of section
+   links under the letterhead, so a visitor can jump to the one part
+   they came for instead of scrolling the whole record.
+
+   The fact grid is the scannable identity block. Identity facts go in
+   a grid of labelled cells, never in a paragraph: the reference
+   design's "Location / Email / Education / Status" list is the right
+   idea, and it is what makes an about page readable at a glance.
+
+   The record list is a ruled table of entries — name, caption, status.
+   ------------------------------------------------------------------ */
+.anchor-index {
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface);
+}
+
+.anchor-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  list-style: none;
+  margin: 0;
+  padding: var(--s-3) 0;
+}
+
+.anchor-index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.anchor-index a:hover,
+.anchor-index a:focus-visible {
+  color: var(--accent);
+}
+
+/* The fact grid: labelled cells, ruled like the rest of the sheet.
+   The column count is fixed rather than auto-fit so the cell count
+   divides evenly (six facts in three columns, not four plus a gap) and
+   so the vertical hairline can be placed on exactly the cells that
+   start a column. */
+.fact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.fact-grid > div {
+  padding: var(--s-4) var(--s-4) var(--s-4) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* A hairline between two cells that sit side by side. The first cell
+   of each row starts a column, so it carries no left rule. */
+.fact-grid > div:nth-child(3n + 2),
+.fact-grid > div:nth-child(3n + 3) {
+  border-left: 1px solid var(--rule-soft);
+  padding-left: var(--s-4);
+}
+
+.fact-grid dt {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--s-2);
+}
+
+.fact-grid dt .de {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.fact-grid dd {
+  margin: 0;
+  color: var(--fg);
+  font-size: var(--t-sm);
+  line-height: 1.6;
+}
+
+/* The record list: a ruled table of entries. */
+.record-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.record-list > li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.record-list > li > a,
+.record-list > li > span {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3) var(--s-4);
+  padding: var(--s-4) 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.record-list > li > a:hover .record-list-name,
+.record-list > li > a:focus-visible .record-list-name {
+  color: var(--accent);
+}
+
+.record-list-name {
+  font-weight: 500;
+}
+
+.record-list-tag {
+  font-family: var(--font-mono);
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+
+.record-list .status {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.record-list .status.active,
+.record-list .status.live,
+.record-list .status.shipped {
+  color: var(--accent);
+}
+
+.record-list .status.expired {
+  color: var(--muted);
+}
+
+.record-list .status.in-progress,
+.record-list .status.beta,
+.record-list .status.research,
+.record-list .status.experimental {
+  color: var(--brand);
+}
+
+/* A sub-heading inside a section, for grouping within one register. */
+.sub-head {
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: var(--s-7) 0 var(--s-3);
+  font-weight: 500;
+}
+
+.sub-head .muted {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* A two-column variant, for a fact count that divides by two. */
+.fact-grid.is-2col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fact-grid.is-2col > div:nth-child(3n + 2),
+.fact-grid.is-2col > div:nth-child(3n + 3) {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.fact-grid.is-2col > div:nth-child(2n) {
+  border-left: 1px solid var(--rule-soft);
+  padding-left: var(--s-4);
+}
+
+@media (max-width: 60rem) {
+  /* Two columns: the hairline moves to the second cell of each row. */
+  .fact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fact-grid > div:nth-child(3n + 2),
+  .fact-grid > div:nth-child(3n + 3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .fact-grid > div:nth-child(2n) {
+    border-left: 1px solid var(--rule-soft);
+    padding-left: var(--s-4);
+  }
+}
+
+@media (max-width: 40rem) {
+  /* One column: every cell starts a row, so no vertical rules at all. */
+  .fact-grid,
+  .fact-grid.is-2col {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fact-grid > div:nth-child(2n),
+  .fact-grid.is-2col > div:nth-child(2n) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .record-list > li > a,
+  .record-list > li > span {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .record-list-tag {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ------------------------------------------------------------------
  * Print — the report header keeps two columns
  *
  * The 48rem breakpoint collapses .report-head to one column, which makes

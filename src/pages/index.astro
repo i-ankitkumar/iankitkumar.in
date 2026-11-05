@@ -288,6 +288,7 @@ for (const exp of experiments) {
             <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
               Resume <span class="arr">↓</span>
             </a>
+            <a class="btn" href="/cv/">Full record</a>
             <a class="btn" href={SITE.github} target="_blank" rel="noopener">GitHub</a>
             <a class="btn" href={SITE.linkedin} target="_blank" rel="noopener">LinkedIn</a>
             <a class="btn" href={`mailto:${SITE.email}`}>Email</a>
@@ -458,7 +459,30 @@ for (const exp of experiments) {
 
   <!-- ABOUT / POSITIONING -->
   <Section title="About" id="about" num="C" intro="A short version of where I've been and where I'm heading.">
-    <div class="prose" style="max-width: var(--measure);">
+    {/* The identity facts, in a scannable grid rather than a paragraph.
+        Identity facts belong in labelled cells: location, status, and
+        languages are the three a reader looks for first, and a prose
+        paragraph makes them hard to find. */}
+    <dl class="fact-grid is-2col">
+      <div>
+        <dt>Location <span class="de">/ Ort</span></dt>
+        <dd>{SITE.location}</dd>
+      </div>
+      <div>
+        <dt>Status <span class="de">/ Status</span></dt>
+        <dd>{SITE.status}</dd>
+      </div>
+      <div>
+        <dt>Languages <span class="de">/ Sprachen</span></dt>
+        <dd>{SITE.languages}</dd>
+      </div>
+      <div>
+        <dt>Focus <span class="de">/ Schwerpunkt</span></dt>
+        <dd>Platform engineering · AI-assisted automation · MCP tooling</dd>
+      </div>
+    </dl>
+
+    <div class="prose" style="max-width: var(--measure); margin-top: var(--s-6);">
       <p>
         I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune: Splunk multi-site clusters, Azure landing zones, Terraform across 2,500+ subscriptions, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
       </p>
