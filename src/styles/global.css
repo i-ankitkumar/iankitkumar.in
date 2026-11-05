@@ -796,7 +796,23 @@ code, pre, .mono { font-family: var(--font-mono); }
   font-family: var(--font-mono);
   font-size: var(--t-sm);
   color: var(--fg-soft);
-  margin: var(--s-1) 0 var(--s-3);
+  margin: var(--s-2) 0 var(--s-3);
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.timeline-item .company p {
+  margin: 0;
+  color: var(--fg-soft);
+  max-width: none;
+}
+
+/* The employer mark: a stamped block in the sheet's ink, so the eye can
+   group entries by employer without reading each one. */
+.employer-mark {
+  flex: 0 0 auto;
+  display: block;
 }
 .timeline-item p { color: var(--fg-soft); max-width: 62ch; }
 .timeline-item ul { max-width: 62ch; color: var(--fg-soft); font-size: var(--t-sm); }

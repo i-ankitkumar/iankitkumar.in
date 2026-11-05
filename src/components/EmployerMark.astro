@@ -1,0 +1,113 @@
+---
+/**
+ * Employer mark — a mono lettermark in the sheet's ink.
+ *
+ * The reference design uses the employer's own colour logo next to each
+ * role. A scraped corporate logo would break the Inspection Report
+ * register: a saturated raster mark reads as pasted-in clipart on a
+ * ruled paper sheet, and hotlinking a brand asset from a corporate CDN
+ * is fragile and a licensing question.
+ *
+ * A lettermark carries the same job, which is letting the eye group
+ * entries by employer instead of reading each one, and it stays inside
+ * the document: one ink, one rule, no second colour.
+ *
+ * The mark is decorative. The employer name is always rendered as text
+ * beside it, so the mark is hidden from assistive technology.
+ */
+
+export interface Props {
+  /** Employer name, used to derive the initials. */
+  name: string;
+  /** Explicit initials. Overrides the derived ones. */
+  initials?: string;
+  /** Pixel size of the square mark. */
+  size?: number;
+}
+
+const { name, initials, size = 48 } = Astro.props;
+
+/**
+ * Derive initials from an employer name.
+ *
+ * The general rule is the first letter of the first two significant
+ * words. Descriptive corporate suffixes are noise for a mark, so they
+ * are dropped first: "Corporation", "Inc", "LTD", "LLC", "GmbH", "AG",
+ * "Group".
+ *
+ * "Colgate Global Business Services" is the case that needs care.
+ * "Global Business Services" is three words of description, and
+ * dropping it leaves one word, "Colgate". A single word takes its
+ * first two letters, which would give "CO" — that reads as a country
+ * code, not a company. The name is really two parts: the brand
+ * ("Colgate") and the division ("Business Services"). So the mark is
+ * the brand's initial plus the division's own initials: "CBS".
+ */
+function deriveInitials(value: string): string {
+  const cleaned = value.trim();
+  // An acronym like "GBS" or "IBM" is already its own mark.
+  if (/^[A-Z0-9]{2,5}$/.test(cleaned)) return cleaned;
+
+  // "Colgate Business Services" → brand "Colgate", division "Business Services".
+  const branded = cleaned.match(/^(.*?)\s+Global\s+(Business Services)$/i);
+  if (branded) {
+    const brand = branded[1].trim();
+    const division = branded[2]
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((w) => w[0].toUpperCase())
+      .join('');
+    return brand.slice(0, 1).toUpperCase() + division;
+  }
+
+  const words = cleaned
+    .replace(/\b(Corporation|Corp|Inc|Ltd|LLC|GmbH|AG|Group)\b/gi, '')
+    .split(/[\s,&-]+/)
+    .filter(Boolean);
+
+  if (words.length === 0) return cleaned.slice(0, 2).toUpperCase();
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+
+const label = (initials ?? deriveInitials(name)).toUpperCase();
+
+// The viewBox is the rendered size in pixels, so the font size below is
+// the actual rendered size in pixels. A fixed 44-unit viewBox scaled
+// down to 34px would render an 18-unit font at about 14px, which is
+// too small to read as a mark.
+const fontSize = label.length > 2 ? size * 0.32 : size * 0.42;
+---
+
+<svg
+  class="employer-mark"
+  width={size}
+  height={size}
+  viewBox={`0 0 ${size} ${size}`}
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- A stamped block: a hairline frame with the initials inked in it.
+       The frame is the document's rule colour, the initials are the
+       document's ink, so the mark reads as part of the sheet. -->
+  <rect
+    x="0.5"
+    y="0.5"
+    width={size - 1}
+    height={size - 1}
+    fill="var(--surface)"
+    stroke="var(--rule)"
+    stroke-width="1"
+  />
+  <text
+    x={size / 2}
+    y={size / 2}
+    text-anchor="middle"
+    dominant-baseline="central"
+    fill="var(--fg)"
+    font-family="var(--font-mono)"
+    font-size={fontSize}
+    font-weight="600"
+    letter-spacing="0.02em"
+  >{label}</text>
+</svg>

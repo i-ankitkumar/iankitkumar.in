@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import ConfirmMark from './ConfirmMark.astro';
+import EmployerMark from './EmployerMark.astro';
 
 export interface Props {
   role: CollectionEntry<'experience'>;
@@ -24,7 +25,13 @@ const { data } = role;
       {data.role}
       <ConfirmMark confirm={data.confirm} />
     </Heading>
-    <p class="company">{data.company}{data.current && <span class="muted"> — current</span>}</p>
+    {/* The employer mark sits above the employer name so the eye can
+        group entries by employer without reading each one. The name
+        stays as text, so the mark carries no meaning of its own. */}
+    <div class="company">
+      <EmployerMark name={data.company} size={40} />
+      <p>{data.company}{data.current && <span class="muted"> — current</span>}</p>
+    </div>
     <p class="muted" style="margin:0; max-width:64ch; line-height:1.65;">{data.summary}</p>
     {data.bullets.length > 0 && (
       <ul>
