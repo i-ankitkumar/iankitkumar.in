@@ -266,6 +266,27 @@ that carries the evidence. The record counts are computed from the content colle
 typed in, so adding a project cannot desync the strip. The labels carry a fixed two-line box so
 the four numbers sit on one baseline regardless of label length.
 
+**Fact grid.** Identity facts live in a ruled grid of labelled cells, never in a paragraph:
+Location, Status, Languages, Focus. The English label leads and the German follows in the `.de`
+span, which carries `--muted` (5.01:1 light, 6.02:1 dark), never `--rule` — the rule is a
+decorative hairline at 1.61:1 and fails AA as text.
+
+The column count is fixed rather than `auto-fit`, so the cell count divides evenly and the
+vertical hairline lands only on the cells that have a left neighbour. Six facts use three
+columns; four use the `is-2col` variant; below 40rem everything is one column with no vertical
+rules.
+
+**Employer mark.** Each role carries a mono lettermark in the sheet's own ink and rule colours:
+a hairline-framed block with the initials in `--fg`. Not the employer's colour logo — a
+saturated raster mark reads as pasted-in clipart on a ruled paper sheet, and hotlinking a brand
+asset from a corporate CDN is fragile and a licensing question. The mark is decorative and
+`aria-hidden`; the employer name is always rendered as text beside it.
+
+**The single-page record.** `/cv` holds the whole record in one scroll, with six anchored
+sections and a ruled anchor index under the letterhead. It is an additional view over the same
+content collections, not a replacement for the multi-route structure: the deep pages, the
+sitemap, and llms.txt are untouched, and every entry on `/cv` links to its own page.
+
 **Ruled entries.** Work items and experiments are ruled entries on `--surface`, separated by a
 hairline rather than boxed in cards with shadows.
 
