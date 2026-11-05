@@ -101,6 +101,45 @@ const skillGroups: { title: string; items: string[] }[] = [
 ];
 
 // ---------------------------------------------------------------------
+// The value strip.
+//
+// Four measured values in a row, drawn from the same records the
+// measured-values table below carries. The figures are the record's,
+// and each one links to the page that holds the evidence.
+//
+// Scale and trajectory are balanced deliberately: two figures say how
+// big the estate was, two say what the record contains. The strip is
+// reinforcement for the lede, not a replacement for it.
+//
+// Every count is computed from the collection, never hardcoded: a
+// hardcoded count drifts when a project is added and gets the
+// pluralisation wrong.
+// ---------------------------------------------------------------------
+type StripValue = {
+  n: string;
+  label: string;
+  href?: string;
+};
+
+// The records still under review: the projects whose status is one of
+// the open verdicts, plus the experiments (which are research-track by
+// definition).
+const openVerdicts = new Set(['in-progress', 'experimental', 'research']);
+const projectsInReview = projects.filter((p) => openVerdicts.has(p.data.status)).length;
+const recordsInReview = projectsInReview + experiments.length;
+
+const stripValues: StripValue[] = [
+  { n: '20,000+', label: 'Endpoints under patch ops', href: '/work/global-endpoints/' },
+  { n: '2,500+', label: 'Subscriptions scanned', href: '/work/tech-debt-scanning/' },
+  { n: '99.9%', label: 'Upgrade success rate', href: '/work/splunk-upgrade-automation/' },
+  {
+    n: String(projects.length),
+    label: `Work records · ${recordsInReview} in review`,
+    href: '/work/',
+  },
+];
+
+// ---------------------------------------------------------------------
 // The report table.
 //
 // Measured values only. No threshold column: the CV and the content
@@ -244,6 +283,7 @@ for (const exp of experiments) {
           <p class="lead lede">
             I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python, and lately a stack of AI agents that share memory.
           </p>
+
           <div class="actions">
             <a class="btn primary" href={SITE.resumeUrl} target="_blank" rel="noopener">
               Resume <span class="arr">↓</span>
@@ -275,6 +315,26 @@ for (const exp of experiments) {
             <em>{SITE.name} · 2026</em>
           </div>
         </aside>
+      </div>
+
+      {/* The value strip: four measured values, each linking to the
+          record that carries the evidence. It sits under the letterhead
+          block, across the full width of the sheet, so the four figures
+          read as one line of the document. */}
+      <div class="value-strip">
+        {stripValues.map((v) =>
+          v.href ? (
+            <a href={v.href}>
+              <span class="value-n">{v.n}</span>
+              <span class="value-l">{v.label}</span>
+            </a>
+          ) : (
+            <div>
+              <span class="value-n">{v.n}</span>
+              <span class="value-l">{v.label}</span>
+            </div>
+          )
+        )}
       </div>
     </div>
   </section>

@@ -247,6 +247,107 @@ code, pre, .mono { font-family: var(--font-mono); }
 }
 
 /* ------------------------------------------------------------------
+   The value strip — four measured values in a row.
+
+   Report furniture, not a row of floating stat cards: the values sit
+   on ruled columns of the sheet, separated by hairlines, so the strip
+   reads as a line of the document rather than a widget dropped into
+   it. The figures are the same measured values the table below
+   carries, stated compactly so a recruiter gets the scope of the
+   record in one look.
+
+   The values are the record's, so each one links to the page that
+   carries the evidence.
+   ------------------------------------------------------------------ */
+.value-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: var(--s-6) 0 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.value-strip a,
+.value-strip > div {
+  display: block;
+  padding: var(--s-4) var(--s-4) var(--s-4) 0;
+  text-decoration: none;
+  color: inherit;
+  min-height: 24px;
+}
+
+/* A hairline between the columns, except at the ends. */
+.value-strip > * + * {
+  border-left: 1px solid var(--rule-soft);
+  padding-left: var(--s-4);
+}
+
+.value-strip a:hover .value-n,
+.value-strip a:focus-visible .value-n {
+  color: var(--accent);
+}
+
+.value-n {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.value-l {
+  display: block;
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.4;
+  /* The labels wrap to a different number of lines depending on their
+     length, which leaves the four numbers on a ragged baseline. A fixed
+     two-line box keeps every number on the same line. */
+  min-height: calc(2 * 1.4em);
+}
+
+/* At narrow widths the strip becomes two columns, then one. */
+@media (max-width: 48rem) {
+  .value-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .value-strip > * + * {
+    border-left: 0;
+    padding-left: 0;
+  }
+  /* Re-apply the divider on the correct cells: the third and fourth
+     items start a new row and need a top rule instead. */
+  .value-strip > :nth-child(2n) {
+    border-left: 1px solid var(--rule-soft);
+    padding-left: var(--s-4);
+  }
+  .value-strip > :nth-child(n + 3) {
+    border-top: 1px solid var(--rule-soft);
+    padding-top: var(--s-4);
+  }
+}
+
+@media (max-width: 30rem) {
+  .value-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .value-strip > :nth-child(2n) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .value-strip > * + * {
+    border-top: 1px solid var(--rule-soft);
+    padding-top: var(--s-4);
+  }
+}
+
+/* ------------------------------------------------------------------
    Header / nav — the letterhead band
    ------------------------------------------------------------------ */
 .site-header {

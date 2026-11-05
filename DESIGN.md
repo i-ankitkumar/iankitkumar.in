@@ -252,6 +252,20 @@ single `h1`; the name is a `<p>`, so there is exactly one `h1` on the page.
 figures lock to a grid; the label is mono because it is a caption, not prose. The grid is one
 column on narrow screens.
 
+**Value strip.** The homepage carries a four-value strip between the letterhead block and the
+Measured values table. It is a ruled band across the sheet, not a row of floating cards: each
+cell is a mono number over an uppercase mono caption, separated by hairlines, with a rule above
+and below. It spans the full content width, aligned to the same left and right edges as the
+report header and the section heads.
+
+The strip reinforces the lede; it does not replace it. The lede stays the recruiter sentence and
+the `h1` stays the recruiter sentence. The strip is report furniture, so it is ruled, not boxed.
+
+Every figure in the strip is a measured value from the record and every cell links to the page
+that carries the evidence. The record counts are computed from the content collections, never
+typed in, so adding a project cannot desync the strip. The labels carry a fixed two-line box so
+the four numbers sit on one baseline regardless of label length.
+
 **Ruled entries.** Work items and experiments are ruled entries on `--surface`, separated by a
 hairline rather than boxed in cards with shadows.
 
