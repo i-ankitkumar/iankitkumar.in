@@ -180,6 +180,27 @@ above a metadata rail and the prose column. Prose caps at the measure.
 
 The nav is a hamburger below `56rem`. A plain inline nav overflows at 390px.
 
+**Mobile menu.** Below `56rem` the open menu is a full-height overlay panel, not a dropdown that
+hovers over the content. It is `position: fixed`, runs from the bottom of the sticky header to
+the bottom of the viewport, and takes `--nav-panel-top` (the measured header height) as its top
+offset. While it is open the page behind it must not scroll: the lock is `overflow: hidden` on
+the root element, not on `<body>`, because overflow on `<body>` makes `<body>` its own scroll
+container and silently un-sticks the sticky header. The previous inline overflow and the body
+padding are captured on open and restored on close, and the scroll position is put back where
+the reader left it. The panel scrolls inside itself with `overscroll-behavior: contain` so a long
+menu scrolls without chaining back to the document. A non-passive `touchmove` guard swallows
+gestures outside the panel, because `overflow: hidden` alone does not stop iOS Safari
+rubber-banding the document behind it.
+
+**Theme toggle.** The button shows the CURRENT theme as a single word, `Light` or `Dark`. The
+word is chosen by CSS from `:root[data-theme]`, so it is right before the first paint and cannot
+drift from the page the way a script-written label did. The accessible name names that same
+current theme and states the action the button performs: `Light mode, on. Switch to dark mode.`
+and `Dark mode, on. Switch to light mode.`. There is deliberately no `aria-pressed`: the button
+describes the current theme and the next action, which is not the state a pressed toggle
+expresses. The theme attribute, the accessible name, and the stored preference are written by
+one function so they cannot disagree.
+
 ## Elevation & Depth
 
 The report is ruled, not stacked. Depth comes from ink rules and tonal bands on the sheet, not

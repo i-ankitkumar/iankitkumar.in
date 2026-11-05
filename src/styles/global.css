@@ -320,6 +320,18 @@ code, pre, .mono { font-family: var(--font-mono); }
 }
 .theme-toggle:hover { color: var(--fg); border-color: var(--rule-strong); }
 
+/* Theme label.
+ *
+ * The button shows the CURRENT theme, and the accessible name says the
+ * same thing plus the action it performs. The visible word is picked by
+ * CSS from :root[data-theme], so it is correct before the first paint and
+ * cannot drift from the page the way a JS-written label and a static
+ * aria-label did.
+ */
+.theme-label-dark { display: none; }
+:root[data-theme='dark'] .theme-label-light { display: none; }
+:root[data-theme='dark'] .theme-label-dark { display: inline; }
+
 .nav-toggle {
   display: none;
   width: 40px;
@@ -1141,16 +1153,25 @@ code, pre, .mono { font-family: var(--font-mono); }
   .nav-toggle { display: inline-flex; }
   .site-nav {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    /* The panel runs from the bottom of the sticky header to the bottom of
+       the viewport, so it is a full-height overlay and the header stays
+       visible with its close button. */
+    top: var(--nav-panel-top, 3.5rem);
+    bottom: 0;
     left: 0;
     right: 0;
+    z-index: 1;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: var(--s-3) var(--gutter) var(--s-5);
+    padding: var(--s-4) var(--gutter) var(--s-5);
     background: var(--bg);
-    border-bottom: 1px solid var(--rule);
+    /* The panel scrolls inside itself instead of moving the page, and
+       overscroll containment stops the scroll chaining back to the
+       document behind it. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .site-nav.is-open { display: flex; }
   .site-nav a {

@@ -45,14 +45,16 @@ const currentSection = sectionFor(currentPath);
           </a>
         );
       })}
-      <button
-        class="theme-toggle"
-        type="button"
-        data-theme-toggle
-        aria-label="Toggle dark mode"
-        aria-pressed="false"
-      >
-        <span data-theme-label>Theme</span>
+      <!-- The visible word names the CURRENT theme; CSS picks it from
+           :root[data-theme] so it is right before first paint and cannot
+           drift from the page. There is deliberately no static aria-label:
+           until the script runs, the accessible name is the visible word,
+           which is always correct. The script then names the same current
+           theme plus the action the button performs, so the announced name
+           can never contradict what is on screen. -->
+      <button class="theme-toggle" type="button" data-theme-toggle>
+        <span class="theme-label-light">Light</span>
+        <span class="theme-label-dark">Dark</span>
       </button>
     </nav>
     <button
@@ -71,10 +73,62 @@ const currentSection = sectionFor(currentPath);
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
   const nav = document.getElementById('site-nav');
+  const body = document.body;
+  const root = document.documentElement;
+
+  // The open menu is a full-height panel over the page, so the page behind
+  // it must not scroll. The lock has to be undone completely: the previous
+  // inline overflow value is captured on open and restored on close, and the
+  // scroll position is put back where the reader left it.
+  //
+  // The lock is applied to the root element only. On the root, overflow
+  // propagates to the viewport, so the document stops scrolling. Setting it
+  // on <body> instead would make <body> its own scroll container, which
+  // silently un-sticks the sticky header.
+  let savedRootOverflow = '';
+  let savedBodyPaddingRight = '';
+  let savedScrollY = 0;
+
+  const lockScroll = () => {
+    savedScrollY = window.scrollY;
+    savedRootOverflow = root.style.overflow;
+    savedBodyPaddingRight = body.style.paddingRight;
+    // Hiding the viewport scrollbar narrows the layout by the scrollbar
+    // width. Give that width back as padding so the page does not jump
+    // sideways under the menu.
+    const scrollbar = window.innerWidth - root.clientWidth;
+    if (scrollbar > 0) body.style.paddingRight = `${scrollbar}px`;
+    root.style.overflow = 'hidden';
+  };
+
+  const unlockScroll = () => {
+    root.style.overflow = savedRootOverflow;
+    body.style.paddingRight = savedBodyPaddingRight;
+    // Restoring overflow can leave the reader at the top on some engines;
+    // put them back where they were. 'instant' beats the page's global
+    // smooth-scroll so the panel does not visibly glide back.
+    if (window.scrollY !== savedScrollY)
+      window.scrollTo({ top: savedScrollY, behavior: 'instant' as ScrollBehavior });
+  };
+
   const setOpen = (open: boolean) => {
     nav?.classList.toggle('is-open', open);
     toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
     toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (open) {
+      // The overlay panel starts below the sticky header. The header's
+      // height is not a fixed value (the brand can wrap), so measure it
+      // and publish it to CSS.
+      const header = document.querySelector<HTMLElement>('.site-header');
+      if (header)
+        root.style.setProperty(
+          '--nav-panel-top',
+          `${Math.round(header.getBoundingClientRect().height)}px`,
+        );
+      lockScroll();
+    } else {
+      unlockScroll();
+    }
   };
   // The nav precedes the toggle in the DOM, so a keyboard user who opens
   // the menu and presses Tab lands in the page body instead of the menu
@@ -101,9 +155,37 @@ const currentSection = sectionFor(currentPath);
       toggle?.focus();
     }
   });
+  // Touch guard for iOS Safari.
+  //
+  // overflow:hidden on the root stops desktop browsers from scrolling the
+  // page, but iOS Safari still rubber-bands the document behind an open
+  // panel. A non-passive touchmove listener that swallows the gesture
+  // outside the panel is the reliable fix there. Touches inside the panel
+  // are left alone so a long menu can still be scrolled.
+  document.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!nav?.classList.contains('is-open')) return;
+      if (e.target instanceof Node && nav.contains(e.target)) return;
+      e.preventDefault();
+    },
+    { passive: false },
+  );
   // Reset state when the viewport grows past the mobile breakpoint.
   const mq = matchMedia('(min-width: 56rem)');
   mq.addEventListener('change', () => {
     if (mq.matches) setOpen(false);
+  });
+  // The panel's offset from the top of the viewport is the sticky header's
+  // height, which can change on an orientation change. Recompute it while
+  // the panel is open.
+  window.addEventListener('resize', () => {
+    if (!nav?.classList.contains('is-open')) return;
+    const header = document.querySelector<HTMLElement>('.site-header');
+    if (header)
+      root.style.setProperty(
+        '--nav-panel-top',
+        `${Math.round(header.getBoundingClientRect().height)}px`,
+      );
   });
 </script>

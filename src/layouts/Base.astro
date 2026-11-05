@@ -143,11 +143,10 @@ const jsonLd = {
     <script>
       const root: HTMLElement = document.documentElement;
       const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
-      const label = document.querySelector<HTMLElement>('[data-theme-label]');
 
       // Persist the theme without letting a storage failure abort the caller.
       // Order matters: the DOM state is written first, so a throwing
-      // setItem can never leave the button's aria-pressed out of sync.
+      // setItem can never leave the button out of sync with the page.
       const persist = (t: 'light' | 'dark') => {
         try {
           localStorage.setItem('theme', t);
@@ -156,11 +155,20 @@ const jsonLd = {
         }
       };
       const apply = (t: 'light' | 'dark') => {
+        // One state, one writer. The theme attribute and the button's
+        // accessible name are written together, so the visible word and
+        // the announced name can never contradict each other.
         root.dataset.theme = t;
-        toggle?.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
-        // A visible label, not just aria-pressed: a sighted user needs to
-        // know which theme is active.
-        if (label) label.textContent = t === 'dark' ? 'Dark' : 'Light';
+        // The visible word is CSS-driven from [data-theme]. The accessible
+        // name names the same current theme plus the action the button
+        // performs, and starts with the visible word so it satisfies
+        // "Label in Name".
+        toggle?.setAttribute(
+          'aria-label',
+          t === 'dark'
+            ? 'Dark mode, on. Switch to light mode.'
+            : 'Light mode, on. Switch to dark mode.',
+        );
         persist(t);
       };
       toggle?.addEventListener('click', () => {
