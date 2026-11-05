@@ -1231,6 +1231,24 @@ code, pre, .mono { font-family: var(--font-mono); }
 
   .report-table-wrap { border-color: #999; }
 
+  /* The inspection table must fit the A4 content box (182mm at 14mm
+     margins). The screen layout sets a 14rem minimum on the item cell
+     and a 12rem minimum on the evidence cell, and both the value and
+     verdict cells are nowrap: together they push the last column past
+     the right edge, so the VERDICT header and the SHIPPED verdict were
+     clipped off the page. On paper the table is scaled down and the
+     nowrap is dropped so every column fits inside the sheet. */
+  .report-table-wrap { overflow-x: visible; }
+  .report-table { font-size: 0.6875rem; table-layout: fixed; }
+  .report-table th,
+  .report-table td { padding: var(--s-2) var(--s-3); }
+  .report-table th { white-space: normal; }
+  .report-table td.item { min-width: 0; font-size: 0.75rem; }
+  .report-table td.evidence { min-width: 0; }
+  .report-table td.value { white-space: normal; }
+  .report-table td.evidence a { min-height: 0; }
+  .verdict { white-space: normal; }
+
   /* The qualifications rail and the seal are furniture for the on-screen
      inspection report. The printed A4 sheet keeps the baseline
      pagination, so the rail is dropped there: the certifications and
