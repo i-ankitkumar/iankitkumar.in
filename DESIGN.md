@@ -290,6 +290,17 @@ sitemap, and llms.txt are untouched, and every entry on `/cv` links to its own p
 **Ruled entries.** Work items and experiments are ruled entries on `--surface`, separated by a
 hairline rather than boxed in cards with shadows.
 
+**The verb.** Every work, experiment, and tool record carries a short imperative phrase stating
+what it does, on the card directly above the name and on the detail page as the report
+subtitle. It is the reference design's library-card anatomy, adapted to this register.
+
+The card hierarchy reads: type (grey, uppercase, tiny) → verb (ink, mono) → name (ink, sans,
+large). The verb and the name are one block, so the flex gap on the card cannot push them
+apart; the gap between them comes from the verb's own margin.
+
+It is written in the report's voice, not a marketing one. "Evaluate. Score. Improve." does not
+belong on a Splunk migration record.
+
 **Report header.** `ReportHead.astro` renders the furniture row, the title, an optional subtitle,
 the lead, and an optional metadata block. Every inner page uses it so the letterhead is consistent.
 The prop is `reportType`, not `doctype` — `doctype` is a reserved word in Astro's attribute
