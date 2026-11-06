@@ -23,6 +23,6 @@ links:
     href: "/experience/#wolters-kluwer-associate"
     external: false
 featured: true
-order: 20
+order: 35
 confirm: false
 ---

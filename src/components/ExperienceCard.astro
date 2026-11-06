@@ -30,7 +30,7 @@ const { data } = role;
         stays as text, so the mark carries no meaning of its own. */}
     <div class="company">
       <EmployerMark name={data.company} size={40} />
-      <p>{data.company}{data.current && <span class="muted"> — current</span>}</p>
+      <p>{data.company}{data.current && <span class="muted">, current</span>}</p>
     </div>
     <p class="muted" style="margin:0; max-width:64ch; line-height:1.65;">{data.summary}</p>
     {data.bullets.length > 0 && (

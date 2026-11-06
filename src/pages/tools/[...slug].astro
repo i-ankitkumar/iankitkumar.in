@@ -32,8 +32,8 @@ const statusLabel: Record<string, string> = {
     backHref="/tools/"
     backLabel="All tools"
     title={data.name}
-    subtitle={data.verb ? `${data.verb} — ${data.tagline}` : data.tagline}
-    lead={data.summary}
+    subtitle={data.verb}
+    lead={`${data.tagline}. ${data.summary}`}
   >
     <div slot="actions" class="actions" style="margin-top: var(--s-5);">
       {data.links.map((l) => (

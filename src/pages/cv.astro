@@ -147,7 +147,7 @@ const anchors = [
       <dl class="fact-grid">
         <div>
           <dt>Location <span class="de">/ Ort</span></dt>
-          <dd>{SITE.location}</dd>
+          <dd>{SITE.locationShort}</dd>
         </div>
         <div>
           <dt>Status <span class="de">/ Status</span></dt>
@@ -203,7 +203,7 @@ const anchors = [
     </div>
     {experiments.length > 0 && (
       <>
-        <h3 class="sub-head">Experiments <span class="muted">— in review</span></h3>
+        <h3 class="sub-head">Experiments <span class="muted">, in review</span></h3>
         <div class="project-grid">
           {experiments.map((p) => (
             <ExperimentCard exp={p} headingLevel="h3" />
@@ -221,7 +221,7 @@ const anchors = [
           <li>
             <a href={`/tools/${t.id}/`}>
               <span class="record-list-name">{t.data.name}</span>
-              <span class="record-list-tag">{t.data.verb ? `${t.data.verb} — ${t.data.tagline}` : t.data.tagline}</span>
+              <span class="record-list-tag">{t.data.tagline}</span>
               <span class={`status status-${t.data.status}`}>{statusLabel[t.data.status] ?? t.data.status}</span>
             </a>
           </li>

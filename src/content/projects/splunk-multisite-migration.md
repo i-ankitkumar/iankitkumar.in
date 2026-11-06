@@ -25,6 +25,6 @@ links:
     href: "/experience/#wolters-kluwer-current"
     external: false
 featured: true
-order: 10
+order: 15
 confirm: false
 ---
