@@ -57,6 +57,17 @@ const projects = defineCollection({
     status: z.enum(['live', 'shipped', 'in-progress', 'archived', 'research']),
     period: z.string().optional(),
     summary: z.string(),
+    /**
+     * The card line: one sentence, at most ~140 characters.
+     *
+     * `summary` is the detail page's opening paragraph and runs to
+     * 250-280 characters. Putting that on a card duplicates the detail
+     * page word for word, so the card gets its own shorter line and the
+     * detail page keeps the full paragraph. Fall back to `summary` when
+     * a record does not declare one, so a missing short line never
+     * blanks a card.
+     */
+    summaryShort: z.string().optional(),
     problem: z.string().optional(),
     architecture: z.string().optional(),
     implementation: z.string().optional(),
@@ -91,6 +102,8 @@ const experiments = defineCollection({
     category: z.enum(['ai-agent', 'mcp', 'security-tooling', 'ml-security', 'other']),
     status: z.enum(['live', 'shipped', 'in-progress', 'experimental', 'archived']),
     summary: z.string(),
+    /** The card line: one sentence, at most ~140 characters. See projects.summaryShort. */
+    summaryShort: z.string().optional(),
     problem: z.string().optional(),
     architecture: z.string().optional(),
     implementation: z.string().optional(),

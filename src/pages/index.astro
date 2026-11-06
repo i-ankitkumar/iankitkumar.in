@@ -280,8 +280,13 @@ for (const exp of experiments) {
           <h1 class="display">
             Shipping software and AI tooling on top of five years of platform engineering.
           </h1>
+          {/* The lede carries the claim and the scope. It does not
+              re-list the tools: the subject-tag chip above already
+              names the stack, and the Stack section lists it in full.
+              Three statements of the same list was the site's biggest
+              redundancy. */}
           <p class="lead lede">
-            I turn three-day infrastructure work into fifteen-minute button presses. Splunk across 20,000 endpoints, Terraform, Python, and lately a stack of AI agents that share memory.
+            I turn three-day infrastructure work into fifteen-minute button presses, and lately a stack of AI agents that share memory.
           </p>
 
           <div class="actions">
@@ -517,7 +522,20 @@ for (const exp of experiments) {
         <div class="skill-group reveal">
           <h3>{group.title}</h3>
           <ul>
-            {group.items.map((item) => <li>{item}</li>)}
+            {/* The middot is real inline text at the END of the item,
+                not a ::after and not a sibling element. A ::after is
+                laid out as a box and can end up stranded in the
+                leftover space of a wrapped line; a sibling separator
+                gets orphaned in the gap between items. Inline text at
+                the end of the item flows with the item's last word, so
+                a line break always falls before the separator, never
+                after it. */}
+            {group.items.map((item, i) => (
+              <li>
+                {item}
+                {i < group.items.length - 1 && <span class="sep" aria-hidden="true">·</span>}
+              </li>
+            ))}
           </ul>
         </div>
       ))}

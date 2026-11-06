@@ -63,34 +63,36 @@ const anchors = [
   <Nav slot="header" />
 
   <!-- REPORT HEADER -->
+  {/* /cv does not repeat the homepage hero. The homepage is the
+      letterhead; this page is the record it points at. A recruiter who
+      read the homepage and then opened /cv used to see the same frame
+      twice before any new content.
+
+      What stays is one compact identity line, so a visitor who lands
+      on /cv directly (from a search, or from a shared link) still
+      knows whose record they are reading, and the location they need
+      for the eligibility check.
+  */}
   <div class="perf" aria-hidden="true"></div>
-  <section class="report-hero">
+  <section class="report-hero is-compact">
     <div class="container">
       <div class="report-head">
         <div>
           <p class="doctype">Prüfprotokoll · Complete Record</p>
-
-          <p class="letterhead-name">{SITE.name}</p>
-          <p class="letterhead-role">{SITE.role}</p>
-
-          <div class="subject">
-            <img
-              class="subject-photo"
-              src={SITE.photoUrl}
-              alt={`${SITE.name} — portrait`}
-              width="96"
-              height="96"
-              loading="eager"
-              decoding="async"
-            />
-            <p class="subject-tag">{SITE.tagline}</p>
-          </div>
 
           <h1 class="display">
             The whole record on one page.
           </h1>
           <p class="lead lede">
             Every role, every piece of shipped work, every tool and certification, in one scroll. Each entry links to its own page with the full write-up.
+          </p>
+
+          {/* Name, role, and current employer on one mono row. The
+              location is deliberately NOT here: it is already in the
+              report metadata on the right ("Ort / Location"), and
+              repeating it made this line long enough to wrap. */}
+          <p class="report-line identity-line">
+            {SITE.name} · {SITE.role} · Wolters Kluwer
           </p>
 
           <div class="actions">
@@ -114,12 +116,6 @@ const anchors = [
             <dt>Ausgabe <span class="de">/ Issue</span></dt>
             <dd>2026</dd>
           </dl>
-          <p class="report-line"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</p>
-          <div class="stamp" role="img" aria-label="Inspected and accepted by Ankit Kumar, 2026. Self-inspected record.">
-            <b>GEPRÜFT</b>
-            <span>INSPECTED · ABGENOMMEN</span>
-            <em>{SITE.name} · 2026</em>
-          </div>
         </aside>
       </div>
     </div>

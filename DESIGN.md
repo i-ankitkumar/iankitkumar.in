@@ -328,6 +328,44 @@ lower-left, so the crop is a 360x360 window at `+200+245` taken from the origina
 full-size `/photo.jpg` is kept only as the JSON-LD `Person.image`, where a crawler wants more
 than a 96px display crop.
 
+**Stack ledger.** The stack section is a ledger, not a wall of bullets. Each category is one
+ruled row: a mono uppercase label in a fixed `8.5rem` column, and the items as an inline run
+that wraps in the remaining space. Two columns of rows on desktop, one below `48rem`, where
+the label stops being a fixed column and sits on its own line above the items.
+
+The separator between items is inline text at the END of the item it follows, not a `::after`
+and not a sibling element. A `::after` is laid out as a box and strands itself in the leftover
+space of a wrapped line; a sibling separator is orphaned in the gap between items. Only inline
+text inside the item's own flow wraps with the item's last word, so a line break always falls
+before the separator and never after it.
+
+**Card summary vs detail lead.** A card shows `summaryShort`, at most ~140 characters and one
+sentence. The detail page shows `summary`, the full paragraph. `summaryShort` is optional in
+the schema and falls back to `summary`, so a record that has not declared one still renders a
+card. The card must not carry the detail page's opening paragraph verbatim: that is
+duplication, and it makes the card a wall of text that repeats itself on the next click.
+
+## Content architecture
+
+The site is one document in several views. The rule that keeps it coherent: **every fact
+appears exactly once, in the one view that owns it.**
+
+- The **homepage** owns the claim, the identity, and the stack. It is the letterhead.
+- **`/cv`** is the record. It does NOT repeat the homepage hero — no letterhead, no portrait,
+  no stack chips, no seal. It opens on the title, the lede, one mono identity line (name,
+  role, current employer), the actions, and the report metadata. The location lives in the
+  metadata column, so the identity line does not repeat it.
+- **`/work`** owns the ranking and the one-line summary of each record.
+- **Detail pages** own the full write-up.
+
+Duplication is the failure mode here, not verbosity. The site's body content is about 4,000
+words across 23 entries; the reason a reader feels the weight is repetition and one oversized
+section, not the volume of copy.
+
+A headline on an inner page states the subject of that page. It does not describe the filing
+convention: "Projects, in order of how often I talk about them" explains how the list is
+sorted, which is a footnote, not a headline.
+
 ## Do's and Don'ts
 
 **Reveal-on-scroll.** `.reveal` elements start at `opacity: 0` and are revealed by an
@@ -368,5 +406,10 @@ entry that makes the claim, not on a site-wide config object.
 - Do not publish a relocation city. Germany only.
 - Do not publish "EU Blue Card eligible" on site pages without Ankit's explicit approval. It is
   a legal-status claim, and it is true on the CV but not cleared for the site.
+- Do not repeat the homepage hero on an inner page. Each view owns its own content; a second
+  copy of the letterhead is duplication, not reinforcement.
+- Do not put a fact on two pages. If two pages both need it, one of them links to the other.
+- Do not put the full detail paragraph on a card. Cards carry `summaryShort`; detail pages
+  carry `summary`.
 - Do not let a PDF or a text block run wider than the measure.
 - Do not reintroduce pills or large radii. The document edge is square.

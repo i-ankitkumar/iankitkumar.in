@@ -138,6 +138,24 @@ code, pre, .mono { font-family: var(--font-mono); }
   padding-bottom: var(--s-7);
 }
 
+/* The compact hero. /cv does not repeat the homepage letterhead, so
+   its header block is shorter: the title, the lede, one identity line,
+   and the actions, with the report metadata still in the right column.
+   The top and bottom padding come in by one step to match. */
+.report-hero.is-compact {
+  padding-top: var(--s-5);
+  padding-bottom: var(--s-5);
+}
+
+/* The identity line: name, role, and location on one mono row, so a
+   visitor who lands on /cv directly knows whose record they are
+   reading without a letterhead, portrait, and stack chips repeating
+   what the homepage already says. */
+.identity-line {
+  margin-top: var(--s-5);
+  color: var(--fg-soft);
+}
+
 .report-head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
@@ -861,17 +879,30 @@ code, pre, .mono { font-family: var(--font-mono); }
 
 /* ------------------------------------------------------------------
    Stack
+
+   A ledger, not a wall of bullets. Each category is one ruled row:
+   a mono label on the left, the items as an inline run on the right.
+   Two columns of these rows, so the whole stack reads in one pass
+   instead of scrolling through seven stacked groups.
    ------------------------------------------------------------------ */
 .skill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
-  gap: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--s-7);
   border-top: 1px solid var(--rule);
 }
 
 .skill-group {
-  padding: var(--s-5) var(--s-5) var(--s-5) 0;
+  padding: var(--s-4) 0;
   border-bottom: 1px solid var(--rule);
+  /* The label and the items share a baseline grid: the label is a
+     narrow fixed column, the items take the rest. */
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: var(--s-4);
+  /* The label sits on the first line of the items, not on the
+     baseline of the whole block, so it reads as a row label. */
+  align-items: start;
 }
 .skill-group h3 {
   font-family: var(--font-mono);
@@ -880,7 +911,9 @@ code, pre, .mono { font-family: var(--font-mono); }
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  margin: 0 0 var(--s-3);
+  margin: 0;
+  /* Optically align the small caps with the first line of body text. */
+  padding-top: 0.15em;
 }
 .skill-group ul {
   list-style: none;
@@ -888,8 +921,41 @@ code, pre, .mono { font-family: var(--font-mono); }
   margin: 0;
   font-size: var(--t-sm);
   color: var(--fg-soft);
+  /* The items run inline and wrap, separated by a hairline middot
+     rather than a bullet, so the row stays two or three lines tall
+     instead of one line per tool. */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-3);
 }
-.skill-group li { margin-bottom: var(--s-2); }
+/* Each item is a plain inline box, so the trailing separator is part of
+   the item's own text flow and wraps with the item's last word. */
+.skill-group li {
+  margin: 0;
+}
+
+/* The separator is inline text at the end of the item, not a gap
+   filler: a break always falls before it, so no line ever ends with a
+   dangling middot and no line ever starts with one. */
+.skill-group .sep {
+  color: var(--rule);
+  user-select: none;
+  margin: 0 0.35em;
+}
+
+/* The ledger folds to one column, and the label stops being a fixed
+   column: below 48rem the label sits on its own line above the items,
+   because a 8.5rem label against a 22rem screen leaves too little room
+   for the items to wrap in. */
+@media (max-width: 48rem) {
+  .skill-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .skill-group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-2);
+  }
+}
 
 /* ------------------------------------------------------------------
    Detail pages

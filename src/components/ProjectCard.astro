@@ -47,7 +47,11 @@ const statusLabel: Record<string, string> = {
       <ConfirmMark confirm={data.confirm} label={data.confirm ? 'verify' : undefined} />
     </Heading>
   </div>
-  <p>{data.summary}</p>
+  {/* The card line. `summaryShort` is the one-sentence version
+      written for a card; `summary` is the detail page's opening
+      paragraph and is far too long to repeat here. Fall back to
+      `summary` so a record without a short line still renders. */}
+  <p>{data.summaryShort ?? data.summary}</p>
   {data.tags.length > 0 && (
     <div class="tags">
       {data.tags.map((t) => <span class="tag">{t}</span>)}
