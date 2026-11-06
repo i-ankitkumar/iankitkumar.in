@@ -221,7 +221,7 @@ const anchors = [
           <li>
             <a href={`/tools/${t.id}/`}>
               <span class="record-list-name">{t.data.name}</span>
-              <span class="record-list-tag">{t.data.tagline}</span>
+              <span class="record-list-tag">{t.data.verb ? `${t.data.verb} — ${t.data.tagline}` : t.data.tagline}</span>
               <span class={`status status-${t.data.status}`}>{statusLabel[t.data.status] ?? t.data.status}</span>
             </a>
           </li>

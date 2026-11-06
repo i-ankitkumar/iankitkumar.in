@@ -1,5 +1,6 @@
 ---
 name: "Subscription migration across 25 Azure tenants"
+verb: "Consolidate subscriptions"
 type: "Cloud Governance"
 status: "shipped"
 period: "2024"

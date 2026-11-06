@@ -36,10 +36,17 @@ const statusLabel: Record<string, string> = {
   <span class="type">{data.type}</span>
   {isCurrent && <span class="type current-flag">Current direction</span>}
   {data.status && <span class="status">{statusLabel[data.status] ?? data.status}</span>}
-  <Heading>
-    {data.name}
-    <ConfirmMark confirm={data.confirm} label={data.confirm ? 'verify' : undefined} />
-  </Heading>
+  {/* The verb: a short imperative phrase stating what the record does.
+      It sits directly above the name with no gap between them, so the
+      two read as one block — what the record does, then what it is
+      called — the way the reference design's library cards do. */}
+  <div class="verb-block">
+    {data.verb && <p class="verb">{data.verb}</p>}
+    <Heading>
+      {data.name}
+      <ConfirmMark confirm={data.confirm} label={data.confirm ? 'verify' : undefined} />
+    </Heading>
+  </div>
   <p>{data.summary}</p>
   {data.tags.length > 0 && (
     <div class="tags">

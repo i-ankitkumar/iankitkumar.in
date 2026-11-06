@@ -56,6 +56,7 @@ const blocks: { title: string; body?: string }[] = [
     backLabel="All experiments"
     category={showCategory ? category : undefined}
     title={data.name}
+    subtitle={data.verb}
     lead={data.summary}
   >
     <div slot="actions" class="actions" style="margin-top: var(--s-5);">

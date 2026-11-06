@@ -1,5 +1,6 @@
 ---
 name: "Global Windows endpoint operations"
+verb: "Operate endpoints globally"
 type: "Endpoint Ops"
 status: "shipped"
 period: "2021 – 2022"

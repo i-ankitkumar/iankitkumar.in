@@ -1,5 +1,6 @@
 ---
 name: "Tech-debt scanning across 2,500+ subscriptions"
+verb: "Find and fix tech debt"
 type: "Reliability"
 status: "shipped"
 period: "2024"

@@ -1,5 +1,6 @@
 ---
 name: "AI-assisted triage for Splunk security alerts"
+verb: "Enrich alerts with AI"
 type: "Security Tooling"
 category: "security-tooling"
 status: "experimental"

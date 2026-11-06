@@ -1,5 +1,6 @@
 ---
 name: "NIDS using ML and DL"
+verb: "Detect network intrusions"
 type: "Open Source"
 status: "research"
 period: "2022"

@@ -1,5 +1,6 @@
 ---
 name: "Splunk dashboards for SOC2 + financial reporting"
+verb: "Prove compliance continuously"
 type: "Observability"
 status: "shipped"
 period: "2022 – 2024"

@@ -1,5 +1,6 @@
 ---
 name: "IDS using MLP + GridSearchCV"
+verb: "Detect intrusions with MLP"
 type: "Open Source"
 status: "research"
 period: "2022"

@@ -1,5 +1,6 @@
 ---
 name: "AI office stack — multi-agent dev environment"
+verb: "Orchestrate agents"
 type: "AI Engineering"
 status: "live"
 period: "2026"

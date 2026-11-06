@@ -1,5 +1,6 @@
 ---
 name: "kittybot"
+verb: "Run the Telegram bot"
 tagline: "Split household expenses from Telegram"
 status: "beta"
 summary: "A Telegram bot that pulls grocery orders from Swiggy Instamart, Zepto, Blinkit and BigBasket, and writes the shared expenses to Kittysplit — but only after you approve every split."

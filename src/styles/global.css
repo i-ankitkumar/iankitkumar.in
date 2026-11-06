@@ -683,6 +683,34 @@ code, pre, .mono { font-family: var(--font-mono); }
 .project-card .status.live,
 .project-card .status.shipped { color: var(--accent); }
 
+/* The verb — a short imperative phrase stating what the record does.
+   It sits between the category label and the name, so the hierarchy on
+   a card reads: what kind of record (type) → what it does (verb) →
+   what it is called (name). Mono, because it is a caption on the
+   record rather than prose, and it takes the ink colour so it reads
+   as part of the title rather than as another grey label. */
+.project-card .verb {
+  font-family: var(--font-mono);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  max-width: none;
+  margin: 0 0 var(--s-1);
+}
+
+/* The verb and the name are one block. Without this the card's flex
+   gap pushes them apart, and the verb reads as another loose label
+   instead of as the line that introduces the name. */
+.project-card .verb-block {
+  margin: 0;
+}
+
+.project-card .verb-block > h2,
+.project-card .verb-block > h3 {
+  margin: 0;
+}
+
 .project-card.sm { padding: var(--s-4) var(--s-5) var(--s-4) 0; }
 .project-card.sm h2,
 .project-card.sm h3 { font-size: var(--t-base); }

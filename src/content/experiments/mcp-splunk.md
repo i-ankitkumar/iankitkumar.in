@@ -1,5 +1,6 @@
 ---
 name: "MCP server: Splunk query planner"
+verb: "Let models query Splunk"
 type: "MCP"
 category: "mcp"
 status: "experimental"

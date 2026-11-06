@@ -41,6 +41,18 @@ const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.object({
     name: z.string(),
+    /**
+     * A short imperative phrase stating what the record does.
+     *
+     * Every card carries one, so a grid of work records reads as a set
+     * rather than a pile of titles. It is the site's equivalent of the
+     * reference design's library verbs ("Evaluate. Score. Improve."),
+     * written in the report's own voice rather than a marketing one.
+     *
+     * Two or three words. Lower case, no trailing period. It sits above
+     * the name on the card and in the category line on the detail page.
+     */
+    verb: z.string().optional(),
     type: z.string(),
     status: z.enum(['live', 'shipped', 'in-progress', 'archived', 'research']),
     period: z.string().optional(),
@@ -74,6 +86,8 @@ const experiments = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/experiments' }),
   schema: z.object({
     name: z.string(),
+    /** A short imperative phrase stating what the record does. See the projects schema. */
+    verb: z.string().optional(),
     category: z.enum(['ai-agent', 'mcp', 'security-tooling', 'ml-security', 'other']),
     status: z.enum(['live', 'shipped', 'in-progress', 'experimental', 'archived']),
     summary: z.string(),
@@ -96,6 +110,8 @@ const tools = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
+      /** A short imperative phrase stating what the record does. See the projects schema. */
+      verb: z.string().optional(),
       tagline: z.string(),
       status: z.enum(['live', 'beta', 'in-progress', 'archived']),
       summary: z.string(),

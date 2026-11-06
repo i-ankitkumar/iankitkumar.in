@@ -1,5 +1,6 @@
 ---
 name: "Multi-cloud Splunk upgrade automation"
+verb: "Upgrade without incidents"
 type: "Release Engineering"
 status: "shipped"
 period: "2024"

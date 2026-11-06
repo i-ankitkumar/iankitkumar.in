@@ -23,10 +23,15 @@ const statusLabel: Record<string, string> = {
 <article class="project-card reveal" data-confirm={data.confirm || undefined}>
   <span class="type">Tool</span>
   <span class="status">{statusLabel[data.status] ?? data.status}</span>
-  <Heading>
-    <a href={`/tools/${tool.id}/`}>{data.name}</a>
-    <ConfirmMark confirm={data.confirm} />
-  </Heading>
+  {/* The verb: a short imperative phrase stating what the record does.
+      It groups with the name so the two read as one block. */}
+  <div class="verb-block">
+    {data.verb && <p class="verb">{data.verb}</p>}
+    <Heading>
+      <a href={`/tools/${tool.id}/`}>{data.name}</a>
+      <ConfirmMark confirm={data.confirm} />
+    </Heading>
+  </div>
   <p>{data.summary}</p>
   {data.stack.length > 0 && (
     <div class="tags">

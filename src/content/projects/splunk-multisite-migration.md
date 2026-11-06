@@ -1,5 +1,6 @@
 ---
 name: "Splunk multi-site cluster migration"
+verb: "Migrate to multi-site"
 type: "Infrastructure"
 status: "shipped"
 period: "2024"

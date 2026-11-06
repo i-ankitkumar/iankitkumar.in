@@ -1,5 +1,6 @@
 ---
 name: "GPP Hack4Good"
+verb: "Build under time pressure"
 type: "Hackathon"
 status: "shipped"
 period: "2021"

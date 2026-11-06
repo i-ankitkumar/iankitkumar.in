@@ -1,5 +1,6 @@
 ---
 name: "iankitkumar.in + blog.iankitkumar.in"
+verb: "Ship the site and blog"
 type: "Personal Site"
 status: "live"
 period: "2024 – ongoing"
