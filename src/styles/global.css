@@ -473,6 +473,19 @@ code, pre, .mono { font-family: var(--font-mono); }
 .page-section {
   padding-block: var(--s-7);
   border-top: 1px solid var(--rule);
+  /* An anchored section must land clear of the sticky header, not under
+     it. Without this, a fragment link scrolls the section's top edge to
+     the top of the viewport, which puts the section heading behind the
+     57px header band — the heading's top edge is clipped and reads as a
+     half-cut line of type.
+
+     This affects every fragment link on the site: the /cv anchor index
+     and the homepage's #numbers, #about and #stack deep links, which are
+     the targets llms.txt points a reader at.
+
+     The offset is the header height plus a little breathing room, so the
+     heading clears the band and its section badge is fully visible. */
+  scroll-margin-top: calc(var(--nav-h) + var(--s-4));
 }
 .page-section:first-of-type { border-top: 0; }
 
