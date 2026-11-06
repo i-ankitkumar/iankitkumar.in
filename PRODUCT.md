@@ -10,7 +10,7 @@ web
 
 The portfolio serves three layered audiences. A visitor should self-select into the right depth within five seconds, then get richer content if they stay.
 
-- **Primary: technical recruiters and hiring managers in Germany and the EU.** Scanning a GitHub profile README or landing on iankitkumar.in during a sourcing pass. They want a fast yes/no on fit: location, eligibility, stack, seniority, contact.
+- **Primary: technical recruiters and hiring managers in Germany and the EU.** Scanning a GitHub profile README or landing on iankitkumar.in during a sourcing pass. They want a fast yes/no on fit: location, relocation status, stack, seniority, contact.
 - **Secondary: software and AI engineering hiring managers.** Dig past the first fold for evidence of scope, scale, and recent work. Want credible claims, easy access to deeper material, and a sense of whether the candidate can ship.
 - **Tertiary: peers in DevOps, SRE, MLOps, and AI-engineering communities.** Visiting for reasons other than hiring: project interest, voice, taste, conversation starters.
 
@@ -20,7 +20,7 @@ Decision shape the design must protect: the first five seconds answer the recrui
 
 Ankit Kumar's personal site and GitHub profile presence. It communicates an **infrastructure engineer transitioning into software and AI engineering**, anchored in real Splunk, Azure, AWS, Terraform, MCP, and AI-powered security work, and routes interested visitors to the right follow-up surface (resume, GitHub, LinkedIn, blog).
 
-Success looks like: a recruiter or manager can confirm fit (Pune, relocating to Germany, EU Blue Card eligible, Splunk multi-site + Azure + AWS + Terraform + MCP, comfortable with software and AI engineering crossover) from the profile alone, without needing to ask. Failure looks like: a visitor leaves unsure of location, eligibility, or how to make contact.
+Success looks like: a recruiter or manager can confirm fit (Pune, relocating to Germany, Splunk multi-site + Azure + AWS + Terraform + MCP, comfortable with software and AI engineering crossover) from the profile alone, without needing to ask. Failure looks like: a visitor leaves unsure of location, relocation status, or how to make contact.
 
 ## Positioning
 
@@ -86,9 +86,10 @@ The product ships across three repos. They share the audience, positioning, evid
 
 **Constraints (binding):**
 
-- Every claim is verifiable and must remain so. Cert list (Terraform Associate, AZ-104, RHCSA, AZ-900, AI-900, AZ-400 in progress), language levels (English C1, Hindi Native, German A2), and EU Blue Card eligibility are factual. Future design work must not invent additional certs, client logos, testimonials, employers, or metrics.
+- Every claim is verifiable and must remain so. Cert list (Terraform Associate, AZ-104, RHCSA, AZ-900, AI-900, AZ-400 in progress) and language levels (English C1, Hindi Native, German A2) are factual. Future design work must not invent additional certs, client logos, testimonials, employers, or metrics.
 - AWS, MCP, AI-powered security tooling, and "relocating to Germany" are **newer claims** added during the v2 rewrite and have been signed off; they now carry `confirm: false`. Only the relocation *window* remains unconfirmed (`relocateWindow: true`).
 - The site states "relocating to Germany", not "relocating to Heidelberg". Heidelberg is a partner-linked location and is not published on this surface. The card (Surface 1) is deliberately coarser still: "Pune, India -> Germany".
+- EU Blue Card eligibility is **not published on any public surface**, including this site's `resume.pdf`. It is a legal status that depends on a job offer: the employer sponsors it, and the applicant applies at the German embassy in Mumbai only once an offer is in hand. Publishing "EU Blue Card eligible" before then states a status that is not yet true, so the surface states relocation status ("relocating to Germany") instead and says nothing about eligibility. This decision came from Ankit on 2026-11-06, superseding the earlier rule that the claim should be stated strongly.
 - Location is **Pune** for the v2 site (matches the work entries on the CV and the recent memory note about CV/LinkedIn being updated). The CV header still says Mumbai; that is a separate live document.
 - Generated artifacts in content collections are committed and tracked; the public assets in `public/` are copied from the existing live repo and are also committed.
 - The **inspection-report register is the binding product direction for this surface**: warm paper ground, ink rules, IBM Plex Sans and IBM Plex Mono, blue for a passed verdict and rust for an open one, ruled entries instead of shadow-as-border cards. This replaces the earlier monochrome-precision constraint and was chosen by Ankit from five presented directions. The profile card (Surface 1) keeps its own terminal register; that does not license this surface to follow it, and the report register does not license that surface to abandon terminal.
@@ -107,7 +108,7 @@ The product ships across three repos. They share the audience, positioning, evid
 
 - **The inspection-report register is binding.** Warm paper sheet, ink rules, IBM Plex Sans + IBM Plex Mono, blue for a passed verdict and rust for an open one, ruled entries, a measured-values table, and a verification stamp. Three type weights only (400 read / 500 interact / 600 announce). Restrained motion. Future work preserves this form factor unless the user explicitly reopens the brand.
 - **Real name and identity.** "Ankit Kumar", handle `i-ankitkumar`. These are the brand; fictional personas are not.
-- **Honest voice.** No marketing copy. If a statement is a fact (cert, level, eligibility), it is stated as a fact. If it is a value claim, it is softened or omitted. Anything still under review carries a `verify` badge.
+- **Honest voice.** No marketing copy. If a statement is a fact (cert, language level, relocation status), it is stated as a fact. If it is a value claim, it is softened or omitted. Anything still under review carries a `verify` badge.
 - **Premium dark + light themes.** Light is the default; dark is co-equal and both are first-class. Both pass WCAG AA contrast.
 
 ## Evidence on Hand
