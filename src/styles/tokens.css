@@ -76,8 +76,19 @@
 
   /* Motion */
   --dur-1: 120ms;
-  --dur-3: 320ms;
-  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --dur-2: 200ms;
+  --dur-3: 280ms;
+  /* A stronger ease-out than the CSS built-in. The built-in easings
+     are too weak: they lack the punch that makes a transition feel
+     deliberate rather than merely animated. The curve starts fast, so
+     the element appears to move the instant it is triggered, which is
+     the moment the reader is watching most closely. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  /* Press feedback. A pressed control scales back a little so the
+     interface visibly acknowledges the press; without it a button
+     gives no sign it heard the click. Kept small on purpose: this is
+     a ruled report, not a bouncy app. */
+  --press-scale: 0.97;
 
   /* Shape — the report is ruled, not rounded. */
   --r-sm: 2px;

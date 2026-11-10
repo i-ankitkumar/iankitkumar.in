@@ -436,8 +436,13 @@ code, pre, .mono { font-family: var(--font-mono); }
   padding: 0.3rem 0.55rem;
   min-height: 24px;
   cursor: pointer;
+  transition: transform var(--dur-1) var(--ease-out),
+              color var(--dur-1) var(--ease-out),
+              border-color var(--dur-1) var(--ease-out);
 }
 .theme-toggle:hover { color: var(--fg); border-color: var(--rule-strong); }
+/* Press feedback: the toggle acknowledges the press. */
+.theme-toggle:active { transform: scale(var(--press-scale)); }
 
 /* Theme label.
  *
@@ -462,7 +467,11 @@ code, pre, .mono { font-family: var(--font-mono); }
   justify-content: center;
   color: var(--fg);
   cursor: pointer;
+  transition: transform var(--dur-1) var(--ease-out),
+              border-color var(--dur-1) var(--ease-out);
 }
+/* Press feedback: the toggle acknowledges the press. */
+.nav-toggle:active { transform: scale(var(--press-scale)); }
 .nav-toggle-bars,
 .nav-toggle-bars::before,
 .nav-toggle-bars::after {
@@ -1037,8 +1046,13 @@ code, pre, .mono { font-family: var(--font-mono); }
   border: 1px solid var(--rule-strong);
   border-radius: 0;
   cursor: pointer;
+  transition: transform var(--dur-1) var(--ease-out),
+              background var(--dur-1) var(--ease-out),
+              color var(--dur-1) var(--ease-out);
 }
 .btn:hover { background: var(--surface-2); color: var(--fg); }
+/* Press feedback: the button acknowledges the press. */
+.btn:active { transform: scale(var(--press-scale)); }
 .btn.primary {
   background: var(--fg);
   color: var(--bg);

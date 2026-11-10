@@ -374,6 +374,27 @@ that can throw, a 1.5s failsafe reveals everything regardless, and `@media print
 `opacity: 1` because print has no scrolling. Without the print rule, printing the homepage emits
 section headings with none of the evidence.
 
+**Motion.** The report is ruled, not animated. Motion is limited to three things: the
+reveal on scroll, the theme toggle, and the press feedback on a control. The scale lives in
+`tokens.css` as `--dur-1` (120ms), `--dur-2` (200ms) and `--dur-3` (280ms, the reveal),
+all on one easing curve, `--ease-out: cubic-bezier(0.23, 1, 0.32, 1)`. The built-in CSS
+easings are too weak to make a transition feel deliberate.
+
+Three rules keep the motion honest:
+
+- **Name the exact properties.** Never `transition: all`. The report is dense; an
+  unnamed transition can animate `width` and push the table layout mid-read.
+- **Animate `transform` and `opacity` only.** Both skip layout and paint. Animating
+  `width`, `height`, `top`, `left`, `margin` or `padding` triggers all three and the
+  ruled ledger visibly reflows.
+- **A pressed control scales back.** `.btn`, `.theme-toggle` and `.nav-toggle` carry
+  `transform: scale(var(--press-scale))` on `:active`, so the interface acknowledges the
+  press. It is a link or a button, never a large card: scaling a grid card would shift
+  its neighbours.
+
+`@media (prefers-reduced-motion: reduce)` drops the reveal entirely, and it must keep
+doing so if the motion scale changes.
+
 **Experiments.** `/experiments/` lists the AI/MCP work and each card opens a detail page at
 `/experiments/<slug>/` with the same rail-plus-prose shape as a project. The experiments
 collection's schema declares every field its entries author; an undeclared key is stripped
@@ -393,6 +414,7 @@ entry that makes the claim, not on a site-wide config object.
 - Measure contrast after any palette change. The numbers live in PRODUCT.md.
 - Cap prose at `--measure`.
 - Give every page a single `h1` and never skip a heading level.
+- Give a pressed control a scale-back, so the interface acknowledges the press.
 - Run `npx impeccable detect` before deploying.
 
 **Don't**
@@ -406,6 +428,8 @@ entry that makes the claim, not on a site-wide config object.
 - Do not publish a relocation city. Germany only.
 - Do not publish "EU Blue Card eligible" on site pages without Ankit's explicit approval. It is
   a legal-status claim, and it is true on the CV but not cleared for the site.
+- Do not use `transition: all`, and do not animate `width`, `height`, `top`, `left`, `margin`
+  or `padding`. The ruled ledger reflows visibly when the layout is animated.
 - Do not repeat the homepage hero on an inner page. Each view owns its own content; a second
   copy of the letterhead is duplication, not reinforcement.
 - Do not put a fact on two pages. If two pages both need it, one of them links to the other.
