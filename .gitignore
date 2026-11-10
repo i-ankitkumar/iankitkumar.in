@@ -35,6 +35,9 @@ Thumbs.db
 # The upstream copy is tracked at pbakaus/impeccable; vendoring ~11 MB of
 # skill files into a portfolio repo is noise. The detector config in
 # .impeccable/config.json IS tracked, because the ignores carry reasons.
+# The critique snapshots are NOT tracked: each one is a dated record of a
+# moment, and they go stale as soon as the page they describe changes.
+.impeccable/critique/
 .agents/
 .claude/
 .codex/

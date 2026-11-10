@@ -23,7 +23,7 @@ links:
   - label: "Role — IT Infrastructure & Operations Analyst"
     href: "/experience/#wolters-kluwer-current"
     external: false
-featured: false
+featured: true
 order: 10
 confirm: false
 ---

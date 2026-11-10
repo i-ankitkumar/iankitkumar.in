@@ -24,7 +24,7 @@ links:
   - label: "Role — Executive Associate"
     href: "/experience/#colgate-gbs"
     external: false
-featured: true
+featured: false
 order: 30
 confirm: false
 ---

@@ -568,6 +568,16 @@ code, pre, .mono { font-family: var(--font-mono); }
 .report-table th:nth-child(3) { width: 35%; }
 .report-table th:nth-child(4) { width: 22%; }
 
+/* The Direction-of-work table has three columns, not four: its Status
+   column duplicated the Verdict column, and the duplication cost the
+   table its scannability. With the duplicate gone the entry column
+   takes the space the evidence column was wasting (it held two words
+   in a 384px cell) and the verdict sits at the right edge where a
+   reader scanning the column expects it. */
+.report-table.is-direction th:nth-child(1) { width: 62%; }
+.report-table.is-direction th:nth-child(2) { width: 18%; }
+.report-table.is-direction th:nth-child(3) { width: 20%; }
+
 .report-table th {
   font-size: var(--t-xs);
   font-weight: 600;
@@ -1133,19 +1143,14 @@ code, pre, .mono { font-family: var(--font-mono); }
 }
 
 /* ------------------------------------------------------------------
-   Report block — the qualifications rail, the approval seal, the
-   signature line, and the letterhead hierarchy.
+   Report block — the qualifications rail, the signature line, and the
+   letterhead hierarchy.
 
    The rail is a 280px column beside the measured-values table. It
    carries the qualifications and the languages, both of which come
    from source records, and it keeps the real state of each
    certification: a passed one, one still in progress, and one that
    has expired all read differently.
-
-   The seal is report furniture: a self-inspected approval mark on the
-   page, not an external certification and not a claim that anyone
-   signed a certificate. It sits in the whitespace beside the table's
-   lower right so it never covers readable text.
    ------------------------------------------------------------------ */
 .report-sheet {
   position: relative;
@@ -1154,11 +1159,8 @@ code, pre, .mono { font-family: var(--font-mono); }
   align-items: start;
 }
 
-/* The table column keeps a band of whitespace under the table, and the
-   seal sits in it, right-aligned to the table's lower right corner. */
 .report-sheet > .report-table-col {
   position: relative;
-  padding-bottom: 224px;
 }
 
 .rail {
@@ -1249,62 +1251,14 @@ code, pre, .mono { font-family: var(--font-mono); }
   text-transform: uppercase;
 }
 
-/* The approval seal. Rotated, circular, and set in the whitespace
-   under the table's lower right corner, just clear of the rail, so it
-   never sits on readable text. */
-.report-table-col > .seal {
-  position: absolute;
-  right: 20px;
-  /* Set in the whitespace band under the table, tucked against the
-     table's lower right corner and clear of the rail. The selected
-     sketch let the seal overlap the last table rows; that is not
-     reproduced here, because on the live table it would cover
-     readable verdict text. */
-  bottom: 24px;
-  width: 158px;
-  height: 158px;
-  border: 4px double var(--accent);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(-13deg);
-  color: var(--accent);
-  opacity: 0.82;
-  /* Multiply lets the seal read as ink on paper in the light theme. In
-     the dark theme it would sink into the background, so there the
-     blend is dropped and the seal is drawn as a plain overlay. */
-  mix-blend-mode: multiply;
-  pointer-events: none;
-}
-:root[data-theme='dark'] .report-table-col > .seal {
-  mix-blend-mode: normal;
-  opacity: 0.75;
-}
-.report-table-col > .seal b {
-  font-family: var(--font-mono);
-  font-size: 1.5625rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  white-space: nowrap;
-}
-.report-table-col > .seal span {
-  font-family: var(--font-mono);
-  font-size: 1.0625rem;
-  letter-spacing: 0.08em;
-  margin-top: 6px;
-  white-space: nowrap;
-}
-.report-table-col > .seal em {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-size: 0.9375rem;
-  margin-top: 9px;
-  /* The name breaks after the middot inside the circle, so the line
-     never breaks the ring. */
-  text-align: center;
-}
+/* The approval seal was removed from the measured-values block.
+
+   The hero already carries the rust GEPRÜFT stamp in the report metadata,
+   which is where a stamp belongs in the register. The seal repeated that
+   mark in a second shape, spent the accent blue on pure furniture when
+   DESIGN.md reserves blue for a verdict that passed, and announced the
+   same accessible name to screen readers twice. Its removal also
+   recovered the 224px whitespace band it required below the table. */
 
 /* The letterhead: the name as a mono uppercase line above the
    recruiter sentence, with the role beneath it. */
@@ -1325,8 +1279,7 @@ code, pre, .mono { font-family: var(--font-mono); }
   margin: var(--s-2) 0 0;
 }
 
-/* On narrow screens the rail stacks under the table and the seal keeps
-   its place beside the table's lower right. */
+/* On narrow screens the rail stacks under the table. */
 @media (max-width: 48rem) {
   .report-sheet {
     grid-template-columns: minmax(0, 1fr);
@@ -1338,12 +1291,6 @@ code, pre, .mono { font-family: var(--font-mono); }
     border-left: 0;
     border-top: 2px solid var(--rule-strong);
     margin-top: var(--s-5);
-  }
-  .report-table-col > .seal {
-    position: static;
-    margin: var(--s-5) 0 0 auto;
-    transform: none;
-    mix-blend-mode: normal;
   }
   .letterhead-name {
     font-size: 1.75rem;
@@ -1494,19 +1441,18 @@ code, pre, .mono { font-family: var(--font-mono); }
   .report-table td.evidence a { min-height: 0; }
   .verdict { white-space: normal; }
 
-  /* The qualifications rail and the seal are furniture for the on-screen
-     inspection report. The printed A4 sheet keeps the baseline
-     pagination, so the rail is dropped there: the certifications and
-     languages are all on their own pages of the site, and the meta
-     column already carries the approval stamp. */
+  /* The qualifications rail is furniture for the on-screen inspection
+     report. The printed A4 sheet keeps the baseline pagination, so the
+     rail is dropped there: the certifications and languages are all on
+     their own pages of the site, and the meta column already carries
+     the approval stamp. */
   .report-sheet {
     grid-template-columns: minmax(0, 1fr);
   }
   .report-sheet > .report-table-col {
     padding-bottom: 0;
   }
-  .report-sheet .rail,
-  .report-table-col > .seal {
+  .report-sheet .rail {
     display: none;
   }
 

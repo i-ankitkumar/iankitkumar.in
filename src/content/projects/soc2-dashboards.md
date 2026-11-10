@@ -23,7 +23,7 @@ links:
   - label: "Role — Associate IT Infra & Ops Analyst"
     href: "/experience/#wolters-kluwer-associate"
     external: false
-featured: true
+featured: false
 order: 35
 confirm: false
 ---

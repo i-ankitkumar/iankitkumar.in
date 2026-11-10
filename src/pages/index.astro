@@ -10,7 +10,14 @@ import CertItem from '~/components/CertItem.astro';
 import { SITE } from '~/lib/site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const featured = projects.filter((p) => p.data.featured).slice(0, 4);
+
+// The featured set is the top three by the same `order` ranking the
+// /work/ page uses, so "Selected work" on the homepage and "Selected
+// work" on the index mean the same records and the same judgement.
+// Three, not four: the card grid is three columns wide at desktop, and
+// a fourth card left an orphan with a half-drawn rule. The rest of the
+// records are on /work/, which the section links to.
+const featured = projects.filter((p) => p.data.featured).slice(0, 3);
 
 // The AI pivot is the current direction. It is marked on the card so the
 // software-and-AI work reads as the live track, not one entry among many.
@@ -71,6 +78,15 @@ const railLanguages: RailRow[] = SITE.languages.split('·')
 
 const skillGroups: { title: string; items: string[] }[] = [
   {
+    // AI first. The positioning is "infrastructure engineer -> software and
+    // AI engineering", and the becoming arrow is the brand. Leaving this
+    // group last buried the differentiator under thirty infrastructure
+    // line-items, roughly half way down a page a recruiter is skimming for
+    // evidence of AI engineering.
+    title: 'AI & Tooling',
+    items: ['Model Context Protocol (MCP)', 'AI-assisted Splunk tooling', 'LLM structured-output pipelines', 'Paperclip · Honcho · GitNexus · Hermes', 'Pandas · NumPy · scikit-learn · TensorFlow / Keras'],
+  },
+  {
     title: 'Cloud & Infrastructure',
     items: ['Azure (IaaS/PaaS — VMs, VNets, AKS, Functions, Key Vaults)', 'AWS (EC2, SSM, S3, IAM, VPC, CloudWatch, ECS)', 'Terraform (IaC, HashiCorp Certified)', 'Docker · Kubernetes · Helm'],
   },
@@ -94,10 +110,6 @@ const skillGroups: { title: string; items: string[] }[] = [
     title: 'Security & Compliance',
     items: ['SOC2 compliance · audit-ready telemetry', 'Microsoft Sentinel', 'CyberArk · Azure Key Vault · HashiCorp Vault', 'Azure Entra ID (SSO) · Zero-Trust', 'SaaS security controls'],
   },
-  {
-    title: 'AI & Tooling',
-    items: ['Model Context Protocol (MCP)', 'AI-assisted Splunk tooling', 'LLM structured-output pipelines', 'Paperclip · Honcho · GitNexus · Hermes', 'Pandas · NumPy · scikit-learn · TensorFlow / Keras'],
-  },
 ];
 
 // ---------------------------------------------------------------------
@@ -114,30 +126,15 @@ const skillGroups: { title: string; items: string[] }[] = [
 // Every count is computed from the collection, never hardcoded: a
 // hardcoded count drifts when a project is added and gets the
 // pluralisation wrong.
+//
+// The strip is assembled after the Direction-of-work rows, because the
+// "in review" figure is counted from those rows. See below.
 // ---------------------------------------------------------------------
 type StripValue = {
   n: string;
   label: string;
   href?: string;
 };
-
-// The records still under review: the projects whose status is one of
-// the open verdicts, plus the experiments (which are research-track by
-// definition).
-const openVerdicts = new Set(['in-progress', 'experimental', 'research']);
-const projectsInReview = projects.filter((p) => openVerdicts.has(p.data.status)).length;
-const recordsInReview = projectsInReview + experiments.length;
-
-const stripValues: StripValue[] = [
-  { n: '20,000+', label: 'Endpoints under patch ops', href: '/work/global-endpoints/' },
-  { n: '2,500+', label: 'Subscriptions scanned', href: '/work/tech-debt-scanning/' },
-  { n: '99.9%', label: 'Upgrade success rate', href: '/work/splunk-upgrade-automation/' },
-  {
-    n: String(projects.length),
-    label: `Work records · ${recordsInReview} in review`,
-    href: '/work/',
-  },
-];
 
 // ---------------------------------------------------------------------
 // The report table.
@@ -223,7 +220,9 @@ if (currentProject) {
   const v = verdictLabel(currentProject.data.status);
   directionRows.push({
     item: currentProject.data.name,
-    note: currentProject.data.summary,
+    // The short line, falling back to the full summary, so a record
+    // without a short line still renders. Same pattern as ProjectCard.
+    note: currentProject.data.summaryShort ?? currentProject.data.summary,
     status: v.label,
     evidence: 'Work record',
     href: `/work/${currentProject.id}/`,
@@ -235,13 +234,36 @@ for (const exp of experiments) {
   const v = verdictLabel(exp.data.status);
   directionRows.push({
     item: exp.data.name,
-    note: exp.data.summary,
+    note: exp.data.summaryShort ?? exp.data.summary,
     status: v.label,
     evidence: 'Experiment record',
     href: `/experiments/${exp.id}/`,
     review: v.review,
   });
 }
+
+// The records still under review.
+//
+// This counts the rows the reader can actually see in the Direction-of-
+// work table. Two of the projects carry a research status, but they
+// appear nowhere on the homepage: not in that table, not in the
+// selected work. Counting them here made the strip point at evidence
+// the visitor could not find, which is worse than a smaller number.
+//
+// The count is taken from the rows themselves, so it cannot drift when
+// a record is added or its status changes.
+const recordsInReview = directionRows.filter((row) => row.review).length;
+
+const stripValues: StripValue[] = [
+  { n: '20,000+', label: 'Endpoints under patch ops', href: '/work/global-endpoints/' },
+  { n: '2,500+', label: 'Subscriptions scanned', href: '/work/tech-debt-scanning/' },
+  { n: '99.9%', label: 'Upgrade success rate', href: '/work/splunk-upgrade-automation/' },
+  {
+    n: String(projects.length),
+    label: `Work records · ${recordsInReview} in review`,
+    href: '/work/',
+  },
+];
 ---
 
 <Base
@@ -314,7 +336,13 @@ for (const exp of experiments) {
             <dt>Ausgabe <span class="de">/ Issue</span></dt>
             <dd>2026</dd>
           </dl>
-          <p class="report-line"><strong>20,000+ endpoints</strong> · 99.9% upgrade success</p>
+          {/* No figures here. This line used to read "20,000+ endpoints ·
+              99.9% upgrade success", which put the same two numbers on
+              screen a second time: the value strip directly below
+              carries them, and the Measured-values table carries them a
+              third time, each linked to the record that proves it. The
+              meta block's job is to say what was inspected and by whom,
+              not to compete with the evidence. */}
           <div class="stamp" role="img" aria-label="Inspected and accepted by Ankit Kumar, 2026. Self-inspected record.">
             <b>GEPRÜFT</b>
             <span>INSPECTED · ABGENOMMEN</span>
@@ -346,7 +374,7 @@ for (const exp of experiments) {
   </section>
 
   <!-- MEASURED VALUES -->
-  <Section title="Measured values" id="numbers" num="A" intro="Production outcomes from the last five years: the ones I'd defend in an interview.">
+  <Section title="Measured values" id="numbers" num="A" intro="Production outcomes from the record: the ones I'd defend in an interview.">
     <div class="report-sheet">
       <div class="report-table-col">
         <div class="report-table-wrap">
@@ -379,14 +407,18 @@ for (const exp of experiments) {
           </table>
         </div>
 
-        {/* The approval seal: report furniture, not an attestation. It
-            sits in the whitespace beside the table's lower right, clear
-            of any readable text. */}
-        <div class="seal" role="img" aria-label="Inspected and accepted by Ankit Kumar, 2026. Self-inspected record.">
-          <b>GEPRÜFT</b>
-          <span>ABGENOMMEN</span>
-          <em>Ankit Kumar ·<br />2026</em>
-        </div>
+        {/*
+          No second approval mark here. The hero already carries the rust
+          GEPRÜFT stamp in the report metadata, which is where a stamp
+          belongs in the register: inside the record's own header block,
+          rectangular because the register is ruled and not rounded.
+
+          A second mark here was redundant in three ways: it repeated the
+          same idea in a different shape, it spent the accent blue on
+          pure furniture when DESIGN.md reserves blue for a verdict that
+          passed, and it gave screen readers the same accessible name
+          twice ("Inspected and accepted by Ankit Kumar, 2026...").
+        */}
       </div>
 
       {/* The qualifications rail. Qualifications and languages only:
@@ -430,11 +462,10 @@ for (const exp of experiments) {
   <!-- DIRECTION OF WORK -->
   <Section title="Direction of work" id="direction" num="B" intro="Where the record stands today: production work that shipped, and the software-and-AI track that is still under review.">
     <div class="report-table-wrap">
-      <table class="report-table">
+      <table class="report-table is-direction">
         <thead>
           <tr>
             <th scope="col">Entry<small>Prüfgegenstand</small></th>
-            <th scope="col">Status<small>Stand</small></th>
             <th scope="col">Evidence<small>Nachweis</small></th>
             <th scope="col">Verdict<small>Bewertung</small></th>
           </tr>
@@ -446,13 +477,12 @@ for (const exp of experiments) {
                 {row.item}
                 <small>{row.note}</small>
               </td>
-              <td class="value" data-label="Status">{row.status}</td>
               <td class="evidence" data-label="Evidence">
                 <a href={row.href}>{row.evidence}</a>
               </td>
               <td data-label="Verdict">
                 <span class:list={['verdict', row.review ? 'review' : 'passed']}>
-                  {row.review ? 'In review' : 'Delivered'}
+                  {row.status}
                 </span>
               </td>
             </tr>
@@ -489,7 +519,7 @@ for (const exp of experiments) {
 
     <div class="prose" style="max-width: var(--measure); margin-top: var(--s-6);">
       <p>
-        I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune: Splunk multi-site clusters, Azure landing zones, Terraform across 2,500+ subscriptions, and the runbooks that stop surprise incidents. Before that, Colgate GBS: 20,000+ Windows endpoints, 79 factories, 70 countries, and a lot of zero-day patch cycles.
+        I'm an infrastructure engineer with five years on platforms that have to stay up. Most of that has been at Wolters Kluwer in Pune: Splunk multi-site clusters, Azure landing zones, Terraform at scale, and the runbooks that stop surprise incidents. Before that, Colgate GBS: a global Windows estate across every timezone I could work in, and a lot of zero-day patch cycles.
       </p>
       <p>
         At WK I drove an <strong>AI-assisted automation initiative</strong> for pipeline-failure detection, log analysis, and release tagging, and I'm building on top of that with software-engineering work: an MCP server that lets language models query Splunk the way an SRE would, and a small Python pipeline that turns LLM structured output into enriched security alerts.
@@ -504,7 +534,7 @@ for (const exp of experiments) {
   </Section>
 
   <!-- FEATURED WORK -->
-  <Section title="Selected work" id="work" num="D" intro="Four pieces I'd talk through in an interview. The full list is on the work page.">
+  <Section title="Selected work" id="work" num="D" intro="Three pieces I'd talk through in an interview. The full list is on the work page.">
     <div class="project-grid">
       {featured.map((p) => (
         <ProjectCard project={p} headingLevel="h3" isCurrent={p.id === CURRENT_DIRECTION} />
